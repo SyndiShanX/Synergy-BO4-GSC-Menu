@@ -1,0 +1,22 @@
+{
+    "name": "Synergy",
+    "data": [
+        {
+            "type": "scriptparsetree",
+            "name": "scripts/synergy.gsc",
+            "path": "synergy.gscc",
+            "hooks": [
+                "scripts/zm_common/load.gsc"
+            ]
+        },
+        {
+            "type": "luafile",
+            "name": "ui/synergy",
+            "path": "synergy.luac",
+            "hooks_post": [
+                "x64:2b23cf5ef446c848"
+            ]
+        }
+    ],
+    "enabled": true
+}
