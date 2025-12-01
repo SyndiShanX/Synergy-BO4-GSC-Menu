@@ -1,470 +1,159 @@
 LUI.createMenu["T7Hud_" .. Engine[@"GetCurrentMap"]()] = function(menu, controller)
 	local self = LUI.createMenu.T7Hud_zm_factory(menu, controller)
-	
+
 	self:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
 		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_menu") then
 			local scriptData = CoD.GetScriptNotifyData(model)
-			local element = LUI.UIImage.new(0, 0, scriptData[1], scriptData[2], 0, 0, scriptData[3], scriptData[4])			
-			element:setAlpha(scriptData[5])
-			
-			if scriptData[6] == 100001 then
-				local border = element
-				border:setRGB(0.01, 1, 1)
-				border:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_border") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							border:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							border:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							border:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							border:setLeftRight(0, 0, scriptData[2], 0)
-							border:setWidth(454)
-						elseif scriptData[1] == 200009 then
-							border:setTopBottom(0, 0, scriptData[2], 0)
-						end
-					end
-				end)
-				self:addElement(border)
-			elseif scriptData[6] == 100002 then
-				local background = element
-				background:setRGB(0.075, 0.075, 0.075)
-				background:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_background") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							background:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							background:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							background:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							background:setLeftRight(0, 0, scriptData[2], 0)
-							background:setWidth(450)
-						elseif scriptData[1] == 200009 then
-							background:setTopBottom(0, 0, scriptData[2], 0)
-						end
-					end
-				end)
-				self:addElement(background)
-			elseif scriptData[6] == 100003 then
-				local foreground = element
-				foreground:setRGB(0.1, 0.1, 0.1)
-				foreground:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_foreground") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							foreground:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							foreground:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							foreground:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							foreground:setLeftRight(0, 0, scriptData[2], 0)
-							foreground:setWidth(450)
-						elseif scriptData[1] == 200009 then
-							foreground:setTopBottom(0, 0, scriptData[2], 0)
-						end
-					end
-				end)
-				self:addElement(foreground)
-			elseif scriptData[6] == 100004 then
-				local separator_1 = element
-				separator_1:setRGB(0.01, 1, 1)
-				separator_1:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_separator_1") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							separator_1:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							separator_1:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							separator_1:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							separator_1:setLeftRight(0, 0, scriptData[2], 0)
-							separator_1:setWidth(85)
-						elseif scriptData[1] == 200009 then
-							separator_1:setTopBottom(0, 0, scriptData[2], 0)
-							separator_1:setHeight(2)
-						end
-					end
-				end)
-				self:addElement(separator_1)
-			elseif scriptData[6] == 100005 then
-				local separator_2 = element
-				separator_2:setRGB(0.01, 1, 1)
-				separator_2:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_separator_2") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							separator_2:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							separator_2:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							separator_2:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							separator_2:setLeftRight(0, 0, scriptData[2], 0)
-							separator_2:setWidth(85)
-						elseif scriptData[1] == 200009 then
-							separator_2:setTopBottom(0, 0, scriptData[2], 0)
-							separator_2:setHeight(2)
-						end
-					end
-				end)
-				self:addElement(separator_2)
-			elseif scriptData[6] == 100006 then
-				local cursor = element
-				cursor:setRGB(0.15, 0.15, 0.15)
-				cursor:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_cursor") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							cursor:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							cursor:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							cursor:setHeight(scriptData[2])
-						elseif scriptData[1] == 200005 then
-							cursor:setTopBottom(0, 0, scriptData[2], 0)
-							cursor:setHeight(32)
-						elseif scriptData[1] == 200008 then
-							cursor:setLeftRight(0, 0, scriptData[2], 0)
-							cursor:setWidth(450)
-						end
-					end
-				end)
-				self:addElement(cursor)
-			elseif scriptData[6] == 100007 then
-				local scrollbar = element
-				scrollbar:setRGB(0.25, 0.25, 0.25)
-				scrollbar:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_scrollbar") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							scrollbar:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							scrollbar:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							scrollbar:setHeight(scriptData[2])
-						elseif scriptData[1] == 200006 then
-							local scrollbar_height = scrollbar:getHeight()
-							scrollbar:setHeight(scrollbar_height + scriptData[2])
-						elseif scriptData[1] == 200008 then
-							scrollbar:setLeftRight(0, 0, scriptData[2], 0)
-							scrollbar:setWidth(450)
-						elseif scriptData[1] == 200009 then
-							scrollbar:setTopBottom(0, 0, scriptData[2], 0)
-							scrollbar:setHeight(scriptData[3])
-						end
-					end
-				end)
-				self:addElement(scrollbar)
-			elseif scriptData[6] == 100020 then
-				local toggle_0 = element
-				toggle_0:setRGB(0.25, 0.25, 0.25)
-				toggle_0:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_toggle_0") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							toggle_0:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							toggle_0:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							toggle_0:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							toggle_0:setLeftRight(0, 0, scriptData[2], 0)
-							toggle_0:setWidth(16)
-						elseif scriptData[1] == 200009 then
-							toggle_0:setTopBottom(0, 0, scriptData[2], 0)
-							toggle_0:setHeight(16)
-						end
-					end
-				end)
-				self:addElement(toggle_0)
-			elseif scriptData[6] == 100021 then
-				local toggle_1 = element
-				toggle_1:setRGB(0.25, 0.25, 0.25)
-				toggle_1:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_toggle_1") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							toggle_1:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							toggle_1:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							toggle_1:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							toggle_1:setLeftRight(0, 0, scriptData[2], 0)
-							toggle_1:setWidth(16)
-						elseif scriptData[1] == 200009 then
-							toggle_1:setTopBottom(0, 0, scriptData[2], 0)
-							toggle_1:setHeight(16)
-						end
-					end
-				end)
-				self:addElement(toggle_1)
-			elseif scriptData[6] == 100022 then
-				local toggle_2 = element
-				toggle_2:setRGB(0.25, 0.25, 0.25)
-				toggle_2:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_toggle_2") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							toggle_2:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							toggle_2:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							toggle_2:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							toggle_2:setLeftRight(0, 0, scriptData[2], 0)
-							toggle_2:setWidth(16)
-						elseif scriptData[1] == 200009 then
-							toggle_2:setTopBottom(0, 0, scriptData[2], 0)
-							toggle_2:setHeight(16)
-						end
-					end
-				end)
-				self:addElement(toggle_2)
-			elseif scriptData[6] == 100023 then
-				local toggle_3 = element
-				toggle_3:setRGB(0.25, 0.25, 0.25)
-				toggle_3:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_toggle_3") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							toggle_3:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							toggle_3:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							toggle_3:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							toggle_3:setLeftRight(0, 0, scriptData[2], 0)
-							toggle_3:setWidth(16)
-						elseif scriptData[1] == 200009 then
-							toggle_3:setTopBottom(0, 0, scriptData[2], 0)
-							toggle_3:setHeight(16)
-						end
-					end
-				end)
-				self:addElement(toggle_3)
-			elseif scriptData[6] == 100024 then
-				local toggle_4 = element
-				toggle_4:setRGB(0.25, 0.25, 0.25)
-				toggle_4:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_toggle_4") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							toggle_4:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							toggle_4:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							toggle_4:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							toggle_4:setLeftRight(0, 0, scriptData[2], 0)
-							toggle_4:setWidth(16)
-						elseif scriptData[1] == 200009 then
-							toggle_4:setTopBottom(0, 0, scriptData[2], 0)
-							toggle_4:setHeight(16)
-						end
-					end
-				end)
-				self:addElement(toggle_4)
-			elseif scriptData[6] == 100025 then
-				local toggle_5 = element
-				toggle_5:setRGB(0.25, 0.25, 0.25)
-				toggle_5:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_toggle_5") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							toggle_5:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							toggle_5:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							toggle_5:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							toggle_5:setLeftRight(0, 0, scriptData[2], 0)
-							toggle_5:setWidth(16)
-						elseif scriptData[1] == 200009 then
-							toggle_5:setTopBottom(0, 0, scriptData[2], 0)
-							toggle_5:setHeight(16)
-						end
-					end
-				end)
-				self:addElement(toggle_5)
-			elseif scriptData[6] == 100026 then
-				local toggle_6 = element
-				toggle_6:setRGB(0.25, 0.25, 0.25)
-				toggle_6:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_toggle_6") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							toggle_6:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							toggle_6:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200003 then
-							toggle_6:setHeight(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							toggle_6:setLeftRight(0, 0, scriptData[2], 0)
-							toggle_6:setWidth(16)
-						elseif scriptData[1] == 200009 then
-							toggle_6:setTopBottom(0, 0, scriptData[2], 0)
-							toggle_6:setHeight(16)
-						end
-					end
-				end)
-				self:addElement(toggle_6)
-			elseif scriptData[6] == 100030 then
-				local slider_0 = element
-				slider_0:setRGB(0.25, 0.25, 0.25)
-				slider_0:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_slider_0") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							slider_0:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							slider_0:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200004 then
-							slider_0:setWidth(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							slider_0:setLeftRight(0, 0, scriptData[2], 0)
-						elseif scriptData[1] == 200009 then
-							slider_0:setTopBottom(0, 0, scriptData[2], 0)
-							slider_0:setHeight(32)
-						end
-					end
-				end)
-				self:addElement(slider_0)
-			elseif scriptData[6] == 100031 then
-				local slider_1 = element
-				slider_1:setRGB(0.25, 0.25, 0.25)
-				slider_1:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_slider_1") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							slider_1:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							slider_1:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200004 then
-							slider_1:setWidth(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							slider_1:setLeftRight(0, 0, scriptData[2], 0)
-						elseif scriptData[1] == 200009 then
-							slider_1:setTopBottom(0, 0, scriptData[2], 0)
-							slider_1:setHeight(32)
-						end
-					end
-				end)
-				self:addElement(slider_1)
-			elseif scriptData[6] == 100032 then
-				local slider_2 = element
-				slider_2:setRGB(0.25, 0.25, 0.25)
-				slider_2:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_slider_2") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							slider_2:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							slider_2:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200004 then
-							slider_2:setWidth(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							slider_2:setLeftRight(0, 0, scriptData[2], 0)
-						elseif scriptData[1] == 200009 then
-							slider_2:setTopBottom(0, 0, scriptData[2], 0)
-							slider_2:setHeight(32)
-						end
-					end
-				end)
-				self:addElement(slider_2)
-			elseif scriptData[6] == 100033 then
-				local slider_3 = element
-				slider_3:setRGB(0.25, 0.25, 0.25)
-				slider_3:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_slider_3") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							slider_3:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							slider_3:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200004 then
-							slider_3:setWidth(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							slider_3:setLeftRight(0, 0, scriptData[2], 0)
-						elseif scriptData[1] == 200009 then
-							slider_3:setTopBottom(0, 0, scriptData[2], 0)
-							slider_3:setHeight(32)
-						end
-					end
-				end)
-				self:addElement(slider_3)
-			elseif scriptData[6] == 100034 then
-				local slider_4 = element
-				slider_4:setRGB(0.25, 0.25, 0.25)
-				slider_4:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_slider_4") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							slider_4:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							slider_4:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200004 then
-							slider_4:setWidth(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							slider_4:setLeftRight(0, 0, scriptData[2], 0)
-						elseif scriptData[1] == 200009 then
-							slider_4:setTopBottom(0, 0, scriptData[2], 0)
-							slider_4:setHeight(32)
-						end
-					end
-				end)
-				self:addElement(slider_4)
-			elseif scriptData[6] == 100035 then
-				local slider_5 = element
-				slider_5:setRGB(0.25, 0.25, 0.25)
-				slider_5:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_slider_5") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							slider_5:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							slider_5:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200004 then
-							slider_5:setWidth(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							slider_5:setLeftRight(0, 0, scriptData[2], 0)
-						elseif scriptData[1] == 200009 then
-							slider_5:setTopBottom(0, 0, scriptData[2], 0)
-							slider_5:setHeight(32)
-						end
-					end
-				end)
-				self:addElement(slider_5)
-			elseif scriptData[6] == 100036 then
-				local slider_6 = element
-				slider_6:setRGB(0.25, 0.25, 0.25)
-				slider_6:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
-					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_slider_6") then
-						local scriptData = CoD.GetScriptNotifyData(model)
-						if scriptData[1] == 200001 then
-							slider_6:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
-						elseif scriptData[1] == 200002 then
-							slider_6:setAlpha(scriptData[2])
-						elseif scriptData[1] == 200004 then
-							slider_6:setWidth(scriptData[2])
-						elseif scriptData[1] == 200008 then
-							slider_6:setLeftRight(0, 0, scriptData[2], 0)
-						elseif scriptData[1] == 200009 then
-							slider_6:setTopBottom(0, 0, scriptData[2], 0)
-							slider_6:setHeight(32)
-						end
-					end
-				end)
-				self:addElement(slider_6)
-			
+			local element
+
+			if scriptData[1] < 100100 then
+				element = LUI.UIImage.new(0, 0, scriptData[2], scriptData[3], 0, 0, scriptData[4], scriptData[5])
+
+				element:setAlpha(scriptData[6])
+				if scriptData[7] ~= nil then
+					element:setRGB(scriptData[7] / 255, scriptData[7] / 255, scriptData[7] / 255)
+				end
+			elseif scriptData[1] >= 100101 and scriptData[1] <= 100116 then
+				element = LUI.UIText.new(0, 0, scriptData[2], scriptData[2] + 500, 0, 0, scriptData[3], scriptData[3] + 25)
+				element:setAlpha(scriptData[7])
+			elseif scriptData[1] >= 100117 and scriptData[1] <= 100123 then
+				element = LUI.UIText.new(0, 0, scriptData[2], scriptData[2] + 500, 0, 0, scriptData[3], scriptData[3] + 22)
+				element:setAlpha(scriptData[7])
 			end
-			
+
+			if scriptData[1] >= 100001 and scriptData[1] <= 100006 then
+				local elements = element
+				elements:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
+					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_element_" .. tostring(scriptData[1] - 100000)) then
+						local scriptData = CoD.GetScriptNotifyData(model)
+						if scriptData[1] == 200001 then
+							elements:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
+						elseif scriptData[1] == 200002 then
+							elements:setAlpha(scriptData[2])
+						elseif scriptData[1] == 200003 then
+							elements:setHeight(scriptData[2])
+						elseif scriptData[1] == 200005 then
+							elements:setLeftRight(0, 0, scriptData[2], 0)
+							if scriptData[3] ~= nil then
+								elements:setWidth(scriptData[3])
+							end
+						elseif scriptData[1] == 200006 then
+							elements:setTopBottom(0, 0, scriptData[2], 0)
+							if scriptData[3] ~= nil then
+								elements:setHeight(scriptData[3])
+							end
+						end
+					end
+				end)
+				self:addElement(elements)
+			end
+
+			if scriptData[1] >= 100021 and scriptData[1] < 100030 then
+				local toggles = element
+				toggles:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
+					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_toggle_" .. tostring(scriptData[1] - 100020)) then
+						local scriptData = CoD.GetScriptNotifyData(model)
+						if scriptData[1] == 200001 then
+							toggles:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
+						elseif scriptData[1] == 200002 then
+							toggles:setAlpha(scriptData[2])
+						elseif scriptData[1] == 200003 then
+							toggles:setHeight(scriptData[2])
+						elseif scriptData[1] == 200005 then
+							toggles:setLeftRight(0, 0, scriptData[2], 0)
+							toggles:setWidth(16)
+						elseif scriptData[1] == 200006 then
+							toggles:setTopBottom(0, 0, scriptData[2], 0)
+							toggles:setHeight(16)
+						end
+					end
+				end)
+				self:addElement(toggles)
+			end
+
+			if scriptData[1] >= 100030 and scriptData[1] < 100040 then
+				local sliders = element
+				sliders:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
+					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_slider_" .. tostring(scriptData[1] - 100030)) then
+						local scriptData = CoD.GetScriptNotifyData(model)
+						if scriptData[1] == 200001 then
+							sliders:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
+						elseif scriptData[1] == 200002 then
+							sliders:setAlpha(scriptData[2])
+						elseif scriptData[1] == 200004 then
+							sliders:setWidth(scriptData[2])
+						elseif scriptData[1] == 200005 then
+							sliders:setLeftRight(0, 0, scriptData[2], 0)
+						elseif scriptData[1] == 200006 then
+							sliders:setTopBottom(0, 0, scriptData[2], 0)
+							sliders:setHeight(32)
+						end
+					end
+				end)
+				self:addElement(sliders)
+			end
+
+			if scriptData[1] >= 100101 and scriptData[1] < 100200 then
+				local text = element
+
+				local text_name = ""
+
+				if scriptData[1] == 100101 then
+					text:setRGB(1, 1, 1)
+					text_name = "title"
+				elseif scriptData[1] == 100102 then
+					text:setRGB(0.75, 0.75, 0.75)
+					text_name = "description"
+					text:setScale(0.9)
+				else
+					text:setRGB(0.5, 0.5, 0.5)
+				end
+
+				if scriptData[1] >= 100103 and scriptData[1] <= 100109 then
+					text_name = "option_" .. tostring(scriptData[1] - 100102)
+				elseif scriptData[1] >= 100110 and scriptData[1] <= 100116 then
+					text_name = "slider_text_" .. tostring(scriptData[1] - 100109)
+				elseif scriptData[1] >= 100117 and scriptData[1] <= 100123 then
+					text_name = "submenu_icon_" .. tostring(scriptData[1] - 100116)
+				end
+
+				text:setTTF("ttmussels_demibold")
+
+				text:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
+					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_" .. text_name) then
+						local scriptData = CoD.GetScriptNotifyData(model)
+						if scriptData[1] == 200001 then
+							text:setRGB(scriptData[2] / 255, scriptData[3] / 255, scriptData[4] / 255)
+						elseif scriptData[1] == 200002 then
+							text:setAlpha(scriptData[2])
+						elseif scriptData[1] == 200007 then
+							if scriptData[2] == 0 then
+								text:setText(Engine[@"getdvarstring"]("laboratory_special_offer_title"))
+							elseif scriptData[2] == 1 then
+								text:setText(Engine[@"getdvarstring"]("laboratory_special_offer_description"))
+							elseif scriptData[2] == 2 then
+								text:setText(Engine[@"getdvarstring"]("laboratory_special_offer_option_" .. tostring(scriptData[3])))
+							elseif scriptData[2] == 3 then
+								text:setText(Engine[@"getdvarstring"]("laboratory_special_offer_slider_text_" .. tostring(scriptData[3])))
+							elseif scriptData[2] == 4 then
+								text:setText(Engine[@"getdvarstring"]("laboratory_special_offer_submenu_icon_" .. tostring(scriptData[3])))
+							end
+						elseif scriptData[1] == 200005 then
+							text:setLeftRight(0, 0, scriptData[2], 0)
+							text:setWidth(500)
+						elseif scriptData[1] == 200006 then
+							text:setTopBottom(0, 0, scriptData[2], 0)
+							text:setHeight(25)
+						elseif scriptData[1] == 200008 then
+							text:setScale(tonumber("0." .. tostring(scriptData[2])), tonumber("0." .. tostring(scriptData[2])))
+						elseif scriptData[1] == 200009 then
+							text:setHeight(25 * tonumber("0." .. tostring(scriptData[2])))
+						end
+					end
+				end)
+				self:addElement(text)
+			end
+
 			element = nil
 		end
 	end)
