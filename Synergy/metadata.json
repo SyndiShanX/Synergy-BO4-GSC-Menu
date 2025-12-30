@@ -16,6 +16,12 @@
             "hooks_post": [
                 "x64:2b23cf5ef446c848"
             ]
+        },
+        {
+            "type": "hashes",
+            "path": "hashes.txt",
+            "format": "serious_compiler",
+            "ignore_error": true
         }
     ],
     "enabled": true

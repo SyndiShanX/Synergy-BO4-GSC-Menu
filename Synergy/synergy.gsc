@@ -2343,7 +2343,7 @@ equip_attachment(attachment, i) { //224c09c9
 	self.syn["attachment_toggles"][i] = weaponHasAttachment(weapon, attachment);
 }
 
-equip_camo(camo_index) {
+equip_camo(camo_index) { //52f76807
 	weapon = self getCurrentWeapon();
 	self setCamo(weapon, camo_index);
 }
@@ -2402,7 +2402,7 @@ spawn_zombie(spawner) { //253cbb6e
 kill_all_zombies() { //57f97468
 	level.zombie_total = 0;
 	foreach(zombie in get_zombies()) {
-		zombie doDamage(zombie.health * 5000, (0, 0, 0), self);
+		zombie doDamage(zombie.health * 5000, (0, 0, 0));
 		wait 0.05;
 	}
 }

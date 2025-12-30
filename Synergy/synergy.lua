@@ -1,5 +1,8 @@
-LUI.createMenu["T7Hud_" .. Engine[@"GetCurrentMap"]()] = function(menu, controller)
-	local self = LUI.createMenu.T7Hud_zm_factory(menu, controller)
+local old_hud = CoD.DemoUtility.AddHUDWidgets
+
+CoD.DemoUtility.AddHUDWidgets = function(HudRef, InstanceRef)
+	local self = HudRef
+	local controller = InstanceRef
 
 	self:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
 		if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_menu") then
@@ -159,3 +162,5 @@ LUI.createMenu["T7Hud_" .. Engine[@"GetCurrentMap"]()] = function(menu, controll
 	end)
 	return self
 end
+
+old_hud(HudRef, InstanceRef)
