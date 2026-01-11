@@ -163,10 +163,7 @@ initial_variables() { //ec264b2e
 	self.syn["weapons"]["equipment"][1] =					 array("Frag Grenade", "Acid Bomb", "Claymore", "Semtex", "Molotov", "Wraith Fire", "Mini Turret", "Shock Charge");
 	self.syn["weapons"]["extras"][1] =						 array("Death Machine");
 
-	self.syn["weapons"]["hashes"][0] = array("2580570083c8795a", "44214c17f34996ea", "5fd15d3e3a7a9b0c", "28d36f686569f6db", "1039f66708e1d597", "4ef408b2b3e35377", "3c2d17d2f2c857e1", "70f8f3d92031f6f7", "0f662b8266f6be66", "6009b31eb328208b", "6cb6925ebe3bc0d6", "3d5b6ca92bd02c5c", "5bf4dd6dcf1d24f3", "6436ccb615a2b9c6", "7a398a475f8af4c7", "5f1d38574585b35e", "2f42bb0a766b63b4", "66e6c9c83987136b", "28b38fa134e54223", "62032b32d0d142be", "5d7835133aa2daa1", "2f1f9926e48404f7", "5b3e3bae603f9641", "4328baa07bf1d03b", "0b73b6226aaa80f5", "6dc98fe2dc7c7650", "7b2cb0cda291ae11", "1dd5e58c9eb28af6", "66adeb4d1a0422d2", "5d9abb421c753ff2", "497d3824e705398c", "54c9bab69f2a2d2a", "57f46c2caf1de7fc", "0b75a649c0e85983", "369cff6935966a74", "485d0d5e33d6802b", "6840b7b398f4bb83", "67b5b30f9aa8786c", "59618269d014e1fe", "33d6e545e88450c5", "196b2477923b2f7f", "6f8ae16433fba11c", "5243385728e38aa9", "5f9eb7548cc02363", "7a7bda9ab5e9bf35", "0a9dd31e84aaab4e", "35a57559d3bdc159", "3003d1fc53331a5b", "42f6b4f6dd8585ac", "1f48082b20588e4e", "3b0e53f588197120", "18a2b56939a972ee", "6ab1184700ce0aa6", "7be1faad20a192c8", "181d603caefe4cdb", "34b7eb9fde56bd35", "4e23def16bca8076", "79110fd100108ab9", "703eb1b835b3361f", "640d88fb13e0421e", "0c78156ba6aeda14", "71a5a304a66b5bc9", "4ccbdb4876f0a027", "7be1faad20a192c8", "7847b8511647815a", "5a4291956faa97ef", "2605a6745df58840", "3a1959bb039f2be3", "62d7f56331878d18", "5b8d1ff4b772bd85", "095dd69e40d99560", "0539f784146391d2", "5004e2171c2be97d", "7d7f0dbb00201240", "243cd42eb1bd6e10", "4ae11871b1233211", "42a45d43be3dba42", "19c157f2230454ad", "023882a5729dceca", "25a13b6f6232a985", "617dcc39334959ce", "25f355b5d35b8488", "138efe2bb30be63c", "138f012bb30beb55", "138f002bb30be9a2", "134c05846f7c5c98", "67c8d6a04ecce713", "67c8dba04eccef92", "67c8dea04eccf4ab", "67c8e2a04eccfb77", "09b4f9ecbedf98fb", "09b4f7ecbedf9595", "09b4f6ecbedf93e2", "09b4f5ecbedf922f", "4b7e4696d38d13e3", "7b1ab4354f6a9ef4", "60f0c0ede97e5741", "7e6386f7403487f5", "13a204ba6887b18f", "6684ea1c92c6b6e4", "4fa72f3aca76724f", "3bce061cf2bc9f98", "50f35c4cfb775a9c", "187a6cbc1c93a177", "18829f56b3fbdac1", "74dd69dd8a46d4aa", "6627899099b8a69d", "1d3a5309fa2c9b80");
-	self.syn["weapons"]["hashes"][1] = array("ar_accurate_t8", "ar_fastfire_t8", "ar_modular_t8", "ar_mg1909_t8", "ar_damage_t8", "ar_stealth_t8", "ar_galil_t8", "ar_standard_t8", "ar_an94_t8", "ar_doublebarrel_t8", "ar_peacekeeper_t8", "smg_drum_pistol_t8", "smg_standard_t8", "smg_fastfire_t8", "smg_handling_t8", "smg_accurate_t8", "smg_capacity_t8", "smg_mp40_t8", "smg_vmp_t8", "smg_fastburst_t8", "smg_folding_t8", "smg_minigun_t8", "tr_longburst_t8", "tr_leveraction_t8", "tr_midburst_t8", "tr_powersemi_t8", "tr_flechette_t8", "tr_damageburst_t8", "lmg_standard_t8", "lmg_spray_t8", "lmg_heavy_t8", "lmg_double_t8", "lmg_stealth_t8", "sniper_powersemi_t8", "sniper_powerbolt_t8", "sniper_quickscope_t8", "sniper_fastrechamber_t8", "sniper_locus_t8", "sniper_mini14_t8", "sniper_damagesemi_t8", "shotgun_trenchgun_t8", "shotgun_semiauto_t8", "shotgun_pump_t8", "shotgun_precision_t8", "shotgun_fullauto_t8", "pistol_topbreak_t8", "pistol_revolver_t8", "pistol_standard_t8", "pistol_burst_t8", "pistol_fullauto_t8", "launcher_standard_t8", "special_crossbow_t8", "special_ballisticknife_t8_dw", "minigun", "bowie_knife", "eq_frag_grenade", "eq_acid_bomb", "claymore", "sticky_grenade", "eq_molotov", "eq_wraith_fire", "mini_turret", "proximity_grenade", "minigun", "ray_gun", "ray_gun_mk2", "ww_freezegun_t8", "zhield_dw", "zhield_frost_dw", "ww_tricannon_t8", "ww_tricannon_earth_t8", "ww_tricannon_fire_t8", "ww_tricannon_water_t8", "ww_tricannon_air_t8", "zhield_zword_dw", "ww_crossbow_t8", "zhield_spectral_dw", "ww_blundergat_t8", "ww_blundergat_fire_t8", "ww_blundergat_acid_t8", "ww_blundergat_fire_t8_unfinished", "ww_crossbow_impaler_t8", "ww_random_ray_gun1", "ww_random_ray_gun2", "ww_random_ray_gun3", "zhield_zpear_dw", "ww_hand_o", "ww_hand_h", "ww_hand_g", "ww_hand_c", "ray_gun_mk2v", "ray_gun_mk2x", "ray_gun_mk2y", "ray_gun_mk2z", "snowball", "snowball_yellow", "thundergun", "tundragun", "ww_tesla_gun_t8", "ww_tesla_sniper_t8", "hero_chakram_lv3", "hero_hammer_lv3", "hero_scepter_lv3", "hero_sword_pistol_lv3", "hero_flamethrower_t8_lv3", "hero_minigun_t8_lv3", "hero_katana_t8_lv3", "hero_gravityspikes_t8_lv3");
-
-	self.syn["weapons"]["blacklisted_weapons"] = array("bowie_knife","eq_frag_grenade", "eq_acid_bomb", "claymore", "sticky_grenade", "eq_molotov", "eq_wraith_fire", "mini_turret", "proximity_grenade", "homunculus", "homunculus_leprechaun", "minigun", "zhield_dw", "zhield_frost_dw", "ww_blundergat_fire_t8_unfinished", "ww_crossbow_impaler_t8", "ww_random_ray_gun1", "ww_random_ray_gun2", "ww_random_ray_gun3", "zhield_zpear_dw", "hero_chakram_lv3", "hero_hammer_lv3", "hero_scepter_lv3", "hero_sword_pistol_lv3", "hero_flamethrower_t8_lv3", "hero_minigun_t8_lv3", "hero_katana_t8_lv3", "hero_gravityspikes_t8_lv3");
+	self.syn["weapons"]["blacklisted_weapons"] = array("bowie_knife", "stake_knife", "galvaknuckles_t8", "eq_frag_grenade", "eq_acid_bomb", "claymore", "sticky_grenade", "eq_molotov", "eq_wraith_fire", "mini_turret", "proximity_grenade", "homunculus", "homunculus_leprechaun", "cymbal_monkey", "music_box", "eq_nesting_doll_grenade", "eq_nesting_doll_grenade_niko", "eq_nesting_doll_grenade_rich", "eq_nesting_doll_grenade_takeo", "minigun", "zhield_dw", "zhield_frost_dw", "ww_blundergat_fire_t8_unfinished", "ww_crossbow_impaler_t8", "ww_random_ray_gun1", "ww_random_ray_gun2", "ww_random_ray_gun3", "zhield_zpear_dw", "hero_chakram_lv3", "hero_hammer_lv3", "hero_scepter_lv3", "hero_sword_pistol_lv3", "hero_flamethrower_t8_lv3", "hero_minigun_t8_lv3", "hero_katana_t8_lv3", "hero_gravityspikes_t8_lv3");
 
 	// Attachments
 
@@ -185,8 +182,8 @@ initial_variables() { //ec264b2e
 
 	// Powerups
 
-	self.syn["powerup_names"][0] = array("1cf58366f56051a9", "5bb3bdba52958ee0", "65a6e8a720ec27c9", "44139aa5d5d9acfb", "6080366ece401431", "78a69fe66c54a056", "951f1d39fde20f7", "5201bc3e92d0e7ee", "7feb13c572497c4a", "49f009410f356e84", "5afab57564fa0eb8", "7c95ffdff695fa09", "3331e35614cf574b", "50765381ed09468", "E6ffa040580ae58", "28095af5c98f035a", "356fd3bea40f1fee", "28c684193b1b7640");
-	self.syn["powerup_names"][1] = array("Crowd Negative Points", "Nuke", "Insta-Kill", "Max Ammo", "Fire Sale", "Double Points", "Carpenter", "Bonus Points", "Bonfire Sale", "Full Power", "Ammo Clip", "Bonus Points", "CRASH", "Full Power", "Free Perk", "Bonus Points 2", "Bonus Points 3", "Zombie Blood");
+	self.syn["powerup_names"][0] = array("1cf58366f56051a9", "5bb3bdba52958ee0", "65a6e8a720ec27c9", "44139aa5d5d9acfb", "6080366ece401431", "7feb13c572497c4a", "78a69fe66c54a056", "951f1d39fde20f7", "50765381ed09468", "E6ffa040580ae58", "28c684193b1b7640", "356fd3bea40f1fee", "28095af5c98f035a", "5201bc3e92d0e7ee", "49f009410f356e84", "5afab57564fa0eb8", "7c95ffdff695fa09", "3331e35614cf574b", "20f05a40e6dfd271");
+	self.syn["powerup_names"][1] = array("Crowd Negative Points", "Nuke", "Insta-Kill", "Max Ammo", "Fire Sale", "Bonfire Sale", "Double Points", "Carpenter", "Full Power", "Free Perk", "Zombie Blood", "Bonus Points (Player)", "Bonus Points (Player Shared)", "Bonus Points (Team)", "Wolf Full Power", "Wolf Bonus Ammo", "Wolf Bonus Points", "Small Ammo (CRASH)", "Classic Mode Specialist Weapon");
 
 	self.syn["powerups"][0] = getArrayKeys(level.zombie_include_powerups);
 	self.syn["powerups"][1] = array();
@@ -1213,7 +1210,7 @@ menu_option() { //bf384607
 
 			self add_option("Give Weapons", undefined, &new_menu, "Give Weapons");
 			self add_option("Give Mastercrafts", undefined, &new_menu, "Give Mastercrafts");
-			self add_toggle("Give Pack-a-Punched Weapons", "Weapons Given will be Pack-a-Punched", &give_packed_weapon, self.give_packed_weapon);
+			self add_increment("Pack-a-Punch Tier", "Given Weapons will be Pack-a-Punched", &give_packed_weapon, 1, 1, 4, 1);
 			self add_option("Give AAT", undefined, &new_menu, "Give AAT");
 
 			weapon_attachments = get_weapon_attachments();
@@ -1270,9 +1267,7 @@ menu_option() { //bf384607
 
 			for(i = 0; i < self.syn["powerups"][0].size; i++) {
 				switch(self.syn["powerups"][1][i]) {
-					case "CRASH":
-					case "Bonus Points 2":
-					case "Bonus Points 3":
+					case "Small Ammo (CRASH)":
 						break;
 					default:
 						self add_option("Spawn " + self.syn["powerups"][1][i], undefined, &spawn_powerup, self.syn["powerups"][0][i]);
@@ -1542,36 +1537,36 @@ menu_option() { //bf384607
 			load_weapons("equipment");
 
 			if(self.map_name == "voyage_of_despair" || self.map_name == "ix" || self.map_name == "dead_of_the_night" || self.map_name == "ancient_evil") {
-				self add_option("Homunculus", undefined, &give_weapon, "homunculus");
+				self add_option("Homunculus", undefined, &give_grenade, "homunculus");
 				if(self.map_name != "ancient_evil") {
-					self add_option("Homunculus Leprechaun", undefined, &give_weapon, "homunculus_leprechaun");
+					self add_option("Homunculus Leprechaun", undefined, &give_grenade, "homunculus_leprechaun");
 				}
 			}
 
 			if(self.map_name == "blood_of_the_dead" || self.map_name == "classified" || self.map_name == "alpha_omega" || self.map_name == "tag_der_toten") {
-				self add_option("Cymbal Monkey", undefined, &give_weapon, "cymbal_monkey");
+				self add_option("Cymbal Monkey", undefined, &give_grenade, "cymbal_monkey");
 			}
 
 			if(self.map_name == "blood_of_the_dead") {
-				self add_option("Hell's Retriever", undefined, &give_weapon, "tomahawk_t8");
-				self add_option("Hell's Redeemer", undefined, &give_weapon, "tomahawk_t8_upgraded");
+				self add_option("Hell's Retriever", undefined, &give_grenade, "tomahawk_t8");
+				self add_option("Hell's Redeemer", undefined, &give_grenade, "tomahawk_t8_upgraded");
 			}
 
 			if(self.map_name == "ancient_evil") {
-				self add_option("Pegasus Strike", undefined, &give_weapon, "thunderstorm");
-				self add_option("Sprout", undefined, &give_weapon, "equip_sprout");
+				self add_option("Pegasus Strike", undefined, &give_grenade, "thunderstorm");
+				self add_option("Sprout", undefined, &give_grenade, "equip_sprout");
 			}
 
 			if(self.map_name == "tag_der_toten") {
-				self add_option("Samantha Box", undefined, &give_weapon, "music_box");
-				self add_option("Matryoska Dolls", undefined, &give_weapon, "eq_nesting_doll_grenade");
+				self add_option("Samantha Box", undefined, &give_grenade, "music_box");
+				self add_option("Matryoska Dolls", undefined, &give_grenade, "eq_nesting_doll_grenade");
 			}
 
 			if(isDefined(level.w_quantum_bomb)) {
-				self add_option("QED", undefined, &give_weapon, level.w_quantum_bomb);
+				self add_option("QED", undefined, &give_grenade, level.w_quantum_bomb);
 			}
 			if(isDefined(level.w_black_hole_bomb)) {
-				self add_option("Gersh Device", undefined, &give_weapon, level.w_black_hole_bomb);
+				self add_option("Gersh Device", undefined, &give_grenade, level.w_black_hole_bomb);
 			}
 
 			break;
@@ -2163,12 +2158,12 @@ give_grenade(grenade) { //9270d7fd
 	self giveMaxAmmo(grenade);
 }
 
-give_packed_weapon() { //e376eef7
-	self.give_packed_weapon = !return_toggle(self.give_packed_weapon);
+give_packed_weapon(pap_level) { //e376eef7
+	self.give_packed_weapon = pap_level;
 }
 
 give_weapon(weapon) { //5be7a94b
-	if(isDefined(self.give_packed_weapon) && self.give_packed_weapon == 1) {
+	if(isDefined(self.give_packed_weapon) && self.give_packed_weapon >= 1) {
 		if(!isInArray(self.syn["weapons"]["blacklisted_weapons"], weapon)) {
 			weapon_upgraded = weapon + "_upgraded";
 			weapon = weapon_upgraded;
@@ -2184,6 +2179,12 @@ give_weapon(weapon) { //5be7a94b
 	if(!self hasWeapon(weapon)) {
 		self zm_weapons::give_build_kit_weapon(weapon);
 
+		if(isDefined(self.give_packed_weapon) && self.give_packed_weapon >= 2) {
+			if(!isInArray(self.syn["weapons"]["blacklisted_weapons"], weapon)) {
+				self zm_pap_util::repack_weapon(weapon, self.give_packed_weapon);
+			}
+		}
+
 		wait 0.25;
 		self giveStartAmmo(weapon);
 	} else {
@@ -2198,7 +2199,7 @@ give_weapon(weapon) { //5be7a94b
 }
 
 give_mastercraft_weapon(null, mastercraft_index, weapon, offset) { //72d8cec0
-	if(isDefined(self.give_packed_weapon) && self.give_packed_weapon == 1) {
+	if(isDefined(self.give_packed_weapon) && self.give_packed_weapon >= 1) {
 		weapon_upgraded = weapon + "_upgraded";
 		weapon = weapon_upgraded;
 	}
@@ -2226,6 +2227,11 @@ give_mastercraft_weapon(null, mastercraft_index, weapon, offset) { //72d8cec0
 	self takeWeapon(self getCurrentWeapon());
 
 	self giveWeapon(weapon, weapon_options);
+
+	if(isDefined(self.give_packed_weapon) && self.give_packed_weapon >= 2) {
+		self zm_pap_util::repack_weapon(weapon, self.give_packed_weapon);
+	}
+
 	self giveStartAmmo(weapon);
 }
 

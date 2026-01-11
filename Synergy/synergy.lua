@@ -160,7 +160,6 @@ CoD.DemoUtility.AddHUDWidgets = function(HudRef, InstanceRef)
 			element = nil
 		end
 	end)
+	old_hud(HudRef, InstanceRef)
 	return self
 end
-
-old_hud(HudRef, InstanceRef)
