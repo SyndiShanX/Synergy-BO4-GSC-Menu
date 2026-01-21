@@ -14,7 +14,11 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 
 ### Requirements: [Project BO4 / Shield](https://shield-bo4.gitbook.io/document)
 
-#### Zombies:
+#### Installation:
+
+* You can install the Mod ingame on the Mod Manager Page
+
+##### Manual Installation:
 
 * Download the Latest ZIP from [Releases](https://github.com/SyndiShanX/Synergy-BO4-GSC-Menu/releases)
 
