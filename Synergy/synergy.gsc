@@ -103,6 +103,7 @@ initial_variables() { //ec264b2e
 	self.previous = array();
 	self.saved_index = array();
 	self.saved_offset = array();
+	self.saved_trigger = array();
 	self.slider = array();
 
 	self.x_offset = 1220;
@@ -338,6 +339,7 @@ input_manager() { //fb500cd3
 			if(self meleeButtonPressed()) {
 				self.saved_index[self.current_menu] = self.syn["cursor"].index;
 				self.saved_offset[self.current_menu] = self.scrolling_offset;
+				self.saved_trigger[self.current_menu] = self.previous_trigger;
 
 				if(isDefined(self.previous[(self.previous.size - 1)])) {
 					self new_menu();
@@ -362,6 +364,7 @@ input_manager() { //fb500cd3
 			} else if(self useButtonPressed()) {
 				self.saved_index[self.current_menu] = self.syn["cursor"].index;
 				self.saved_offset[self.current_menu] = self.scrolling_offset;
+				self.saved_trigger[self.current_menu] = self.previous_trigger;
 
 				if(isDefined(self.structure[self.syn["cursor"].index].array) || isDefined(self.structure[self.syn["cursor"].index].increment)) {
 					if(isDefined(self.structure[self.syn["cursor"].index].array)) {
@@ -919,12 +922,13 @@ new_menu(menu) { //30112462
 	if(isDefined(self.saved_index[self.current_menu])) {
 		self.syn["cursor"].index = self.saved_index[self.current_menu];
 		self.scrolling_offset = self.saved_offset[self.current_menu];
+		self.previous_trigger = self.saved_trigger[self.current_menu];
 		self.loaded_offset = true;
 	} else {
 		self.syn["cursor"].index = 0;
 		self.scrolling_offset = 0;
+		self.previous_trigger = 0;
 	}
-	self.previous_trigger = 0;
 
 	self menu_option();
 	scroll_cursor();
@@ -940,6 +944,10 @@ empty_option() { //a3ed0f9e
 scroll_cursor(direction) { //1cf9a91c
 	maximum = self.structure.size - 1;
 	fake_scroll = false;
+
+	if(maximum < 0) {
+		maximum = 0;
+	}
 
 	if(isDefined(direction)) {
 		if(direction == "down") {
@@ -2177,6 +2185,8 @@ give_weapon(weapon) { //5be7a94b
 	weapon = getWeapon(weapon);
 
 	if(!self hasWeapon(weapon)) {
+		self takeWeapon(self getCurrentWeapon());
+
 		self zm_weapons::give_build_kit_weapon(weapon);
 
 		if(isDefined(self.give_packed_weapon) && self.give_packed_weapon >= 2) {
@@ -2232,6 +2242,7 @@ give_mastercraft_weapon(null, mastercraft_index, weapon, offset) { //72d8cec0
 		self zm_pap_util::repack_weapon(weapon, self.give_packed_weapon);
 	}
 
+	wait 0.25;
 	self giveStartAmmo(weapon);
 }
 
