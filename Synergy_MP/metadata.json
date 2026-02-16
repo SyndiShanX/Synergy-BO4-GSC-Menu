@@ -1,0 +1,28 @@
+{
+    "name": "Synergy MP",
+    "data": [
+        {
+            "type": "scriptparsetree",
+            "name": "scripts/synergy_mp.gsc",
+            "path": "synergy_mp.gscc",
+            "hooks": [
+                "scripts/core_common/load_shared.gsc"
+            ]
+        },
+        {
+            "type": "luafile",
+            "name": "ui/synergy_mp",
+            "path": "synergy_mp.luac",
+            "hooks_post": [
+                "x64:57d27ab8e2f7a9d0"
+            ]
+        },
+        {
+            "type": "hashes",
+            "path": "hashes.txt",
+            "format": "serious_compiler",
+            "ignore_error": true
+        }
+    ],
+    "enabled": true
+}
