@@ -116,8 +116,8 @@ initial_variables() { //ec264b2e
 	self.menu_color_green = 0;
 	self.menu_color_blue = 0;
 
-	self.syn["background"] = spawnstruct();
-	self.syn["cursor"] = spawnstruct();
+	self.syn["background"] = spawnStruct();
+	self.syn["cursor"] = spawnStruct();
 	self.syn["background"].height = 450;
 	self.syn["cursor"].y = 430;
 	self.syn["cursor"].index = 0;
@@ -296,10 +296,10 @@ initialize_menu() { //15544841
 			}
 
 			set_text("title", "Controls", 0);
-			set_text("option_1", "Open: ^3ADS ^7and ^3Melee", 2);
-			set_text("option_2", "Scroll: ^3ADS ^7and ^3Shoot", 2);
-			set_text("option_3", "Select: ^3Interact ^7Back: ^3Melee", 2);
-			set_text("option_4", "Sliders: ^3Heal^7 ^7and ^3Equipment", 2);
+			set_text("option_1", "Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]", 2);
+			set_text("option_2", "Scroll: ^3[{+speed_throw}] ^7or ^3[{+attack}]", 2);
+			set_text("option_3", "Select: ^3[{+activate}] ^7Back: ^3[{+melee}]", 2);
+			set_text("option_4", "Sliders: ^3[{+smoke}]^7 ^7or ^3[{+frag}]", 2);
 
 			set_shader_height("element_1", 156);
 			set_shader_height("element_2", 152);
@@ -1062,9 +1062,9 @@ set_options() { //a0d8ccb6
 	for(i = 1; i <= self.option_limit; i++) {
 		luinotifyevent(#"synergy_toggle_" + string(i), 2, 200002, 0);
 		luinotifyevent(#"synergy_slider_" + string(i), 2, 200002, 0);
-		set_text("option_" + string(i), "", 2); // Option Texts
-		set_text("slider_text_" + string(i), "", 3); // Slider Texts
-		set_text("submenu_icon_" + string(i), "", 4); // Submenu Icons
+		set_text("option_" + string(i), "", 2);
+		set_text("slider_text_" + string(i), "", 3);
+		set_text("submenu_icon_" + string(i), "", 4);
 	}
 
 	update_element_positions();
@@ -1086,7 +1086,7 @@ set_options() { //a0d8ccb6
 			set_text("option_" + string(i), self.structure[x].text, 2);
 
 			if(isDefined(self.structure[x].command) && self.structure[x].command == &new_menu) {
-				set_text("submenu_icon_" + string(i), ">", 4); // Submenu Icons
+				set_text("submenu_icon_" + string(i), ">", 4);
 			}
 
 			if(isDefined(self.structure[x].toggle)) {
@@ -1126,7 +1126,7 @@ set_options() { //a0d8ccb6
 				}
 				luinotifyevent(#"synergy_slider_text_" + string(i), 2, 200009, int(slider_scale));
 
-				set_text("slider_text_" + string(i), slider_text, 3); // Slider Text
+				set_text("slider_text_" + string(i), slider_text, 3);
 			} else if(isDefined(self.structure[x].increment) && (self.syn["cursor"].index) == x) {
 				value = abs((self.structure[x].minimum - self.structure[x].maximum)) / 450;
 				width = ceil((self.slider[(self.current_menu + "_" + x)] - self.structure[x].minimum) / value);
@@ -1137,7 +1137,7 @@ set_options() { //a0d8ccb6
 				}
 
 				slider_value = self.slider[(self.current_menu + "_" + x)];
-				set_text("slider_text_" + string(i), "" + slider_value, 3); // Slider Text
+				set_text("slider_text_" + string(i), "" + slider_value, 3);
 				luinotifyevent(#"synergy_slider_" + string(i), 2, 200002, 1);
 			}
 
@@ -2387,7 +2387,7 @@ drop_weapon() { //84172a80
 // Zombie Options
 
 get_zombies() { //81b284e5
-	return getaiteamarray(level.zombie_team);
+	return getAITeamArray(level.zombie_team);
 }
 
 no_target() { //1a890726

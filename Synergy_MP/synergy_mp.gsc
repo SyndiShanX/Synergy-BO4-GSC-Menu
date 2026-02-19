@@ -98,8 +98,8 @@ initial_variables() { //ec264b2e
 	self.menu_color_green = 0;
 	self.menu_color_blue = 0;
 
-	self.syn["background"] = spawnstruct();
-	self.syn["cursor"] = spawnstruct();
+	self.syn["background"] = spawnStruct();
+	self.syn["cursor"] = spawnStruct();
 	self.syn["background"].height = 450;
 	self.syn["cursor"].y = 430;
 	self.syn["cursor"].index = 0;
@@ -127,7 +127,7 @@ initial_variables() { //ec264b2e
 	self.syn["weapons"]["extras"][0] =               array("gun_ultimate_turret", "ultimate_turret", "molotov_fire", "mini_turret", "concussion_grenade", "ray_gun", "briefcase_bomb_defuse");
 	self.syn["weapons"]["specialist"][0] =           array("sig_buckler_dw", "sig_buckler_turret", "hero_pineapplegun", "hero_pineapple_grenade", "hero_flamethrower", "ability_dog", "sig_bow_quickshot", "shock_rifle", "sig_lmg", "eq_gravityslam", "hero_annihilator", "sig_blade");
 	self.syn["weapons"]["specialist_equipment"][0] = array("eq_swat_grenade", "eq_cluster_semtex_grenade", "gadget_supplypod", "gadget_radiation_field", "eq_tripwire", "eq_hawk", "eq_seeker_mine", "eq_shroud", "eq_sensor", "eq_grapple", "gadget_spawnbeacon", "eq_smoke", "eq_concertina_wire", "eq_emp_grenade");
-	
+
 	self.syn["weapons"]["assault_rifles"][1] =       array("ICR-7", "Maddox RFB", "KN-57", "Rampart 17", "VAPR-XKG", "Grav", "Swat RFT", "AN-94", "Doublecross", "Peacekeeper");
 	self.syn["weapons"]["sub_machine_guns"][1] =     array("MX9", "Spitfire", "Saug 9mm", "GKS", "Cordite", "VMP", "Daemon 3XB", "Switchblade X9", "MicroMG 9mm");
 	self.syn["weapons"]["tactical_rifles"][1] =      array("Swordfish", "ABR 223", "Auger DMR", "S6 Stingray", "M16");
@@ -236,10 +236,10 @@ initialize_menu() { //15544841
 			}
 
 			set_text("title", "Controls", 0);
-			set_text("option_1", "Open: ^3ADS ^7and ^3Melee", 2);
-			set_text("option_2", "Scroll: ^3ADS ^7and ^3Shoot", 2);
-			set_text("option_3", "Select: ^3Interact ^7Back: ^3Melee", 2);
-			set_text("option_4", "Sliders: ^3Heal^7 ^7and ^3Equipment", 2);
+			set_text("option_1", "Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]", 2);
+			set_text("option_2", "Scroll: ^3[{+speed_throw}] ^7or ^3[{+attack}]", 2);
+			set_text("option_3", "Select: ^3[{+activate}] ^7Back: ^3[{+melee}]", 2);
+			set_text("option_4", "Sliders: ^3[{+smoke}]^7 ^7or ^3[{+frag}]", 2);
 
 			set_shader_height("element_1", 156);
 			set_shader_height("element_2", 152);
@@ -928,9 +928,9 @@ set_options() { //a0d8ccb6
 	for(i = 1; i <= self.option_limit; i++) {
 		luinotifyevent(#"synergy_toggle_" + string(i), 2, 200002, 0);
 		luinotifyevent(#"synergy_slider_" + string(i), 2, 200002, 0);
-		set_text("option_" + string(i), "", 2); // Option Texts
-		set_text("slider_text_" + string(i), "", 3); // Slider Texts
-		set_text("submenu_icon_" + string(i), "", 4); // Submenu Icons
+		set_text("option_" + string(i), "", 2);
+		set_text("slider_text_" + string(i), "", 3);
+		set_text("submenu_icon_" + string(i), "", 4);
 	}
 
 	update_element_positions();
@@ -952,7 +952,7 @@ set_options() { //a0d8ccb6
 			set_text("option_" + string(i), self.structure[x].text, 2);
 
 			if(isDefined(self.structure[x].command) && self.structure[x].command == &new_menu) {
-				set_text("submenu_icon_" + string(i), ">", 4); // Submenu Icons
+				set_text("submenu_icon_" + string(i), ">", 4);
 			}
 
 			if(isDefined(self.structure[x].toggle)) {
@@ -992,7 +992,7 @@ set_options() { //a0d8ccb6
 				}
 				luinotifyevent(#"synergy_slider_text_" + string(i), 2, 200009, int(slider_scale));
 
-				set_text("slider_text_" + string(i), slider_text, 3); // Slider Text
+				set_text("slider_text_" + string(i), slider_text, 3);
 			} else if(isDefined(self.structure[x].increment) && (self.syn["cursor"].index) == x) {
 				value = abs((self.structure[x].minimum - self.structure[x].maximum)) / 450;
 				width = ceil((self.slider[(self.current_menu + "_" + x)] - self.structure[x].minimum) / value);
@@ -1003,7 +1003,7 @@ set_options() { //a0d8ccb6
 				}
 
 				slider_value = self.slider[(self.current_menu + "_" + x)];
-				set_text("slider_text_" + string(i), "" + slider_value, 3); // Slider Text
+				set_text("slider_text_" + string(i), "" + slider_value, 3);
 				luinotifyevent(#"synergy_slider_" + string(i), 2, 200002, 1);
 			}
 
@@ -1045,7 +1045,6 @@ menu_option() { //bf384607
 			self add_option("Give Killstreaks", undefined, &new_menu, "Give Killstreaks");
 			self add_option("Menu Options", undefined, &new_menu, "Menu Options");
 			self add_option("All Players", undefined, &new_menu, "All Players");
-			self add_option("Debug Options", undefined, &new_menu, "Debug Options");
 
 			break;
 		case "Basic Options":
@@ -1560,8 +1559,8 @@ print_name(target) { //c4da1a2b
 
 prod_settings(target) { //91f1d5e2
 	iPrintln(target.bot.var_b2b8f0b6);
-  iPrintln(target.bot.var_e8c941d6);
-  iPrintln(target.var_abdff161);
+	iPrintln(target.bot.var_e8c941d6);
+	iPrintln(target.var_abdff161);
 }
 
 kick_player(target) { //de512d61
