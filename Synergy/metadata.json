@@ -4,9 +4,22 @@
         {
             "type": "scriptparsetree",
             "name": "scripts/synergy.gsc",
-            "path": "synergy.gscc",
+            "path": "synergy.gscc"
+        },
+        {
+            "type": "scriptparsetree",
+            "name": "scripts/synergy_zm.gsc",
+            "path": "synergy_zm.gscc",
             "hooks": [
                 "scripts/zm_common/load.gsc"
+            ]
+        },
+        {
+            "type": "scriptparsetree",
+            "name": "scripts/synergy_mp.gsc",
+            "path": "synergy_mp.gscc",
+            "hooks": [
+                "scripts/mp_common/load.gsc"
             ]
         },
         {
@@ -14,14 +27,9 @@
             "name": "ui/synergy",
             "path": "synergy.luac",
             "hooks_post": [
-                "x64:2b23cf5ef446c848"
+                "x64:2b23cf5ef446c848",
+								"x64:57d27ab8e2f7a9d0"
             ]
-        },
-        {
-            "type": "hashes",
-            "path": "hashes.txt",
-            "format": "serious_compiler",
-            "ignore_error": true
         }
     ],
     "enabled": true

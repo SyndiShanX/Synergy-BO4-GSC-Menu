@@ -24,7 +24,7 @@ CoD.DemoUtility.AddHUDWidgets = function(HudRef, InstanceRef)
 				element:setAlpha(scriptData[7])
 			end
 
-			if scriptData[1] >= 100001 and scriptData[1] <= 100006 then
+			if scriptData[1] >= 100001 and scriptData[1] <= 100020 then
 				local elements = element
 				elements:subscribeToGlobalModel(controller, "PerController", "scriptNotify", function (model)
 					if CoD.ModelUtility.IsParamModelEqualToHashString(model, @"synergy_element_" .. tostring(scriptData[1] - 100000)) then
@@ -118,6 +118,8 @@ CoD.DemoUtility.AddHUDWidgets = function(HudRef, InstanceRef)
 					text_name = "slider_text_" .. tostring(scriptData[1] - 100109)
 				elseif scriptData[1] >= 100117 and scriptData[1] <= 100123 then
 					text_name = "submenu_icon_" .. tostring(scriptData[1] - 100116)
+				elseif scriptData[1] >= 100124 and scriptData[1] <= 100130 then
+					text_name = "extra_text_" .. tostring(scriptData[1] - 100123)
 				end
 
 				text:setTTF("ttmussels_demibold")
@@ -140,6 +142,8 @@ CoD.DemoUtility.AddHUDWidgets = function(HudRef, InstanceRef)
 								text:setText(Engine[@"getdvarstring"]("laboratory_special_offer_slider_text_" .. tostring(scriptData[3])))
 							elseif scriptData[2] == 4 then
 								text:setText(Engine[@"getdvarstring"]("laboratory_special_offer_submenu_icon_" .. tostring(scriptData[3])))
+							elseif scriptData[2] == 5 then
+								text:setText(Engine[@"getdvarstring"]("laboratory_special_offer_extra_text_" .. tostring(scriptData[3])))
 							end
 						elseif scriptData[1] == 200005 then
 							text:setLeftRight(0, 0, scriptData[2], 0)
@@ -148,7 +152,7 @@ CoD.DemoUtility.AddHUDWidgets = function(HudRef, InstanceRef)
 							text:setTopBottom(0, 0, scriptData[2], 0)
 							text:setHeight(25)
 						elseif scriptData[1] == 200008 then
-							text:setScale(tonumber("0." .. tostring(scriptData[2])), tonumber("0." .. tostring(scriptData[2])))
+							text:setScale(tonumber(scriptData[2] .. "." .. tostring(scriptData[3])), tonumber(scriptData[2] .. "." .. tostring(scriptData[3])))
 						elseif scriptData[1] == 200009 then
 							text:setHeight(25 * tonumber("0." .. tostring(scriptData[2])))
 						end
