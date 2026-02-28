@@ -30,6 +30,12 @@
                 "x64:2b23cf5ef446c848",
 								"x64:57d27ab8e2f7a9d0"
             ]
+        },
+        {
+            "type": "hashes",
+            "path": "hashes.txt",
+            "format": "serious_compiler",
+            "ignore_error": true
         }
     ],
     "enabled": true

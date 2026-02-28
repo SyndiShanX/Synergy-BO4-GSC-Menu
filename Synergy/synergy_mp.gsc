@@ -16,6 +16,7 @@ autoexec __init__system__() { //89f2df9
 
 init() { //9284135d
 	callback::on_spawned(&player_connect);
+	level.initialized = false;
 }
 
 initial_variables() { //ec264b2e
@@ -53,9 +54,6 @@ initial_variables() { //ec264b2e
 	self.syn["weapons"]["extras"][1] =               array("Handheld Sentry Gun", "Sentry Gun", "Incendiary Grenade", "Mini Turret", "Concussion Grenade", "Ray Gun", "S&D Bomb");
 	self.syn["weapons"]["specialist"][1] =           array("Ballistic Shield", "Ballistic Shield (Fortified)", "War Machine", "War Machine (Short Range)", "Purifier", "K9-Unit", "Sparrow", "Tempest", "Scythe", "Grav Slam", "Annihilator", "Shadow Blade");
 	self.syn["weapons"]["specialist_equipment"][1] = array("9-Bang", "Cluster Grenade", "Assault Pack", "Reactor Core", "Mesh Mine", "Hawk", "Seeker", "Radar Shroud", "Sensor Dart", "Grapple Gun", "Tac-Deploy", "Smoke", "Razor Wire", "EMP Disruptor");
-
-	self.syn["weapons"]["hashes"][0] = array("2580570083c8795a", "44214c17f34996ea", "5fd15d3e3a7a9b0c", "1039f66708e1d597", "cef408b2b3e35377", "bc2d17d2f2c857e1", "70f8f3d92031f6f7", "f662b8266f6be66", "6009b31eb328208b", "6cb6925ebe3bc0d6", "dbf4dd6dcf1d24f3", "e436ccb615a2b9c6", "7a398a475f8af4c7", "df1d38574585b35e", "2f42bb0a766b63b4", "a8b38fa134e54223", "62032b32d0d142be", "dd7835133aa2daa1", "af1f9926e48404f7", "5b3e3bae603f9641", "b73b6226aaa80f5", "edc98fe2dc7c7650", "7b2cb0cda291ae11", "9dd5e58c9eb28af6", "66adeb4d1a0422d2", "dd9abb421c753ff2", "497d3824e705398c", "57f46c2caf1de7fc", "8b75a649c0e85983", "369cff6935966a74", "485d0d5e33d6802b", "e840b7b398f4bb83", "e7b5b30f9aa8786c", "59618269d014e1fe", "33d6e545e88450c5", "ef8ae16433fba11c", "5243385728e38aa9", "df9eb7548cc02363", "7a7bda9ab5e9bf35", "b5a57559d3bdc159", "3003d1fc53331a5b", "c2f6b4f6dd8585ac", "9f48082b20588e4e", "3b0e53f588197120", "98a2b56939a972ee", "eab1184700ce0aa6", "85710451c453fe0e", "e8a980198a51e72b", "640df302fef996c9", "7b66427785660bae", "fc1ff1ad76b46da2", "e768b46ba75651ce", "82d4d1d3ec87299", "1a44144ddcdc7a06", "7ffcec935d4bcd61", "3c94920deb0cbd90", "20e5bae184643ee5", "48a954b0cb9f04e2", "2bb2c011d62c43c8", "277fe05e21fe4de4", "640d88fb13e0421e", "dcfdeed7c43f7060", "583dbb8b3c0d3b21", "4e23def16bca8076", "f9110fd100108ab9", "640d88fb13e0421e", "4ccbdb4876f0a027", "36a6454f13b54f18", "575116beccfad85", "a3dd6039fe2f36c6", "71a5a304a66b5bc9", "6e948344fd2eb524", "f847b8511647815a", "f3b55382af4bd7ab", "17deed0ce4d37971", "7d1d8f68d86b15ca", "c6b51d90ec5c7a06", "10285306541d5cc1", "e837931ce185238c", "489c5cedc5a1f9c8", "40380537847df901", "38b6b90f02622b4", "25b9fb682a777869", "cbb2d7f789b561eb", "ebb8d088aa5d2df5", "40ed3db21a4ef343", "28f808c767805112", "5a4ad500dc02f842", "8feadd53dae6b7e4", "efdb7a0ec4d32102", "81e6fe73573d39ea", "86509699f65bd279", "ca4ba36128b6582f", "8f525ab9cc66c061", "1a9c4a9e057c8eea", "3a19c6a9c8caef33", "ce328b70915ff6b9", "c9584349d375280d", "4cb9aca7f51434a4", "a1b346649d376bf3");
-	self.syn["weapons"]["hashes"][1] = array("ar_accurate_t8", "ar_fastfire_t8", "ar_modular_t8", "ar_damage_t8", "ar_stealth_t8", "ar_galil_t8", "ar_standard_t8", "ar_an94_t8", "ar_doublebarrel_t8", "ar_peacekeeper_t8", "smg_standard_t8", "smg_fastfire_t8", "smg_handling_t8", "smg_accurate_t8", "smg_capacity_t8", "smg_vmp_t8", "smg_fastburst_t8", "smg_folding_t8", "smg_minigun_t8", "tr_longburst_t8", "tr_midburst_t8", "tr_powersemi_t8", "tr_flechette_t8", "tr_damageburst_t8", "lmg_standard_t8", "lmg_spray_t8", "lmg_heavy_t8", "lmg_stealth_t8", "sniper_powersemi_t8", "sniper_powerbolt_t8", "sniper_quickscope_t8", "sniper_fastrechamber_t8", "sniper_locus_t8", "sniper_mini14_t8", "sniper_damagesemi_t8", "shotgun_semiauto_t8", "shotgun_pump_t8", "shotgun_precision_t8", "shotgun_fullauto_t8", "pistol_revolver_t8", "pistol_standard_t8", "pistol_burst_t8", "pistol_fullauto_t8", "launcher_standard_t8", "special_crossbow_t8", "special_ballisticknife_t8_dw", "special_ballisticknife_t8_dw_dw", "melee_actionfigure_t8", "melee_slaybell_t8", "melee_secretsanta_t8", "melee_coinbag_t8", "melee_demohammer_t8", "melee_club_t8", "melee_cutlass_t8", "melee_zombiearm_t8", "melee_bowie_bloody", "melee_amuletfist_t8", "melee_stopsign_t8", "hatchet", "frag_grenade", "eq_molotov", "eq_slow_grenade", "trophy_system", "eq_acid_bomb", "claymore", "eq_molotov", "proximity_grenade", "gun_ultimate_turret", "ultimate_turret", "molotov_fire", "mini_turret", "concussion_grenade", "ray_gun", "briefcase_bomb_defuse", "sig_buckler_dw", "sig_buckler_turret", "hero_pineapplegun", "hero_pineapple_grenade", "hero_flamethrower", "ability_dog", "sig_bow_quickshot", "shock_rifle", "sig_lmg", "eq_gravityslam", "hero_annihilator", "sig_blade", "eq_swat_grenade", "eq_cluster_semtex_grenade", "gadget_supplypod", "gadget_radiation_field", "eq_tripwire", "eq_hawk", "eq_seeker_mine", "eq_shroud", "eq_sensor", "eq_grapple", "gadget_spawnbeacon", "eq_smoke", "eq_concertina_wire", "eq_emp_grenade");
 
 	// Attachments
 
@@ -225,7 +223,10 @@ menu_option() { //bf384607
 			if(isDefined(target)) {
 				self synergy::add_option("Print", "Print Player Name", &print_name, target);
 				self synergy::add_option("Kill", "Kill the Player", &commit_suicide, target);
-				self synergy::add_option("Settings", undefined, &prod_settings, target);
+
+				if(isBot(target)) {
+					self synergy::add_option("Settings", undefined, &prod_settings, target);
+				}
 
 				if(!target isHost()) {
 					self synergy::add_option("Kick", "Kick the Player from the Game", &kick_player, target);

@@ -19,7 +19,7 @@ CoD.DemoUtility.AddHUDWidgets = function(HudRef, InstanceRef)
 			elseif scriptData[1] >= 100101 and scriptData[1] <= 100116 then
 				element = LUI.UIText.new(0, 0, scriptData[2], scriptData[2] + 500, 0, 0, scriptData[3], scriptData[3] + 25)
 				element:setAlpha(scriptData[7])
-			elseif scriptData[1] >= 100117 and scriptData[1] <= 100123 then
+			elseif scriptData[1] >= 100117 and scriptData[1] <= 100130 then
 				element = LUI.UIText.new(0, 0, scriptData[2], scriptData[2] + 500, 0, 0, scriptData[3], scriptData[3] + 22)
 				element:setAlpha(scriptData[7])
 			end

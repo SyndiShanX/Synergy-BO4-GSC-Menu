@@ -56,7 +56,16 @@ init() { //9284135d
 	precache("eventstring", #"synergy_submenu_icon_5");
 	precache("eventstring", #"synergy_submenu_icon_6");
 	precache("eventstring", #"synergy_submenu_icon_7");
-	
+
+	precache("eventstring", #"synergy_element_7");
+	precache("eventstring", #"synergy_extra_text_1");
+	precache("eventstring", #"synergy_extra_text_2");
+	precache("eventstring", #"synergy_extra_text_3");
+	precache("eventstring", #"synergy_extra_text_4");
+	precache("eventstring", #"synergy_extra_text_5");
+	precache("eventstring", #"synergy_extra_text_6");
+	precache("eventstring", #"synergy_extra_text_7");
+
 	callback::on_spawned(&player_connect);
 	level thread create_rainbow_color();
 }
@@ -105,7 +114,7 @@ initialize_menu() { //15544841
 
 			level.player_out_of_playable_area_monitor = false;
 			self notify("stop_player_out_of_playable_area_monitor");
-			
+
 			self waittill("init_menu");
 
 			self thread input_manager();
@@ -160,6 +169,15 @@ initialize_menu() { //15544841
 				luinotifyevent(#"synergy_menu", 3, 100121, (self.x_offset + 425), (self.y_offset + 152)); // Submenu Icon Text 5
 				luinotifyevent(#"synergy_menu", 3, 100122, (self.x_offset + 425), (self.y_offset + 182)); // Submenu Icon Text 6
 				luinotifyevent(#"synergy_menu", 3, 100123, (self.x_offset + 425), (self.y_offset + 212)); // Submenu Icon Text 7
+
+				luinotifyevent(#"synergy_menu", 7, 100007, (self.x_offset + 418), (self.x_offset + 700), (self.y_offset - 355), (self.y_offset - 301), 0, 19); // Status Background
+				luinotifyevent(#"synergy_menu", 3, 100124, (self.x_offset + 500), (self.y_offset - 350)); // Status Text 1
+				luinotifyevent(#"synergy_menu", 3, 100125, (self.x_offset + 450), (self.y_offset - 325)); // Status Text 2
+				luinotifyevent(#"synergy_menu", 3, 100126, (self.x_offset + 450), (self.y_offset - 300)); // Status Text 3
+				luinotifyevent(#"synergy_menu", 3, 100127, (self.x_offset + 450), (self.y_offset - 275)); // Status Text 4
+				luinotifyevent(#"synergy_menu", 3, 100128, (self.x_offset + 450), (self.y_offset - 250)); // Status Text 5
+				luinotifyevent(#"synergy_menu", 3, 100129, (self.x_offset + 450), (self.y_offset - 225)); // Status Text 6
+				luinotifyevent(#"synergy_menu", 3, 100130, (self.x_offset + 450), (self.y_offset - 200)); // Status Text 7
 
 				for(i = 3; i <= 9; i++) {
 					self.menu["synergy_text_" + string(i)] = spawnStruct();
@@ -240,6 +258,10 @@ input_manager() { //fb500cd3
 				self.saved_offset[self.current_menu] = self.scrolling_offset;
 				self.saved_trigger[self.current_menu] = self.previous_trigger;
 
+				if(self.structure[self.syn["cursor"].index].command == &new_menu) {
+					self.previous_option = self.structure[self.syn["cursor"].index].text;
+				}
+
 				if(isDefined(self.structure[self.syn["cursor"].index].array) || isDefined(self.structure[self.syn["cursor"].index].increment)) {
 					if(isDefined(self.structure[self.syn["cursor"].index].array)) {
 						cursor_selected = self.structure[self.syn["cursor"].index].array[self.slider[(self.current_menu + "_" + self.syn["cursor"].index)]];
@@ -315,11 +337,18 @@ set_menu_visibility(opacity) { //40a7558d
 
 	luinotifyevent(#"synergy_title", 2, 200002, opacity);
 	luinotifyevent(#"synergy_description", 2, 200002, opacity);
-	
+
 	for(i = 1; i <= self.option_limit; i++) {
 		luinotifyevent(#"synergy_option_" + string(i), 2, 200002, opacity);
 		luinotifyevent(#"synergy_slider_text_" + string(i), 2, 200002, opacity);
 		luinotifyevent(#"synergy_submenu_icon_" + string(i), 2, 200002, opacity);
+	}
+
+	if(opacity == 0) {
+		for(i = 1; i <= self.option_limit; i++) {
+			luinotifyevent(#"synergy_toggle_" + string(i), 2, 200002, opacity);
+			luinotifyevent(#"synergy_slider_" + string(i), 2, 200002, opacity);
+		}
 	}
 }
 
