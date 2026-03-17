@@ -55,10 +55,21 @@ initial_variables() { //ec264b2e
 	self.syn["weapons"]["specialist"][1] =           array("Ballistic Shield", "Ballistic Shield (Fortified)", "War Machine", "War Machine (Short Range)", "Purifier", "K9-Unit", "Sparrow", "Tempest", "Scythe", "Grav Slam", "Annihilator", "Shadow Blade");
 	self.syn["weapons"]["specialist_equipment"][1] = array("9-Bang", "Cluster Grenade", "Assault Pack", "Reactor Core", "Mesh Mine", "Hawk", "Seeker", "Radar Shroud", "Sensor Dart", "Grapple Gun", "Tac-Deploy", "Smoke", "Razor Wire", "EMP Disruptor");
 
+	self.syn["weapons"]["hashes"][0] = array("2580570083c8795a", "44214c17f34996ea", "5fd15d3e3a7a9b0c", "1039f66708e1d597", "cef408b2b3e35377", "bc2d17d2f2c857e1", "70f8f3d92031f6f7", "f662b8266f6be66", "6009b31eb328208b", "6cb6925ebe3bc0d6", "dbf4dd6dcf1d24f3", "e436ccb615a2b9c6", "7a398a475f8af4c7", "df1d38574585b35e", "2f42bb0a766b63b4", "a8b38fa134e54223", "62032b32d0d142be", "dd7835133aa2daa1", "af1f9926e48404f7", "5b3e3bae603f9641", "b73b6226aaa80f5", "edc98fe2dc7c7650", "7b2cb0cda291ae11", "9dd5e58c9eb28af6", "66adeb4d1a0422d2", "dd9abb421c753ff2", "497d3824e705398c", "57f46c2caf1de7fc", "8b75a649c0e85983", "369cff6935966a74", "485d0d5e33d6802b", "e840b7b398f4bb83", "e7b5b30f9aa8786c", "59618269d014e1fe", "33d6e545e88450c5", "ef8ae16433fba11c", "5243385728e38aa9", "df9eb7548cc02363", "7a7bda9ab5e9bf35", "b5a57559d3bdc159", "3003d1fc53331a5b", "c2f6b4f6dd8585ac", "9f48082b20588e4e", "3b0e53f588197120", "98a2b56939a972ee", "eab1184700ce0aa6", "85710451c453fe0e", "e8a980198a51e72b", "640df302fef996c9", "7b66427785660bae", "fc1ff1ad76b46da2", "e768b46ba75651ce", "82d4d1d3ec87299", "1a44144ddcdc7a06", "7ffcec935d4bcd61", "3c94920deb0cbd90", "20e5bae184643ee5", "48a954b0cb9f04e2", "2bb2c011d62c43c8", "277fe05e21fe4de4", "640d88fb13e0421e", "dcfdeed7c43f7060", "583dbb8b3c0d3b21", "4e23def16bca8076", "f9110fd100108ab9", "640d88fb13e0421e", "4ccbdb4876f0a027", "36a6454f13b54f18", "575116beccfad85", "a3dd6039fe2f36c6", "71a5a304a66b5bc9", "6e948344fd2eb524", "f847b8511647815a", "f3b55382af4bd7ab", "17deed0ce4d37971", "7d1d8f68d86b15ca", "c6b51d90ec5c7a06", "10285306541d5cc1", "e837931ce185238c", "489c5cedc5a1f9c8", "40380537847df901", "38b6b90f02622b4", "25b9fb682a777869", "cbb2d7f789b561eb", "ebb8d088aa5d2df5", "40ed3db21a4ef343", "28f808c767805112", "5a4ad500dc02f842", "8feadd53dae6b7e4", "efdb7a0ec4d32102", "81e6fe73573d39ea", "86509699f65bd279", "ca4ba36128b6582f", "8f525ab9cc66c061", "1a9c4a9e057c8eea", "3a19c6a9c8caef33", "ce328b70915ff6b9", "c9584349d375280d", "4cb9aca7f51434a4", "a1b346649d376bf3");
+	self.syn["weapons"]["hashes"][1] = array("ar_accurate_t8", "ar_fastfire_t8", "ar_modular_t8", "ar_damage_t8", "ar_stealth_t8", "ar_galil_t8", "ar_standard_t8", "ar_an94_t8", "ar_doublebarrel_t8", "ar_peacekeeper_t8", "smg_standard_t8", "smg_fastfire_t8", "smg_handling_t8", "smg_accurate_t8", "smg_capacity_t8", "smg_vmp_t8", "smg_fastburst_t8", "smg_folding_t8", "smg_minigun_t8", "tr_longburst_t8", "tr_midburst_t8", "tr_powersemi_t8", "tr_flechette_t8", "tr_damageburst_t8", "lmg_standard_t8", "lmg_spray_t8", "lmg_heavy_t8", "lmg_stealth_t8", "sniper_powersemi_t8", "sniper_powerbolt_t8", "sniper_quickscope_t8", "sniper_fastrechamber_t8", "sniper_locus_t8", "sniper_mini14_t8", "sniper_damagesemi_t8", "shotgun_semiauto_t8", "shotgun_pump_t8", "shotgun_precision_t8", "shotgun_fullauto_t8", "pistol_revolver_t8", "pistol_standard_t8", "pistol_burst_t8", "pistol_fullauto_t8", "launcher_standard_t8", "special_crossbow_t8", "special_ballisticknife_t8_dw", "special_ballisticknife_t8_dw_dw", "melee_actionfigure_t8", "melee_slaybell_t8", "melee_secretsanta_t8", "melee_coinbag_t8", "melee_demohammer_t8", "melee_club_t8", "melee_cutlass_t8", "melee_zombiearm_t8", "melee_bowie_bloody", "melee_amuletfist_t8", "melee_stopsign_t8", "hatchet", "frag_grenade", "eq_molotov", "eq_slow_grenade", "trophy_system", "eq_acid_bomb", "claymore", "eq_molotov", "proximity_grenade", "gun_ultimate_turret", "ultimate_turret", "molotov_fire", "mini_turret", "concussion_grenade", "ray_gun", "briefcase_bomb_defuse", "sig_buckler_dw", "sig_buckler_turret", "hero_pineapplegun", "hero_pineapple_grenade", "hero_flamethrower", "ability_dog", "sig_bow_quickshot", "shock_rifle", "sig_lmg", "eq_gravityslam", "hero_annihilator", "sig_blade", "eq_swat_grenade", "eq_cluster_semtex_grenade", "gadget_supplypod", "gadget_radiation_field", "eq_tripwire", "eq_hawk", "eq_seeker_mine", "eq_shroud", "eq_sensor", "eq_grapple", "gadget_spawnbeacon", "eq_smoke", "eq_concertina_wire", "eq_emp_grenade");
+
 	// Attachments
 
 	self.syn["attachments"][0] = array("acog", "damage", "damage2", "dualoptic", "dw", "elo", "extbarrel", "extbarrel2", "extclip", "extclip2", "fastreload", "fastreload2", "fmj", "fmj2", "grip", "grip2", "holo", "is", "ir", "mixclip", "mms", "pistolscope", "quickdraw", "quickdraw2", "reflex", "rf", "speedreloader", "stalker", "stalker2", "steadyaim", "steadyaim2", "suppressed", "swayreduc", "uber");
 	self.syn["attachments"][1] = array("Acog", "High Caliber", "High Caliber II", "Dual Zoom", "Dual Wield", "Elo", "Long Barrel", "Long Barrel II", "Extended Mags", "Extended Mags II", "Fast Mags", "Fast Mags II", "FMJ", "FMJ II", "Grip", "Grip II", "Holographic", "Iron Sights", "Thermal", "Hybrid Mags", "Threat Detector", "Compact Scope", "Quickdraw", "Quickdraw II", "Reflex", "Rapid Fire", "Speed Loader", "Stock", "Stock II", "Laser Sight", "Laser Sight II", "Suppressor", "Stabilizer", "Operator Mod");
+
+	// Perks
+
+	//self.syn["perks"][0] = array(#"specialty_scavenger", #"specialty_showenemyequipment", #"specialty_flakjacket", #"specialty_stunprotection", #"specialty_longersprint", #"specialty_movefaster", #"specialty_nottargetedbyairsupport", #"specialty_sprintfire", #"specialty_fastweaponswitch", #"specialty_gpsjammer", #"specialty_friendliesthroughwalls", #"specialty_quieter", #"specialty_tracker", #"specialty_immunecounteruav", #"specialty_loudenemies", #"specialty_jetquiet", #"specialty_bulletflinch", #"specialty_anteup", #"specialty_detectnearbyenemies");
+	//self.syn["perks"][1] = array("Scavenger", "Engineer", "Flak Jacket", "Tactical Mask", "Lightweight", "Skulker", "Cold Blooded", "Gung-Ho", "Dexterity", "Ghost", "Team Link", "Dead Silence", "Tracker", "Hard Wired", "Awareness", "Blast Suppressor", "Toughness", "Ante-Up", "Sixth Sense");
+	//
+	//self.syn["talents"][0] = array("talent_scavenger", "talent_engineer", "talent_flakjacket", "talent_resistance", "talent_lightweight", "talent_skulker", "talent_coldblooded", "talent_gungho", "talent_dexterity", "talent_ghost", "talent_teamlink", "talent_deadsilence", "talent_tracker");
+	//self.syn["talents"][1] = array("Scavenger", "Engineer", "Flak Jacket", "Tactical Mask", "Lightweight", "Skulker", "Cold Blooded", "Gung-Ho", "Dexterity", "Ghost", "Team Link", "Dead Silence", "Tracker");
 
 	// Killstreaks
 
@@ -84,7 +95,11 @@ initialize_menu() { //15544841
 			self.initialized = true;
 			level.initialized = true;
 
-			self notify("init_menu");
+			if(!self.menu_initialized) {
+				self notify("init_menu");
+			}
+
+			self.synergy_enabled = true;
 
 			self thread menu_call();
 		}
@@ -140,6 +155,7 @@ menu_option() { //bf384607
 			self synergy::add_option("Give Killstreaks", undefined, &synergy::new_menu, "Give Killstreaks");
 			self synergy::add_option("Menu Options", undefined, &synergy::new_menu, "Menu Options");
 			self synergy::add_option("All Players", undefined, &synergy::new_menu, "All Players");
+			self synergy::add_option("Debug Options", undefined, &synergy::new_menu, "Debug Options");
 
 			break;
 		case "Basic Options":
@@ -150,12 +166,18 @@ menu_option() { //bf384607
 
 			self synergy::add_toggle("Infinite Ammo", "Gives you Infinite Ammo, Grenades, Specialist, and Killstreaks", &infinite_ammo, self.infinite_ammo);
 
+			//self synergy::add_option("Give All Perks", undefined, &give_all_perks);
+			//self synergy::add_option("Take All Perks", undefined, &take_all_perks);
+			//
+			//self synergy::add_option("Give Perks", undefined, &synergy::new_menu, "Give Perks");
+			//self synergy::add_option("Take Perks", undefined, &synergy::new_menu, "Take Perks");
+
 			break;
 		case "Fun Options":
 			self synergy::add_menu(menu);
 
-			self synergy::add_increment("Set Speed", undefined, &set_speed, 1, 1, 15, 1);
-			self synergy::add_increment("Set Gravity", undefined, &set_gravity, 800, 100, 800, 100);
+			self synergy::add_increment("Set Speed", undefined, &set_speed, "set_speed", 1, 1, 15, 1);
+			self synergy::add_increment("Set Gravity", undefined, &set_gravity, "set_gravity", 800, 100, 800, 100);
 
 			self synergy::add_toggle("Third Person", undefined, &third_person, self.third_person);
 
@@ -188,14 +210,14 @@ menu_option() { //bf384607
 		case "Menu Options":
 			self synergy::add_menu(menu);
 
-			self synergy::add_increment("Move Menu X", "Move the Menu around Horizontally", &synergy::modify_menu_position, 0, -1200, 1200, 50, "x");
-			self synergy::add_increment("Move Menu Y", "Move the Menu around Vertically", &synergy::modify_menu_position, 0, -250, 250, 25, "y");
+			self synergy::add_increment("Move Menu X", "Move the Menu around Horizontally", &synergy::modify_menu_position, "move_menu_x", 0, -1200, 1200, 50, "x");
+			self synergy::add_increment("Move Menu Y", "Move the Menu around Vertically", &synergy::modify_menu_position, "move_menu_y", 0, -250, 250, 25, "y");
 
 			self synergy::add_option("Rainbow Menu", "Set the Menu Outline Color to Cycling Rainbow", &synergy::set_menu_rainbow);
 
-			self synergy::add_increment("Red", "Set the Red Value for the Menu Outline Color", &synergy::set_menu_colors, 255, 1, 255, 1, "Red");
-			self synergy::add_increment("Green", "Set the Green Value for the Menu Outline Color", &synergy::set_menu_colors, 255, 1, 255, 1, "Green");
-			self synergy::add_increment("Blue", "Set the Blue Value for the Menu Outline Color", &synergy::set_menu_colors, 255, 1, 255, 1, "Blue");
+			self synergy::add_increment("Red", "Set the Red Value for the Menu Outline Color", &synergy::set_menu_colors, "set_red", 255, 1, 255, 1, "Red");
+			self synergy::add_increment("Green", "Set the Green Value for the Menu Outline Color", &synergy::set_menu_colors, "set_green", 255, 1, 255, 1, "Green");
+			self synergy::add_increment("Blue", "Set the Blue Value for the Menu Outline Color", &synergy::set_menu_colors, "set_blue", 255, 1, 255, 1, "Blue");
 
 			self synergy::add_toggle("Hide UI", undefined, &synergy::hide_ui, self.hide_ui);
 			self synergy::add_toggle("Hide Weapon", undefined, &synergy::hide_weapon, self.hide_weapon);
@@ -236,6 +258,22 @@ menu_option() { //bf384607
 			}
 
 			break;
+		//case "Give Perks":
+		//	self synergy::add_menu(menu);
+		//
+		//	for(i = 0; i < self.syn["perks"][0].size; i++) {
+		//		self synergy::add_option(self.syn["perks"][1][i], undefined, &give_perk, self.syn["perks"][0][i], 0);
+		//	}
+		//
+		//	break;
+		//case "Take Perks":
+		//	self synergy::add_menu(menu);
+		//
+		//	for(i = 0; i < self.syn["perks"][0].size; i++) {
+		//		self synergy::add_option(self.syn["perks"][1][i], undefined, &take_perk, self.syn["perks"][0][i]);
+		//	}
+		//
+		//	break;
 		case "Equip Attachment":
 			self synergy::add_menu(menu);
 
@@ -300,45 +338,45 @@ menu_option() { //bf384607
 		case "Give Mastercrafts":
 			self synergy::add_menu(menu);
 
-			self synergy::add_array("ICR-7 Variant", undefined, &give_mastercraft_weapon, array("Blinding Glory", "Summon", "Gearhead"), undefined, "ar_accurate_t8");
-			self synergy::add_array("Maddox RFB Variant", undefined, &give_mastercraft_weapon, array("Carbon Cobra", "$treet"), undefined, "ar_fastfire_t8");
-			self synergy::add_array("KN-57 Variant", undefined, &give_mastercraft_weapon, array("MkII", "Kuromaku", "Fabergé K"), undefined, "ar_modular_t8");
-			self synergy::add_array("Rampart 17 Variant", undefined, &give_mastercraft_weapon, array("MkII", "Afterburner"), undefined, "ar_damage_t8");
+			self synergy::add_array("ICR-7 Variant", undefined, &give_mastercraft_weapon, "icr_mastercrafts", array("Blinding Glory", "Summon", "Gearhead"), undefined, "ar_accurate_t8");
+			self synergy::add_array("Maddox RFB Variant", undefined, &give_mastercraft_weapon, "maddox_mastercrafts", array("Carbon Cobra", "$treet"), undefined, "ar_fastfire_t8");
+			self synergy::add_array("KN-57 Variant", undefined, &give_mastercraft_weapon, "kn_mastercrafts", array("MkII", "Kuromaku", "Fabergé K"), undefined, "ar_modular_t8");
+			self synergy::add_array("Rampart 17 Variant", undefined, &give_mastercraft_weapon, "rampart_mastercrafts", array("MkII", "Afterburner"), undefined, "ar_damage_t8");
 			self synergy::add_option("VAPR-XKG - Vampire Hunter", undefined, &give_mastercraft_weapon, undefined, 2, "ar_stealth_t8");
-			self synergy::add_array("Swat RFT Variant", undefined, &give_mastercraft_weapon, array("MkII", "Temple of Boom"), undefined, "ar_standard_t8");
+			self synergy::add_array("Swat RFT Variant", undefined, &give_mastercraft_weapon, "swat_mastercrafts", array("MkII", "Temple of Boom"), undefined, "ar_standard_t8");
 			self synergy::add_option("Peacekeeper - MkII", undefined, &give_mastercraft_weapon, undefined, 1, "ar_peacekeeper_t8");
 
-			self synergy::add_array("MX9 Variant", undefined, &give_mastercraft_weapon, array("MkII Patriot", "Soldier of Fortune"), undefined, "smg_standard_t8");
-			self synergy::add_array("Spitfire Variant", undefined, &give_mastercraft_weapon, array("Deep Voyage", "MkII"), undefined, "smg_fastfire_t8", 1);
-			self synergy::add_array("Saug 9mm Variant", undefined, &give_mastercraft_weapon, array("Great Lion", "MkII"), undefined, "smg_handling_t8", 1);
-			self synergy::add_array("GKS Variant", undefined, &give_mastercraft_weapon, array("MkII - Damascus", "Tactical Unicorn", "Black Plague"), undefined, "smg_accurate_t8");
-			self synergy::add_array("Cordite Variant", undefined, &give_mastercraft_weapon, array("Zero G", "MkII"), undefined, "smg_capacity_t8", 1);
-			self synergy::add_array("Daemon 3XB Variant", undefined, &give_mastercraft_weapon, array("MkII", "Imaginator"), undefined, "smg_fastburst_t8");
+			self synergy::add_array("MX9 Variant", undefined, &give_mastercraft_weapon, "mx_mastercrafts", array("MkII Patriot", "Soldier of Fortune"), undefined, "smg_standard_t8");
+			self synergy::add_array("Spitfire Variant", undefined, &give_mastercraft_weapon, "spitfire_mastercrafts", array("Deep Voyage", "MkII"), undefined, "smg_fastfire_t8", 1);
+			self synergy::add_array("Saug 9mm Variant", undefined, &give_mastercraft_weapon, "saug_mastercrafts", array("Great Lion", "MkII"), undefined, "smg_handling_t8", 1);
+			self synergy::add_array("GKS Variant", undefined, &give_mastercraft_weapon, "gks_mastercrafts", array("MkII - Damascus", "Tactical Unicorn", "Black Plague"), undefined, "smg_accurate_t8");
+			self synergy::add_array("Cordite Variant", undefined, &give_mastercraft_weapon, "cordite_mastercrafts", array("Zero G", "MkII"), undefined, "smg_capacity_t8", 1);
+			self synergy::add_array("Daemon 3XB Variant", undefined, &give_mastercraft_weapon, "daemon_mastercrafts", array("MkII", "Imaginator"), undefined, "smg_fastburst_t8");
 			self synergy::add_option("Switchblade X9 - MkII", undefined, &give_mastercraft_weapon, undefined, 1, "smg_folding_t8");
 
-			self synergy::add_array("Swordfish Variant", undefined, &give_mastercraft_weapon, array("Ahab's Revenge", "MkII"), undefined, "tr_longburst_t8", 1);
-			self synergy::add_array("ABR 223 Variant", undefined, &give_mastercraft_weapon, array("Fighter Ace", "MkII"), undefined, "tr_midburst_t8", 1);
-			self synergy::add_array("S6 Stingray Variant", undefined, &give_mastercraft_weapon, array("Predator", "MkII"), undefined, "tr_flechette_t8");
+			self synergy::add_array("Swordfish Variant", undefined, &give_mastercraft_weapon, "swordfish_mastercrafts", array("Ahab's Revenge", "MkII"), undefined, "tr_longburst_t8", 1);
+			self synergy::add_array("ABR 223 Variant", undefined, &give_mastercraft_weapon, "abr_mastercrafts", array("Fighter Ace", "MkII"), undefined, "tr_midburst_t8", 1);
+			self synergy::add_array("S6 Stingray Variant", undefined, &give_mastercraft_weapon, "stingray_mastercrafts", array("Predator", "MkII"), undefined, "tr_flechette_t8");
 
-			self synergy::add_array("Titan Variant", undefined, &give_mastercraft_weapon, array("MkII - Sandstorm", "Black Knight"), undefined, "lmg_standard_t8");
+			self synergy::add_array("Titan Variant", undefined, &give_mastercraft_weapon, "titan_mastercrafts", array("MkII - Sandstorm", "Black Knight"), undefined, "lmg_standard_t8");
 			self synergy::add_option("Hades - Venom Cocktail", undefined, &give_mastercraft_weapon, undefined, 1, "lmg_spray_t8");
-			self synergy::add_array("VKM 750 Variant", undefined, &give_mastercraft_weapon, array("Magic Carpet Ride", "MkII"), undefined, "lmg_heavy_t8", 1);
+			self synergy::add_array("VKM 750 Variant", undefined, &give_mastercraft_weapon, "vkm_mastercrafts", array("Magic Carpet Ride", "MkII"), undefined, "lmg_heavy_t8", 1);
 			self synergy::add_option("Tigershark - MkII", undefined, &give_mastercraft_weapon, undefined, 1, "lmg_stealth_t8");
 
 			self synergy::add_option("SDM - Lost Patrol", undefined, &give_mastercraft_weapon, undefined, 2, "sniper_powersemi_t8");
-			self synergy::add_array("Paladin HB50 Variant", undefined, &give_mastercraft_weapon, array("Unknown", "Valkyrie", "MkII"), undefined, "sniper_powerbolt_t8");
-			self synergy::add_array("Koshka Variant", undefined, &give_mastercraft_weapon, array("MkII", "Wundergewehr 115"), undefined, "sniper_quickscope_t8");
+			self synergy::add_array("Paladin HB50 Variant", undefined, &give_mastercraft_weapon, "paladin_mastercrafts", array("Unknown", "Valkyrie", "MkII"), undefined, "sniper_powerbolt_t8");
+			self synergy::add_array("Koshka Variant", undefined, &give_mastercraft_weapon, "koshka_mastercrafts", array("MkII", "Wundergewehr 115"), undefined, "sniper_quickscope_t8");
 			self synergy::add_option("Outlaw - High Noon", undefined, &give_mastercraft_weapon, undefined, 2, "sniper_fastrechamber_t8");
 			self synergy::add_option("Vendetta - MkII", undefined, &give_mastercraft_weapon, undefined, 1, "sniper_mini14_t8");
 
-			self synergy::add_array("SG12 Variant", undefined, &give_mastercraft_weapon, array("MkII - Killcano", "Boombox"), undefined, "shotgun_semiauto_t8");
-			self synergy::add_array("MOG 12 Variant", undefined, &give_mastercraft_weapon, array("Enforcer", "MkII"), undefined, "shotgun_pump_t8", 1);
-			self synergy::add_array("Rampage Variant", undefined, &give_mastercraft_weapon, array("MkII", "Desecrator"), undefined, "shotgun_fullauto_t8");
+			self synergy::add_array("SG12 Variant", undefined, &give_mastercraft_weapon, "sg_mastercrafts", array("MkII - Killcano", "Boombox"), undefined, "shotgun_semiauto_t8");
+			self synergy::add_array("MOG 12 Variant", undefined, &give_mastercraft_weapon, "mog_mastercrafts", array("Enforcer", "MkII"), undefined, "shotgun_pump_t8", 1);
+			self synergy::add_array("Rampage Variant", undefined, &give_mastercraft_weapon, "rampage_mastercrafts", array("MkII", "Desecrator"), undefined, "shotgun_fullauto_t8");
 
-			self synergy::add_array("Mozu Variant", undefined, &give_mastercraft_weapon, array("Replicant", "MkII"), undefined, "pistol_revolver_t8", 1);
-			self synergy::add_array("Strife Variant", undefined, &give_mastercraft_weapon, array("MkII - Divinity", "Divine Justice"), undefined, "pistol_standard_t8");
+			self synergy::add_array("Mozu Variant", undefined, &give_mastercraft_weapon, "mozu_mastercrafts", array("Replicant", "MkII"), undefined, "pistol_revolver_t8", 1);
+			self synergy::add_array("Strife Variant", undefined, &give_mastercraft_weapon, "strife_mastercrafts", array("MkII - Divinity", "Divine Justice"), undefined, "pistol_standard_t8");
 			self synergy::add_option("RK 7 Garrison - Odin's Song", undefined, &give_mastercraft_weapon, undefined, 2, "pistol_burst_t8");
-			self synergy::add_array("KAP 45 Variant", undefined, &give_mastercraft_weapon, array("MkII", "Game Over"), undefined, "pistol_fullauto_t8");
+			self synergy::add_array("KAP 45 Variant", undefined, &give_mastercraft_weapon, "kap_mastercrafts", array("MkII", "Game Over"), undefined, "pistol_fullauto_t8");
 
 			break;
 		case "Give Weapons":
@@ -427,6 +465,14 @@ menu_option() { //bf384607
 			load_weapons("specialist_equipment");
 
 			break;
+		case "Debug Options":
+			self synergy::add_menu(menu);
+
+			self synergy::add_toggle("Get Current Weapon", undefined, &get_weapon_id, self.get_weapon_id);
+			self synergy::add_option("Get All Weapons", undefined, &get_all_weapons);
+			self synergy::add_option("Test Function", undefined, &test_function);
+
+			break;
 		default:
 			if(!isDefined(self.selected_player)) {
 				self.selected_player = self;
@@ -437,6 +483,75 @@ menu_option() { //bf384607
 			self synergy::add_option(synergy::empty_option());
 			break;
 	}
+}
+
+// Debug Options
+
+test_function() { //84e3b26c
+	//foreach(streak in level.killstreaks) {
+	//	iPrintlnBold(streak);
+	//	wait 2.5;
+	//}
+}
+
+get_weapon_id() { //bb60d1fc
+	self.get_weapon_id = !synergy::return_toggle(self.get_weapon_id);
+	if(self.get_weapon_id) {
+		self thread get_weapon_loop();
+	} else {
+		self notify("stop_get_weapon");
+	}
+}
+
+get_weapon_loop() { //d796b12a
+	self endon("stop_get_weapon");
+	self endon("disconnect");
+	level endon("game_ended");
+
+	for(;;) {
+		weapon_name = weapon_hash_to_id(self getCurrentWeapon());
+		if(weapon_name == "" || !isDefined(weapon_name)) {
+			weapon_name = "" + getWeaponName(self getCurrentWeapon());
+		}
+		iPrintlnBold(weapon_name);
+		wait 5;
+	}
+}
+
+get_all_weapons() { //9516e89e
+	weapons = self getWeaponsListPrimaries();
+	for(i = 0; i < weapons.size; i++) {
+		weapon_name = weapon_hash_to_id(weapons[i]);
+		if(weapon_name == "" || !isDefined(weapon_name)) {
+			weapon_name = "" + getWeaponName(weapons[i]);
+		}
+
+		iPrintlnBold(weapon_name);
+		wait 2.5;
+	}
+}
+
+weapon_hash_to_id(weapon) { //15254ed5
+	attachments = get_equipped_attachments(weapon);
+
+	attachment_string = "";
+	foreach(attachment in attachments) {
+		attachment_string = attachment_string + "+" + attachment;
+	}
+
+	weapon_hash = "" + getWeaponName(weapon);
+	if(isSubStr(weapon_hash, "+")) {
+		weapon_hash = "" + strTok(weapon_hash, "+")[0];
+	}
+
+	weapon_name = "";
+	for(i = 0; i < self.syn["weapons"]["hashes"][0].size; i++) {
+		if(self.syn["weapons"]["hashes"][0][i] == weapon_hash) {
+			weapon_name = "" + self.syn["weapons"]["hashes"][1][i] + attachment_string;
+		}
+	}
+
+	return weapon_name;
 }
 
 // Basic Options
@@ -670,6 +785,112 @@ kick_player(target) { //de512d61
 give_killstreak(streak) { //ec07394f
 	self killstreaks::give(streak, 1);
 }
+
+// Perks
+
+//give_all_perks() { //611acfbb
+//	foreach(perk in self.syn["perks"][0]) {
+//		self perks::perk_setperk(perk);
+//	}
+//}
+//
+//take_all_perks() { //6df72e2a
+//	foreach(perk in self.syn["perks"][0]) {
+//		self perks::perk_unsetperk(perk);
+//	}
+//	//self clearperks();
+//}
+//
+//give_perk(perk) { //47d6a43e
+//	self perks::perk_setperk(perk);
+//
+//	// Lightweight
+//	if(perk == #"specialty_longersprint") {
+//		self perks::perk_setperk(#"specialty_fallheight");
+//	}
+//
+//	// Tac Mask
+//	if(perk == #"specialty_stunprotection") {
+//		self perks::perk_setperk(#"specialty_flashprotection");
+//		self perks::perk_setperk(#"specialty_proximityprotection");
+//	}
+//
+//	// Engineer
+//	if(perk == #"specialty_showenemyequipment") {
+//		self perks::perk_setperk(#"specialty_showscorestreakicons");
+//		self perks::perk_setperk(#"specialty_showenemyvehicles");
+//	}
+//
+//	// Cold Blooded
+//	if(perk == #"specialty_nottargetedbyairsupport") {
+//		self perks::perk_setperk(#"specialty_nottargetedbyraps");
+//		self perks::perk_setperk(#"specialty_nottargetedbyaitank");
+//		self perks::perk_setperk(#"specialty_nottargetedbysentry");
+//		self perks::perk_setperk(#"specialty_nottargetedbyrobot");
+//		self perks::perk_setperk(#"specialty_immunenvthermal");
+//		self perks::perk_setperk(#"specialty_nokillstreakreticle");
+//		self perks::perk_setperk(#"specialty_sixthsensejammer");
+//		self perks::perk_setperk(#"specialty_trackerjammer");
+//
+//		//self clientfield::set("cold_blooded", 1);
+//	}
+//
+//	// Hard Wired
+//	if(perk == #"specialty_immunecounteruav") {
+//		self perks::perk_setperk(#"specialty_immuneemp");
+//		self perks::perk_setperk(#"specialty_immunetriggerc4");
+//		self perks::perk_setperk(#"specialty_immunetriggershock");
+//		self perks::perk_setperk(#"specialty_immunetriggerbetty");
+//		self perks::perk_setperk(#"specialty_sixthsensejammer");
+//		self perks::perk_setperk(#"specialty_trackerjammer");
+//		self perks::perk_setperk(#"specialty_immunesmoke");
+//	}
+//
+//	// Gung-Ho
+//	if(perk == #"specialty_sprintfire") {
+//		self perks::perk_setperk(#"specialty_sprintgrenadelethal");
+//		self perks::perk_setperk(#"specialty_sprintgrenadetactical");
+//		self perks::perk_setperk(#"specialty_sprintequipment");
+//	}
+//
+//	// Blast Suppressor
+//	if(perk == #"specialty_jetquiet") {
+//		self perks::perk_setperk(#"specialty_jetnoradar");
+//		self perks::perk_setperk(#"specialty_jetcharger");
+//	}
+//
+//	// Dexterity
+//	if(perk == #"specialty_fastmantle") {
+//		self perks::perk_setperk(#"specialty_fastladderclimb");
+//		self perks::perk_setperk(#"specialty_slide");
+//		self perks::perk_setperk(#"specialty_fastweaponswitch");
+//		self perks::perk_setperk(#"specialty_sprintrecovery");
+//		self perks::perk_setperk(#"specialty_sprintfirerecovery");
+//	}
+//
+//	// Ante-Up/Overcharge
+//	if(perk == #"specialty_anteup") {
+//		self perks::perk_setperk(#"specialty_overcharge");
+//	}
+//}
+//
+//take_perk(perk) { //9cba355d
+//	if(perks::perk_hasperk(perk)) {
+//		self perks::perk_unsetperk(perk);
+//	}
+//}
+
+//give_talent(talent) { //986114ce
+//	self addTalent(talent);
+//}
+//
+//take_talent(talent) { //b151488d
+//	self removeTalent(talent);
+//}
+//
+//take_all_talents() { //a3ac038f
+//	self clearTalents();
+//}
 
 // Weapon Options
 

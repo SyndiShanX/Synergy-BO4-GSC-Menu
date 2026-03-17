@@ -16,17 +16,23 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 
 #### Installation:
 
-* You can install the Mod ingame on the Mod Manager Page
+* You can install the Mod Menu ingame on the Mod Manager Page
 
 ##### Manual Installation:
 
-* Download the Latest ZIP from [Releases](https://github.com/SyndiShanX/Synergy-BO4-GSC-Menu/releases)
+* Download the Latest Synergy.zip from [Releases](https://github.com/SyndiShanX/Synergy-BO4-GSC-Menu/releases)
 
 * Place the Synergy Folder in the ZIP into `project-bo4/mods`
 
+##### Gun Game Installation:
+
+* Download the Latest Gun_Game.zip from [Releases](https://github.com/SyndiShanX/Synergy-BO4-GSC-Menu/releases)
+
+* Place the Gun_Game Folder in the ZIP into `project-bo4/mods`
+
 ## Credits
 
-This menu is based on [M203](https://github.com/Xeirh/M203) by [Xeirh](https://github.com/Xeirh)
+This menu is based on M203 by [Xeirh](https://github.com/Xeirh)
 
 - Apparition Structure Team:
   * `CF4_99` Main developer
@@ -34,8 +40,4 @@ This menu is based on [M203](https://github.com/Xeirh/M203) by [Xeirh](https://g
   * `ItsFebiven` Some ideas and suggestions
   * `Joel` Suggestions
 
-Some functions are from
-
-[Lucy Menu](https://github.com/TheUnknownCod3r/BO4-Lucy-Menu) by [TheUnknownCod3r](https://github.com/TheUnknownCod3r)
-
-[Atian Menu](https://github.com/ate47/t8-atian-menu) by [ate47](https://github.com/ate47)
+Some functions are from [Atian Menu](https://github.com/ate47/t8-atian-menu) by [ate47](https://github.com/ate47)
