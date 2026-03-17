@@ -503,7 +503,7 @@ check_weapon(params) { //279297cc
 			level notify("weapon_check_passed");
 		} else {
 			level notify("weapon_check_failed");
-			shieldLog("^6 " + attacker_weapon.name + " || " + damage_weapon.name);
+			//shieldLog("^6 " + attacker_weapon.name + " || " + damage_weapon.name);
 		}
 	}
 }
@@ -767,7 +767,7 @@ increment_pack_level() { //6b616c01
 }
 
 pack_weapons() { //dc2d810d
-	shieldLog("^5 Current Weapon String: " + self.current_weapon_string);
+	//shieldLog("^5 Current Weapon String: " + self.current_weapon_string);
 	self.updating_weapon = true;
 
 	if(self.pack_tier >= 1) {
@@ -782,7 +782,7 @@ pack_weapons() { //dc2d810d
 		}
 	}
 
-	shieldLog("^5 Current Weapon String: " + self.current_weapon_string);
+	//shieldLog("^5 Current Weapon String: " + self.current_weapon_string);
 
 	weapon = getWeapon(self.current_weapon_string);
 
@@ -802,7 +802,7 @@ pack_weapons() { //dc2d810d
 		}
 	}
 
-	shieldLog("^5 Current Weapon Repacked: " + weapon.name);
+	//shieldLog("^5 Current Weapon Repacked: " + weapon.name);
 
 	self.current_weapon = weapon;
 	wait 1;
