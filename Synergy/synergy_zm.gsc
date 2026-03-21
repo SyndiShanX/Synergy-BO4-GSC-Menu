@@ -101,9 +101,6 @@ initial_variables() { //ec264b2e
 	self.syn["perks"][0] = array(#"specialty_cooldown", #"specialty_quickrevive", #"specialty_awareness", #"specialty_staminup", #"specialty_etherealrazor", #"specialty_wolf_protector", #"specialty_zombshell", #"specialty_death_dash", #"specialty_electriccherry", #"specialty_berserker", #"specialty_camper", #"specialty_shield", #"specialty_deadshot", #"specialty_extraammo", #"specialty_widowswine", #"specialty_additionalprimaryweapon", #"specialty_phdflopper", #"specialty_mystery");
 	self.syn["perks"][1] = array("Timeslip", "Quick Revive", "Death Perception", "Stamin-Up", "Ethereal Razor", "Blood Wolf Bite", "Zombshell", "Blaze Phase", "Electric Cherry", "Dying Wish", "Stone Cold Stronghold", "Victorious Tortoise", "Deadshot Dealer", "Bandolier Bandit", "Winter's Wail", "Mule Kick", "PhD Slider", "Secret Sauce");
 
-	self.syn["perks"][2] = array(#"specialty_juggernog", #"specialty_doubletap2", #"specialty_whoswho", #"specialty_elemental_pop", #"specialty_vultureaid", #"specialty_fastreload");
-	self.syn["perks"][3] = array("Juggernog", "Double Tap", "Who's Who", "Elemental Pop", "Vulture Aid", "Speed Cola");
-
 	// Powerups
 
 	self.syn["powerup_names"][0] = array("1cf58366f56051a9", "5bb3bdba52958ee0", "65a6e8a720ec27c9", "44139aa5d5d9acfb", "6080366ece401431", "7feb13c572497c4a", "78a69fe66c54a056", "951f1d39fde20f7", "50765381ed09468", "E6ffa040580ae58", "28c684193b1b7640", "356fd3bea40f1fee", "28095af5c98f035a", "5201bc3e92d0e7ee", "49f009410f356e84", "5afab57564fa0eb8", "7c95ffdff695fa09", "3331e35614cf574b", "20f05a40e6dfd271");
@@ -455,20 +452,12 @@ menu_option() { //bf384607
 				self synergy::add_option(self.syn["perks"][1][i], undefined, &give_perk, self.syn["perks"][0][i]);
 			}
 
-			for(i = 0; i < self.syn["perks"][2].size; i++) {
-				self synergy::add_option(self.syn["perks"][3][i], undefined, &give_enhancement_perk, self.syn["perks"][2][i]);
-			}
-
 			break;
 		case "Take Perks":
 			self synergy::add_menu(menu);
 
 			for(i = 0; i < self.syn["perks"][0].size; i++) {
 				self synergy::add_option(self.syn["perks"][1][i], undefined, &take_perk, self.syn["perks"][0][i]);
-			}
-
-			for(i = 0; i < self.syn["perks"][2].size; i++) {
-				self synergy::add_option(self.syn["perks"][3][i], undefined, &take_enhancement_perk, self.syn["perks"][2][i]);
 			}
 
 			break;
@@ -1133,132 +1122,6 @@ take_perk(perk) { //9cba355d
 	}
 }
 
-give_enhancement_perk(perk) { //6f6861d1
-	switch(perk) {
-		case "specialty_juggernog":
-			if(!self.HasJugg) {
-				self.var_66cb03ad = 300;
-				self setMaxHealth(300);
-				self.HasJugg = 1;
-			}
-			break;
-		case "specialty_elemental_pop":
-			if(!self.HasElemental) {
-				self.HasElemental = 1;
-			}
-			break;
-		case "specialty_vultureaid":
-			if(!self hasPerk(#"specialty_vultureaid")) {
-				self thread vulture_aid_logic();
-				self thread vulture_aid_down();
-			}
-			break;
-		default:
-			self perks::perk_setperk(perk);
-			break;
-	}
-	update_enhancement_perks();
-}
-
-take_enhancement_perk(perk) { //7b9aca54
-	switch(perk) {
-		case "specialty_juggernog":
-			if(self.HasJugg) {
-				self.var_66cb03ad = 150;
-				self setMaxHealth(150);
-				self.HasJugg = 0;
-			}
-			break;
-		case "specialty_elemental_pop":
-			if(self.HasElemental) {
-				self.HasElemental = 0;
-			}
-			break;
-		case "specialty_vultureaid":
-			if(self hasPerk(#"specialty_vultureaid")) {
-				self notify(#"vulture_aid_down");
-			}
-			break;
-		default:
-			self perks::perk_unsetperk(perk);
-			break;
-	}
-	update_enhancement_perks();
-}
-
-update_enhancement_perks() { //dc117a2
-	// Juggernog Toggle
-	self zm_utility::set_max_health();
-	self luinotifyevent(#"hash_5f8731dc1f9a86d4", 1, self.HasJugg);
-
-	// Double Tap Toggle
-	if(self hasPerk(#"specialty_doubletap2")) {
-		is_double_tap_2 = getDvarInt("shield_enh_ClassicMode_DoubleTab2", 0);
-
-		if(!is_double_tap_2) {
-			self luinotifyevent(#"hash_2669f675f6ec30e6", 1, 1);
-		} else {
-			self luinotifyevent(#"hash_2669f675f6ec30e6", 1, 2);
-		}
-	} else {
-		self luinotifyevent(#"hash_2669f675f6ec30e6", 1, 0);
-	}
-
-	// Who's Who Toggle
-	self luinotifyevent(#"hash_f6d77b06f09295d", 1, self hasPerk(#"specialty_whoswho"));
-
-	// Elemental Pop Toggle
-	self luinotifyevent(#"hash_6f0e02e3f11ac718", 1, self.HasElemental);
-
-	// Vulture Aid Toggle
-	self luinotifyevent(#"hash_18005a0411b0e358", 1, self hasPerk(#"specialty_vultureaid"));
-
-	// Speed Cola Toggle
-	self luinotifyevent(#"hash_3bd02656081b96d6", 1, self hasPerk(#"specialty_fastreload"));
-}
-
-vulture_aid_logic() { //be0766f2
-	self endon(#"death", #"disconnect", #"player_downed", #"hash_7618be2fb768de2a", #"vulture_aid_stop");
-
-	while(true) {
-	  foreach(obj in level.vultureobjects) {
-	    if(util::is_looking_at(obj.origin, 0.5, 0, isDefined(obj.is_weapon) ? undefined : (0, 0, 50))) {
-	      if((isDefined(obj.is_weapon) || isDefined(obj.is_perk)) && distancesquared(obj.origin, self.origin) < 1800000) {
-	        self luinotifyevent(#"hash_58365cf8cda34e54", 2, 2, obj.n_obj_id);
-	        continue;
-	      }
-
-	      if(!isDefined(obj.is_weapon) && !isDefined(obj.is_perk)) {
-	        self luinotifyevent(#"hash_58365cf8cda34e54", 2, 2, obj.n_obj_id);
-	      } else {
-	        self luinotifyevent(#"hash_58365cf8cda34e54", 2, 3, obj.n_obj_id);
-	      }
-
-	      continue;
-	    }
-
-	    self luinotifyevent(#"hash_58365cf8cda34e54", 2, 3, obj.n_obj_id);
-	  }
-
-	  wait 0.05;
-	}
-}
-
-vulture_aid_down() { //d96f5f0
-	self endon(#"death", #"disconnect");
-	self waittill(#"player_downed", #"hash_7b1d8f23195c152b", #"vulture_aid_down");
-	wait 0.1;
-	self perks::perk_unsetperk(#"specialty_vultureaid");
-	self notify(#"vulture_aid_stop");
-	self notify(#"hash_7b1d8f23195c152b");
-
-	foreach(obj in level.vultureobjects) {
-	  self luinotifyevent(#"hash_58365cf8cda34e54", 2, 3, obj.n_obj_id);
-	}
-
-	self luinotifyevent(#"hash_18005a0411b0e358", 1, 0);
-}
-
 give_perks() { //5ac66375
 	self thread zm_perks::function_cc24f525(); // Lucy Menu
 }
@@ -1580,19 +1443,18 @@ shoot_powerups_loop() { //d38fcbee
 
 // Weapon Options
 
-give_grenade(grenade) { //9270d7fd
+give_grenade(grenade_string) { //9270d7fd
+	grenade = getWeapon(grenade_string);
 	if(isDefined(self zm_loadout::get_player_lethal_grenade())) {
 		self takeWeapon(self zm_loadout::get_player_lethal_grenade());
 		self zm_loadout::set_player_lethal_grenade(grenade);
-	} else if(isDefined(self zm_loadout::get_player_tactical_grenade())) {
-		self takeWeapon(self zm_loadout::get_player_tactical_grenade());
 	}
 
-	if(grenade == "homunculus") {
+	if(grenade_string == "homunculus") {
 		zm_magicbox::give_offhand_weapon(level.w_homunculus);
 	}
 
-	self giveWeapon(getWeapon(grenade));
+	self giveWeapon(grenade);
 	self giveMaxAmmo(grenade);
 }
 
