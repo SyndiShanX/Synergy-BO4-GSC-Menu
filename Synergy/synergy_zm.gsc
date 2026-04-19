@@ -324,7 +324,6 @@ menu_option() { //bf384607
 			self synergy::add_option("Map Options", undefined, &synergy::new_menu, "Map Options");
 			self synergy::add_option("Powerup Options", undefined, &synergy::new_menu, "Powerup Options");
 			self synergy::add_option("Menu Options", undefined, &synergy::new_menu, "Menu Options");
-			self synergy::add_option("Debug Options", undefined, &synergy::new_menu, "Debug Options");
 
 			break;
 		case "Basic Options":
@@ -813,153 +812,10 @@ menu_option() { //bf384607
 			}
 
 			break;
-		case "Debug Options":
-			self synergy::add_menu(menu);
-
-			self synergy::add_toggle("Get Current Weapon", undefined, &get_weapon_id, self.get_weapon_id);
-			self synergy::add_option("Get All Weapons", undefined, &get_all_weapons);
-			self synergy::add_option("Test Function", undefined, &test_function);
-
-			break;
 		default:
 			self synergy::add_option(synergy::empty_option());
 			break;
 	}
-}
-
-// Debug Options
-
-test_function() { //84e3b26c
-	//for(i = 0; i < self.syn["weapons"]["blacklisted_weapons"].size; i++) {
-	//	setDvar("loot_bribe_menu_start", "" + getWeaponName(getWeapon(self.syn["weapons"]["blacklisted_weapons"][i])));
-	//	wait 0.05;
-	//	luinotifyevent(#"synergy_slider_6", 1, 200007);
-	//	wait 0.5;
-	//}
-
-	//perk = self zm_perks::function_5ea0c6cf();
-	//
-	//self zm_perks::perk_give_bottle_begin(perk);
-	//evt = self waittilltimeout(3, #"fake_death", #"death", #"player_downed", #"offhand_end", #"perk_abort_drinking", #"disconnect");
-	//
-	//if(evt._notify == "offhand_end" || evt._notify == #"timeout") {
-	//  self thread zm_perks::wait_give_perk(perk);
-	//}
-
-	//wait 10;
-
-	//perk_array = array::exclude(level.var_b8be892e, self.perks_active);
-	//perk = array::random(perk_array);
-
-	//perk = self zm_perks::function_5ea0c6cf();
-	//
-	//self zm_perks::perk_give_bottle_begin(perk);
-	//evt = self waittilltimeout(3, #"fake_death", #"death", #"player_downed", #"offhand_end", #"perk_abort_drinking", #"disconnect");
-	//
-	//if(evt._notify == "offhand_end" || evt._notify == #"timeout") {
-	//  self thread zm_perks::wait_give_perk(perk);
-	//}
-
-	//wait 10;
-
-	//foreach(weapon in level.zombie_weapons) {
-	//	weapon_exists = "null";
-	//
-	//	weapon_name = weapon_hash_to_id(weapon.weapon);
-	//	if(weapon_name == "" || !isDefined(weapon_name)) {
-	//		weapon_name = "" + getWeaponName(weapon.weapon);
-	//	}
-	//
-	//	foreach(weapon_category in self.syn["weapons"]["category"][0]) {
-	//		if(array::contains(self.syn["weapons"][weapon_category][0], weapon_name)) {
-	//			weapon_exists = weapon_category;
-	//			break;
-	//		}
-	//	}
-	//
-	//	if(weapon_exists == "null") {
-	//		iPrintlnBold(weapon_name);
-	//
-	//		self giveWeapon(weapon.weapon);
-	//
-	//		wait 15;
-	//	} else {
-	//		iPrintlnBold(weapon_name + " | " + weapon_category);
-	//
-	//		wait 1;
-	//	}
-	//}
-
-	get_camo_index(self getCurrentWeapon());
-}
-
-get_camo_index(weapon) {
-	if(isDefined(weapon) && weapon != level.weaponNone) {
-		weapon_options = self getBuildKitWeaponOptions(weapon);
-		camo_index = getCamoIndex(weapon_options);
-
-		iPrintlnBold(camo_index);
-	}
-}
-
-get_weapon_id() { //bb60d1fc
-	self.get_weapon_id = !synergy::return_toggle(self.get_weapon_id);
-	if(self.get_weapon_id) {
-		self thread get_weapon_loop();
-	} else {
-		self notify("stop_get_weapon");
-	}
-}
-
-get_weapon_loop() { //d796b12a
-	self endon("stop_get_weapon");
-	self endon("disconnect");
-	level endon("game_ended");
-
-	for(;;) {
-		weapon_name = weapon_hash_to_id(self getCurrentWeapon());
-		if(weapon_name == "" || !isDefined(weapon_name)) {
-			weapon_name = "" + getWeaponName(self getCurrentWeapon());
-		}
-		iPrintlnBold(weapon_name);
-		wait 5;
-	}
-}
-
-get_all_weapons() { //9516e89e
-	weapons = self getWeaponsListPrimaries();
-	for(i = 0; i < weapons.size; i++) {
-		weapon_name = weapon_hash_to_id(weapons[i]);
-		if(weapon_name == "" || !isDefined(weapon_name)) {
-			weapon_name = "" + getWeaponName(weapons[i]);
-		}
-
-		iPrintlnBold(weapon_name);
-		wait 2.5;
-	}
-}
-
-weapon_hash_to_id(weapon) { //15254ed5
-	attachments = get_equipped_attachments(weapon);
-
-	attachment_string = "";
-	foreach(attachment in attachments) {
-		attachment_string = attachment_string + "+" + attachment;
-	}
-
-	weapon_hash = "" + getWeaponName(weapon);
-	if(isSubStr(weapon_hash, "+")) {
-		weapon_hash = "" + strTok(weapon_hash, "+")[0];
-	}
-
-	weapon_name = "";
-	for(i = 0; i < self.syn["weapons"]["hashes"][0].size; i++) {
-		if(self.syn["weapons"]["hashes"][0][i] == weapon_hash) {
-			weapon_name = "" + self.syn["weapons"]["hashes"][1][i] + attachment_string;
-		}
-	}
-
-	return weapon_name;
 }
 
 // Basic Options

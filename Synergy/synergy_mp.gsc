@@ -155,7 +155,6 @@ menu_option() { //bf384607
 			self synergy::add_option("Give Killstreaks", undefined, &synergy::new_menu, "Give Killstreaks");
 			self synergy::add_option("Menu Options", undefined, &synergy::new_menu, "Menu Options");
 			self synergy::add_option("All Players", undefined, &synergy::new_menu, "All Players");
-			self synergy::add_option("Debug Options", undefined, &synergy::new_menu, "Debug Options");
 
 			break;
 		case "Basic Options":
@@ -465,14 +464,6 @@ menu_option() { //bf384607
 			load_weapons("specialist_equipment");
 
 			break;
-		case "Debug Options":
-			self synergy::add_menu(menu);
-
-			self synergy::add_toggle("Get Current Weapon", undefined, &get_weapon_id, self.get_weapon_id);
-			self synergy::add_option("Get All Weapons", undefined, &get_all_weapons);
-			self synergy::add_option("Test Function", undefined, &test_function);
-
-			break;
 		default:
 			if(!isDefined(self.selected_player)) {
 				self.selected_player = self;
@@ -483,75 +474,6 @@ menu_option() { //bf384607
 			self synergy::add_option(synergy::empty_option());
 			break;
 	}
-}
-
-// Debug Options
-
-test_function() { //84e3b26c
-	//foreach(streak in level.killstreaks) {
-	//	iPrintlnBold(streak);
-	//	wait 2.5;
-	//}
-}
-
-get_weapon_id() { //bb60d1fc
-	self.get_weapon_id = !synergy::return_toggle(self.get_weapon_id);
-	if(self.get_weapon_id) {
-		self thread get_weapon_loop();
-	} else {
-		self notify("stop_get_weapon");
-	}
-}
-
-get_weapon_loop() { //d796b12a
-	self endon("stop_get_weapon");
-	self endon("disconnect");
-	level endon("game_ended");
-
-	for(;;) {
-		weapon_name = weapon_hash_to_id(self getCurrentWeapon());
-		if(weapon_name == "" || !isDefined(weapon_name)) {
-			weapon_name = "" + getWeaponName(self getCurrentWeapon());
-		}
-		iPrintlnBold(weapon_name);
-		wait 5;
-	}
-}
-
-get_all_weapons() { //9516e89e
-	weapons = self getWeaponsListPrimaries();
-	for(i = 0; i < weapons.size; i++) {
-		weapon_name = weapon_hash_to_id(weapons[i]);
-		if(weapon_name == "" || !isDefined(weapon_name)) {
-			weapon_name = "" + getWeaponName(weapons[i]);
-		}
-
-		iPrintlnBold(weapon_name);
-		wait 2.5;
-	}
-}
-
-weapon_hash_to_id(weapon) { //15254ed5
-	attachments = get_equipped_attachments(weapon);
-
-	attachment_string = "";
-	foreach(attachment in attachments) {
-		attachment_string = attachment_string + "+" + attachment;
-	}
-
-	weapon_hash = "" + getWeaponName(weapon);
-	if(isSubStr(weapon_hash, "+")) {
-		weapon_hash = "" + strTok(weapon_hash, "+")[0];
-	}
-
-	weapon_name = "";
-	for(i = 0; i < self.syn["weapons"]["hashes"][0].size; i++) {
-		if(self.syn["weapons"]["hashes"][0][i] == weapon_hash) {
-			weapon_name = "" + self.syn["weapons"]["hashes"][1][i] + attachment_string;
-		}
-	}
-
-	return weapon_name;
 }
 
 // Basic Options
