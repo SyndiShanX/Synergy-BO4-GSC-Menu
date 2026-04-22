@@ -364,7 +364,7 @@ menu_option() { //bf384607
 
 			self synergy::add_option("Give Weapons", undefined, &synergy::new_menu, "Give Weapons");
 			self synergy::add_option("Give Mastercrafts", undefined, &synergy::new_menu, "Give Mastercrafts");
-			self synergy::add_increment("Pack-a-Punch Tier", "Given Weapons will be Pack-a-Punched", &give_packed_weapon, "give_packed_weapon", 1, 1, 4, 1);
+			self synergy::add_increment("Pack-a-Punch Tier", "Given Weapons will be Pack-a-Punched", &give_packed_weapon, "give_packed_weapon", 0, 0, 4, 1);
 			self synergy::add_option("Give AAT", undefined, &synergy::new_menu, "Give AAT");
 
 			weapon_attachments = get_weapon_attachments();
