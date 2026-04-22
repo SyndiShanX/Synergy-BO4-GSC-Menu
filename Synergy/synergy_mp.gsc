@@ -63,14 +63,6 @@ initial_variables() { //ec264b2e
 	self.syn["attachments"][0] = array("acog", "damage", "damage2", "dualoptic", "dw", "elo", "extbarrel", "extbarrel2", "extclip", "extclip2", "fastreload", "fastreload2", "fmj", "fmj2", "grip", "grip2", "holo", "is", "ir", "mixclip", "mms", "pistolscope", "quickdraw", "quickdraw2", "reflex", "rf", "speedreloader", "stalker", "stalker2", "steadyaim", "steadyaim2", "suppressed", "swayreduc", "uber");
 	self.syn["attachments"][1] = array("Acog", "High Caliber", "High Caliber II", "Dual Zoom", "Dual Wield", "Elo", "Long Barrel", "Long Barrel II", "Extended Mags", "Extended Mags II", "Fast Mags", "Fast Mags II", "FMJ", "FMJ II", "Grip", "Grip II", "Holographic", "Iron Sights", "Thermal", "Hybrid Mags", "Threat Detector", "Compact Scope", "Quickdraw", "Quickdraw II", "Reflex", "Rapid Fire", "Speed Loader", "Stock", "Stock II", "Laser Sight", "Laser Sight II", "Suppressor", "Stabilizer", "Operator Mod");
 
-	// Perks
-
-	//self.syn["perks"][0] = array(#"specialty_scavenger", #"specialty_showenemyequipment", #"specialty_flakjacket", #"specialty_stunprotection", #"specialty_longersprint", #"specialty_movefaster", #"specialty_nottargetedbyairsupport", #"specialty_sprintfire", #"specialty_fastweaponswitch", #"specialty_gpsjammer", #"specialty_friendliesthroughwalls", #"specialty_quieter", #"specialty_tracker", #"specialty_immunecounteruav", #"specialty_loudenemies", #"specialty_jetquiet", #"specialty_bulletflinch", #"specialty_anteup", #"specialty_detectnearbyenemies");
-	//self.syn["perks"][1] = array("Scavenger", "Engineer", "Flak Jacket", "Tactical Mask", "Lightweight", "Skulker", "Cold Blooded", "Gung-Ho", "Dexterity", "Ghost", "Team Link", "Dead Silence", "Tracker", "Hard Wired", "Awareness", "Blast Suppressor", "Toughness", "Ante-Up", "Sixth Sense");
-	//
-	//self.syn["talents"][0] = array("talent_scavenger", "talent_engineer", "talent_flakjacket", "talent_resistance", "talent_lightweight", "talent_skulker", "talent_coldblooded", "talent_gungho", "talent_dexterity", "talent_ghost", "talent_teamlink", "talent_deadsilence", "talent_tracker");
-	//self.syn["talents"][1] = array("Scavenger", "Engineer", "Flak Jacket", "Tactical Mask", "Lightweight", "Skulker", "Cold Blooded", "Gung-Ho", "Dexterity", "Ghost", "Team Link", "Dead Silence", "Tracker");
-
 	// Killstreaks
 
 	self.syn["killstreaks"][0] = array("dart", "recon_car", "uav", "supply_drop", "counteruav", "planemortar", "ultimate_turret", "remote_missile", "drone_squadron", "overwatch_helicopter", "tank_robot", "straferun", "helicopter_comlink", "swat_team", "ac130");
@@ -165,12 +157,6 @@ menu_option() { //bf384607
 
 			self synergy::add_toggle("Infinite Ammo", "Gives you Infinite Ammo, Grenades, Specialist, and Killstreaks", &infinite_ammo, self.infinite_ammo);
 
-			//self synergy::add_option("Give All Perks", undefined, &give_all_perks);
-			//self synergy::add_option("Take All Perks", undefined, &take_all_perks);
-			//
-			//self synergy::add_option("Give Perks", undefined, &synergy::new_menu, "Give Perks");
-			//self synergy::add_option("Take Perks", undefined, &synergy::new_menu, "Take Perks");
-
 			break;
 		case "Fun Options":
 			self synergy::add_menu(menu);
@@ -245,10 +231,6 @@ menu_option() { //bf384607
 				self synergy::add_option("Print", "Print Player Name", &print_name, target);
 				self synergy::add_option("Kill", "Kill the Player", &commit_suicide, target);
 
-				if(isBot(target)) {
-					self synergy::add_option("Settings", undefined, &prod_settings, target);
-				}
-
 				if(!target isHost()) {
 					self synergy::add_option("Kick", "Kick the Player from the Game", &kick_player, target);
 				}
@@ -257,22 +239,6 @@ menu_option() { //bf384607
 			}
 
 			break;
-		//case "Give Perks":
-		//	self synergy::add_menu(menu);
-		//
-		//	for(i = 0; i < self.syn["perks"][0].size; i++) {
-		//		self synergy::add_option(self.syn["perks"][1][i], undefined, &give_perk, self.syn["perks"][0][i], 0);
-		//	}
-		//
-		//	break;
-		//case "Take Perks":
-		//	self synergy::add_menu(menu);
-		//
-		//	for(i = 0; i < self.syn["perks"][0].size; i++) {
-		//		self synergy::add_option(self.syn["perks"][1][i], undefined, &take_perk, self.syn["perks"][0][i]);
-		//	}
-		//
-		//	break;
 		case "Equip Attachment":
 			self synergy::add_menu(menu);
 
@@ -692,12 +658,6 @@ print_name(target) { //c4da1a2b
 	iPrintlnBold(target.name);
 }
 
-prod_settings(target) { //91f1d5e2
-	iPrintln(target.bot.var_b2b8f0b6);
-	iPrintln(target.bot.var_e8c941d6);
-	iPrintln(target.var_abdff161);
-}
-
 kick_player(target) { //de512d61
 	kick(target getEntityNumber());
 }
@@ -707,112 +667,6 @@ kick_player(target) { //de512d61
 give_killstreak(streak) { //ec07394f
 	self killstreaks::give(streak, 1);
 }
-
-// Perks
-
-//give_all_perks() { //611acfbb
-//	foreach(perk in self.syn["perks"][0]) {
-//		self perks::perk_setperk(perk);
-//	}
-//}
-//
-//take_all_perks() { //6df72e2a
-//	foreach(perk in self.syn["perks"][0]) {
-//		self perks::perk_unsetperk(perk);
-//	}
-//	//self clearperks();
-//}
-//
-//give_perk(perk) { //47d6a43e
-//	self perks::perk_setperk(perk);
-//
-//	// Lightweight
-//	if(perk == #"specialty_longersprint") {
-//		self perks::perk_setperk(#"specialty_fallheight");
-//	}
-//
-//	// Tac Mask
-//	if(perk == #"specialty_stunprotection") {
-//		self perks::perk_setperk(#"specialty_flashprotection");
-//		self perks::perk_setperk(#"specialty_proximityprotection");
-//	}
-//
-//	// Engineer
-//	if(perk == #"specialty_showenemyequipment") {
-//		self perks::perk_setperk(#"specialty_showscorestreakicons");
-//		self perks::perk_setperk(#"specialty_showenemyvehicles");
-//	}
-//
-//	// Cold Blooded
-//	if(perk == #"specialty_nottargetedbyairsupport") {
-//		self perks::perk_setperk(#"specialty_nottargetedbyraps");
-//		self perks::perk_setperk(#"specialty_nottargetedbyaitank");
-//		self perks::perk_setperk(#"specialty_nottargetedbysentry");
-//		self perks::perk_setperk(#"specialty_nottargetedbyrobot");
-//		self perks::perk_setperk(#"specialty_immunenvthermal");
-//		self perks::perk_setperk(#"specialty_nokillstreakreticle");
-//		self perks::perk_setperk(#"specialty_sixthsensejammer");
-//		self perks::perk_setperk(#"specialty_trackerjammer");
-//
-//		//self clientfield::set("cold_blooded", 1);
-//	}
-//
-//	// Hard Wired
-//	if(perk == #"specialty_immunecounteruav") {
-//		self perks::perk_setperk(#"specialty_immuneemp");
-//		self perks::perk_setperk(#"specialty_immunetriggerc4");
-//		self perks::perk_setperk(#"specialty_immunetriggershock");
-//		self perks::perk_setperk(#"specialty_immunetriggerbetty");
-//		self perks::perk_setperk(#"specialty_sixthsensejammer");
-//		self perks::perk_setperk(#"specialty_trackerjammer");
-//		self perks::perk_setperk(#"specialty_immunesmoke");
-//	}
-//
-//	// Gung-Ho
-//	if(perk == #"specialty_sprintfire") {
-//		self perks::perk_setperk(#"specialty_sprintgrenadelethal");
-//		self perks::perk_setperk(#"specialty_sprintgrenadetactical");
-//		self perks::perk_setperk(#"specialty_sprintequipment");
-//	}
-//
-//	// Blast Suppressor
-//	if(perk == #"specialty_jetquiet") {
-//		self perks::perk_setperk(#"specialty_jetnoradar");
-//		self perks::perk_setperk(#"specialty_jetcharger");
-//	}
-//
-//	// Dexterity
-//	if(perk == #"specialty_fastmantle") {
-//		self perks::perk_setperk(#"specialty_fastladderclimb");
-//		self perks::perk_setperk(#"specialty_slide");
-//		self perks::perk_setperk(#"specialty_fastweaponswitch");
-//		self perks::perk_setperk(#"specialty_sprintrecovery");
-//		self perks::perk_setperk(#"specialty_sprintfirerecovery");
-//	}
-//
-//	// Ante-Up/Overcharge
-//	if(perk == #"specialty_anteup") {
-//		self perks::perk_setperk(#"specialty_overcharge");
-//	}
-//}
-//
-//take_perk(perk) { //9cba355d
-//	if(perks::perk_hasperk(perk)) {
-//		self perks::perk_unsetperk(perk);
-//	}
-//}
-
-//give_talent(talent) { //986114ce
-//	self addTalent(talent);
-//}
-//
-//take_talent(talent) { //b151488d
-//	self removeTalent(talent);
-//}
-//
-//take_all_talents() { //a3ac038f
-//	self clearTalents();
-//}
 
 // Weapon Options
 

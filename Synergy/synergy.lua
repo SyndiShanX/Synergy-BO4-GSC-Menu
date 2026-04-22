@@ -16,10 +16,10 @@ CoD.DemoUtility.AddHUDWidgets = function(HudRef, InstanceRef)
 				if scriptData[7] ~= nil then
 					element:setRGB(scriptData[7] / 255, scriptData[7] / 255, scriptData[7] / 255)
 				end
-			elseif scriptData[1] >= 100101 and scriptData[1] <= 100116 then
+			elseif scriptData[1] >= 100101 and scriptData[1] < 100130 then
 				element = LUI.UIText.new(0, 0, scriptData[2], scriptData[2] + 500, 0, 0, scriptData[3], scriptData[3] + 25)
 				element:setAlpha(scriptData[7])
-			elseif scriptData[1] >= 100117 and scriptData[1] <= 100130 then
+			elseif scriptData[1] >= 100130 and scriptData[1] < 100150 then
 				element = LUI.UIText.new(0, 0, scriptData[2], scriptData[2] + 500, 0, 0, scriptData[3], scriptData[3] + 22)
 				element:setAlpha(scriptData[7])
 			end
@@ -112,14 +112,14 @@ CoD.DemoUtility.AddHUDWidgets = function(HudRef, InstanceRef)
 					text:setRGB(0.5, 0.5, 0.5)
 				end
 
-				if scriptData[1] >= 100103 and scriptData[1] <= 100109 then
-					text_name = "option_" .. tostring(scriptData[1] - 100102)
-				elseif scriptData[1] >= 100110 and scriptData[1] <= 100116 then
-					text_name = "slider_text_" .. tostring(scriptData[1] - 100109)
-				elseif scriptData[1] >= 100117 and scriptData[1] <= 100123 then
-					text_name = "submenu_icon_" .. tostring(scriptData[1] - 100116)
-				elseif scriptData[1] >= 100124 and scriptData[1] <= 100130 then
-					text_name = "extra_text_" .. tostring(scriptData[1] - 100123)
+				if scriptData[1] >= 100110 and scriptData[1] < 100120 then
+					text_name = "option_" .. tostring(scriptData[1] - 100109)
+				elseif scriptData[1] >= 100120 and scriptData[1] < 100130 then
+					text_name = "slider_text_" .. tostring(scriptData[1] - 100119)
+				elseif scriptData[1] >= 100130 and scriptData[1] < 100140 then
+					text_name = "submenu_icon_" .. tostring(scriptData[1] - 100129)
+				elseif scriptData[1] >= 100140 and scriptData[1] < 100150 then
+					text_name = "extra_text_" .. tostring(scriptData[1] - 100139)
 				end
 
 				text:setTTF("ttmussels_demibold")

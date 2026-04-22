@@ -230,6 +230,15 @@ load_weapons(weapon_category) { //adb7e2c7
 	}
 }
 
+has_weapon(weapon) { //ada8fe01
+	foreach(equipped_weapon in self getWeaponsListPrimaries()) {
+		if(equipped_weapon.rootWeapon == weapon.rootWeapon) {
+			return true;
+		}
+	}
+	return false;
+}
+
 impatient_revive() { //5542b8e3
 	self endon(#"disconnect");
 	self.var_135a4148 = 0;
@@ -350,8 +359,6 @@ menu_option() { //bf384607
 			break;
 		case "Fun Options":
 			self synergy::add_menu(menu);
-
-			//self synergy::add_toggle("Forge Mode", undefined, &forge_mode, self.forge_mode);
 
 			self synergy::add_increment("Set Speed", undefined, &set_speed, "set_speed", 1, 1, 15, 1);
 			self synergy::add_increment("Set Gravity", undefined, &set_gravity, "set_gravity", 800, 100, 800, 100);
@@ -1119,57 +1126,6 @@ take_points(value) { //8c736c47
 
 // Fun Options
 
-//forge_mode() { //cd449a35
-//	self.forge_mode = !synergy::return_toggle(self.forge_mode);
-//	if(self.forge_mode) {
-//		iPrintlnBold("Forge Mode [^2ON^7], Press ^3[{+speed_throw}]^7 to Pick Up/Drop Objects");
-//		self thread forge_mode_loop();
-//	} else {
-//		iPrintlnBold("Forge Mode [^1OFF^7]");
-//		self notify("stop_forge_mode");
-//	}
-//}
-//
-//forge_mode_loop() { //f9f0252
-//	self endon("disconnect");
-//	self endon("stop_forge_mode");
-//
-//	while (true) {
-//		trace = beamTrace(self getTagOrigin("j_head"), self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 1000000, 1, self);
-//		if(isDefined(trace["entity"])) {
-//			if(self adsButtonPressed()) {
-//				while (self adsButtonPressed()) {
-//					trace["entity"] forceTeleport(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
-//					trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
-//					wait 0.01;
-//				}
-//			}
-//			if(self attackButtonPressed()) {
-//				while (self attackButtonPressed()) {
-//					trace["entity"] rotatePitch(1, 0.01);
-//					wait 0.01;
-//				}
-//			}
-//			if(self fragButtonPressed()) {
-//				while (self fragButtonPressed()) {
-//					trace["entity"] rotateYaw(1, 0.01);
-//					wait 0.01;
-//				}
-//			}
-//			if(self secondaryOffhandButtonPressed()) {
-//				while (self secondaryOffhandButtonPressed()) {
-//					trace["entity"] rotateRoll(1, 0.01);
-//					wait 0.01;
-//				}
-//			}
-//			if(!isPlayer(trace["entity"]) && self meleeButtonPressed()) {
-//				trace["entity"] delete();
-//				wait 0.2;
-//			}
-//		}
-//		wait 0.05;
-//	}
-//}
 
 set_speed(value) { //8b986195
 	if(value == 1) {
@@ -1331,8 +1287,12 @@ give_weapon(weapon) { //5be7a94b
 
 	weapon = getWeapon(weapon);
 
-	if(!self hasWeapon(weapon)) {
-		self takeWeapon(self getCurrentWeapon());
+	if(!has_weapon(weapon)) {
+		max_weapon_num = zm_utility::get_player_weapon_limit(self);
+
+		if(self getWeaponsListPrimaries().size >= max_weapon_num) {
+			self takeWeapon(self getCurrentWeapon());
+		}
 
 		self zm_weapons::give_build_kit_weapon(weapon);
 
@@ -1345,7 +1305,14 @@ give_weapon(weapon) { //5be7a94b
 		wait 0.25;
 		self giveStartAmmo(weapon);
 	} else {
-		self switchToWeaponImmediate(weapon);
+		if(self getCurrentWeapon().rootWeapon != weapon.rootWeapon) {
+			foreach(equipped_weapon in self getWeaponsListPrimaries()) {
+				if(equipped_weapon.rootWeapon == weapon.rootWeapon) {
+					self switchToWeaponImmediate(equipped_weapon);
+					break;
+				}
+			}
+		}
 	}
 
 	if(weapon.rootWeapon.name == "zhield_frost_dw") {

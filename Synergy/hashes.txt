@@ -40,6 +40,7 @@
 0x2E13FDC2, replace_character
 0x53BBF9D2, get_map_name
 0xADB7E2C7, load_weapons
+0xADA8FE01, has_weapon
 0x5542B8E3, impatient_revive
 0x49849A2F, special_revive
 0x941DE1CA, set_box_lmg_only

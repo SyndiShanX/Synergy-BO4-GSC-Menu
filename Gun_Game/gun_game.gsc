@@ -46,24 +46,6 @@ initial_variables() { //ec264b2e
 	self.syn["weapons"]["blacklisted_weapons"] = array("bowie_knife", "stake_knife", "galvaknuckles_t8", "eq_frag_grenade", "eq_acid_bomb", "claymore", "sticky_grenade", "eq_molotov", "eq_wraith_fire", "mini_turret", "proximity_grenade", "homunculus", "homunculus_leprechaun", "cymbal_monkey", "music_box", "eq_nesting_doll_grenade", "eq_nesting_doll_grenade_niko", "eq_nesting_doll_grenade_rich", "eq_nesting_doll_grenade_takeo", "minigun", "zhield_dw", "zhield_frost_dw", "ww_blundergat_fire_t8_unfinished", "ww_crossbow_impaler_t8", "ww_random_ray_gun1", "ww_random_ray_gun2", "ww_random_ray_gun3", "zhield_zpear_dw", "hero_chakram_lv3", "hero_hammer_lv3", "hero_scepter_lv3", "hero_sword_pistol_lv3", "hero_flamethrower_t8_lv3", "hero_minigun_t8_lv3", "hero_katana_t8_lv3", "hero_gravityspikes_t8_lv3");
 	self.syn["weapons"]["gun_game"] = array("ar_accurate_t8", "ar_fastfire_t8", "ar_modular_t8", "ar_mg1909_t8", "ar_damage_t8", "ar_stealth_t8", "ar_galil_t8", "ar_standard_t8", "ar_an94_t8", "ar_doublebarrel_t8", "ar_peacekeeper_t8", "smg_drum_pistol_t8", "smg_standard_t8", "smg_fastfire_t8", "smg_handling_t8", "smg_accurate_t8", "smg_capacity_t8", "smg_mp40_t8", "smg_vmp_t8", "smg_fastburst_t8", "smg_folding_t8", "smg_minigun_t8", "tr_longburst_t8", "tr_leveraction_t8", "tr_midburst_t8", "tr_powersemi_t8", "tr_flechette_t8", "tr_damageburst_t8", "lmg_standard_t8", "lmg_spray_t8", "lmg_heavy_t8", "lmg_double_t8", "lmg_stealth_t8", "sniper_powersemi_t8", "sniper_powerbolt_t8", "sniper_quickscope_t8", "sniper_fastrechamber_t8", "sniper_locus_t8", "sniper_mini14_t8", "sniper_damagesemi_t8", "shotgun_trenchgun_t8", "shotgun_semiauto_t8", "shotgun_pump_t8", "shotgun_precision_t8", "shotgun_fullauto_t8", "pistol_topbreak_t8", "pistol_revolver_t8", "pistol_standard_t8", "pistol_burst_t8", "pistol_fullauto_t8", "launcher_standard_t8", "special_crossbow_t8", "special_ballisticknife_t8_dw", "minigun");
 
-	//if(self.map_name == "voyage_of_despair" || self.map_name == "classified" || self.map_name == "dead_of_the_night" || self.map_name == "alpha_omega" || self.map_name == "tag_der_toten") {
-	//	array::add(self.syn["weapons"]["gun_game"], "zhield_dw");
-	//}
-
-	//if(self.map_name == "voyage_of_despair" || self.map_name == "ix" || self.map_name == "dead_of_the_night" || self.map_name == "ancient_evil") {
-	//	array::add(self.syn["weapons"]["gun_game"], "hero_chakram_lv3");
-	//	array::add(self.syn["weapons"]["gun_game"], "hero_hammer_lv3");
-	//	array::add(self.syn["weapons"]["gun_game"], "hero_scepter_lv3");
-	//	array::add(self.syn["weapons"]["gun_game"], "hero_sword_pistol_lv3");
-	//}
-	//
-	//if(self.map_name == "blood_of_the_dead" || self.map_name == "classified" || self.map_name == "alpha_omega" || self.map_name == "tag_der_toten") {
-	//	array::add(self.syn["weapons"]["gun_game"], "hero_flamethrower_t8_lv3");
-	//	array::add(self.syn["weapons"]["gun_game"], "hero_minigun_t8_lv3");
-	//	array::add(self.syn["weapons"]["gun_game"], "hero_katana_t8_lv3");
-	//	array::add(self.syn["weapons"]["gun_game"], "hero_gravityspikes_t8_lv3");
-	//}
-
 	if(self.map_name == "blood_of_the_dead" || self.map_name == "alpha_omega" || self.map_name == "tag_der_toten") {
 		array::add(self.syn["weapons"]["gun_game"], "smg_thompson_t8");
 	}
@@ -78,7 +60,6 @@ initial_variables() { //ec264b2e
 	}
 
 	if(self.map_name == "voyage_of_despair") {
-		//array::add(self.syn["weapons"]["gun_game"], "zhield_frost_dw");
 		array::add(self.syn["weapons"]["gun_game"], "ww_tricannon_t8");
 		array::add(self.syn["weapons"]["gun_game"], "ww_tricannon_earth_t8");
 		array::add(self.syn["weapons"]["gun_game"], "ww_tricannon_fire_t8");
@@ -87,16 +68,13 @@ initial_variables() { //ec264b2e
 	}
 
 	if(self.map_name == "ix") {
-		//array::add(self.syn["weapons"]["gun_game"], "zhield_zword_dw");
 		array::add(self.syn["weapons"]["gun_game"], "ww_crossbow_t8");
 	}
 
 	if(self.map_name == "blood_of_the_dead") {
-		//array::add(self.syn["weapons"]["gun_game"], "zhield_spectral_dw");
 		array::add(self.syn["weapons"]["gun_game"], "ww_blundergat_t8");
 		array::add(self.syn["weapons"]["gun_game"], "ww_blundergat_fire_t8");
 		array::add(self.syn["weapons"]["gun_game"], "ww_blundergat_acid_t8");
-		//array::add(self.syn["weapons"]["gun_game"], "ww_blundergat_fire_t8_unfinished");
 	}
 
 	if(self.map_name == "dead_of_the_night") {
@@ -107,7 +85,6 @@ initial_variables() { //ec264b2e
 	}
 
 	if(self.map_name == "ancient_evil") {
-		//array::add(self.syn["weapons"]["gun_game"], "zhield_zpear_dw");
 		array::add(self.syn["weapons"]["gun_game"], "ww_hand_o");
 		array::add(self.syn["weapons"]["gun_game"], "ww_hand_h");
 		array::add(self.syn["weapons"]["gun_game"], "ww_hand_g");
@@ -123,8 +100,6 @@ initial_variables() { //ec264b2e
 	}
 
 	if(self.map_name == "tag_der_toten") {
-		//array::add(self.syn["weapons"]["gun_game"], "snowball");
-		//array::add(self.syn["weapons"]["gun_game"], "snowball_yellow");
 		array::add(self.syn["weapons"]["gun_game"], "thundergun");
 		array::add(self.syn["weapons"]["gun_game"], "tundragun");
 		array::add(self.syn["weapons"]["gun_game"], "ww_tesla_gun_t8");
@@ -133,7 +108,6 @@ initial_variables() { //ec264b2e
 
 	self.syn["weapons"]["gun_game"] = array::randomize(self.syn["weapons"]["gun_game"]);
 
-	//self.syn["weapons"]["gun_game"] = arraycombine(array("ww_random_ray_gun2", "ww_random_ray_gun3"), self.syn["weapons"]["gun_game"], 0, 0);
 
 	// Camos
 
@@ -358,17 +332,11 @@ start_game() { //ebb653eb
 	luinotifyevent(#"synergy_extra_text_2", 2, 200002, 1);
 	luinotifyevent(#"synergy_extra_text_3", 2, 200002, 1);
 	luinotifyevent(#"synergy_extra_text_4", 2, 200002, 1);
-	//luinotifyevent(#"synergy_extra_text_5", 2, 200002, 1);
-	//luinotifyevent(#"synergy_extra_text_6", 2, 200002, 1);
-	//luinotifyevent(#"synergy_extra_text_7", 2, 200002, 1);
 
 	luinotifyevent(#"synergy_extra_text_1", 3, 200008, 1, 3);
 	luinotifyevent(#"synergy_extra_text_2", 3, 200008, 1, 3);
 	luinotifyevent(#"synergy_extra_text_3", 3, 200008, 1, 3);
 	luinotifyevent(#"synergy_extra_text_4", 3, 200008, 1, 3);
-	//luinotifyevent(#"synergy_extra_text_5", 3, 200008, 1, 3);
-	//luinotifyevent(#"synergy_extra_text_6", 3, 200008, 1, 3);
-	//luinotifyevent(#"synergy_extra_text_7", 3, 200008, 1, 3);
 
 	self.extra_text_1_offset = -1;
 	self.extra_text_2_offset = -1;
@@ -503,7 +471,6 @@ check_weapon(params) { //279297cc
 			level notify("weapon_check_passed");
 		} else {
 			level notify("weapon_check_failed");
-			//shieldLog("^6 " + attacker_weapon.name + " || " + damage_weapon.name);
 		}
 	}
 }
@@ -541,11 +508,6 @@ track_points() { //c9f765ff
 		self.target_points = int(self.gun_game_points + (self.point_increment * synergy::set_variable((self.current_weapon_index > 0), (self.current_weapon_index + 1), 1)));
 
 		while(self.gun_game_points < self.target_points) {
-			//synergy::set_text("extra_text_4", "^5Gun Game Points: " + self.gun_game_points, 5);
-			//synergy::set_text("extra_text_5", "^5Target Points: " + self.target_points, 5);
-			//synergy::set_text("extra_text_6", "^5Spent Score: " + self.spent_score, 5);
-			//synergy::set_text("extra_text_7", "^5Previous Score: " + self.previous_score, 5);
-
 			remaining_points = int(self.target_points - self.gun_game_points);
 
 			if(remaining_points != self.previous_remaining_points) {
@@ -608,10 +570,6 @@ track_kills() { //c56ee18d
 		self.target_kills = int(self.gun_game_kills + (self.kill_increment * synergy::set_variable((self.current_weapon_index > 0), (self.current_weapon_index + 1), 1)));
 
 		while(self.gun_game_kills < self.target_kills) {
-			//synergy::set_text("extra_text_4", "^5Gun Game Kills: " + self.gun_game_kills, 5);
-			//synergy::set_text("extra_text_5", "^5Target Kills: " + self.target_kills, 5);
-			//synergy::set_text("extra_text_6", "^5Extra Kills: " + self.extra_kills, 5);
-
 			remaining_kills = int(self.target_kills - self.gun_game_kills);
 
 			if(remaining_kills != self.previous_remaining_kills) {
@@ -700,13 +658,12 @@ update_game_info() { //6a4d1be9
 			}
 
 			weapon_name_width = get_string_width(current_weapon_name);
-			
+
 			if(current_weapon_name != self.previous_weapon_name) {
 				synergy::set_text("extra_text_2", "^3" + current_weapon_name, 5);
-				//shieldLog("^3 Extra Text 2: " + current_weapon_name + " || " + string(weapon_name_width));
 				synergy::set_lui_element_x("extra_text_2", int(self.x_offset + weapon_name_width));
 			}
-			
+
 			self.previous_weapon_name = current_weapon_name;
 		}
 
@@ -767,7 +724,6 @@ increment_pack_level() { //6b616c01
 }
 
 pack_weapons() { //dc2d810d
-	//shieldLog("^5 Current Weapon String: " + self.current_weapon_string);
 	self.updating_weapon = true;
 
 	if(self.pack_tier >= 1) {
@@ -782,7 +738,6 @@ pack_weapons() { //dc2d810d
 		}
 	}
 
-	//shieldLog("^5 Current Weapon String: " + self.current_weapon_string);
 
 	weapon = getWeapon(self.current_weapon_string);
 
@@ -790,7 +745,7 @@ pack_weapons() { //dc2d810d
 		self takeWeapon(self.current_weapon);
 		wait 0.1;
 	}
-	
+
 	self zm_weapons::give_build_kit_weapon(weapon);
 
 	if(self.pack_tier >= 2 && zm_weapons::is_weapon_upgraded(weapon)) {
@@ -802,7 +757,6 @@ pack_weapons() { //dc2d810d
 		}
 	}
 
-	//shieldLog("^5 Current Weapon Repacked: " + weapon.name);
 
 	self.current_weapon = weapon;
 	wait 1;
@@ -823,7 +777,7 @@ update_weapon() { //1adba75e
 	if(!isDefined(self.syn["weapons"]["gun_game"][self.current_weapon_index])) {
 		return;
 	}
-	
+
 	if(isDefined(self.current_weapon) && self hasWeapon(self.current_weapon)) {
 		self takeWeapon(self.current_weapon);
 		wait 0.1;

@@ -21,6 +21,8 @@ init() { //9284135d
 	precache("eventstring", #"synergy_toggle_5");
 	precache("eventstring", #"synergy_toggle_6");
 	precache("eventstring", #"synergy_toggle_7");
+	precache("eventstring", #"synergy_toggle_8");
+	precache("eventstring", #"synergy_toggle_9");
 
 	precache("eventstring", #"synergy_slider_1");
 	precache("eventstring", #"synergy_slider_2");
@@ -29,6 +31,8 @@ init() { //9284135d
 	precache("eventstring", #"synergy_slider_5");
 	precache("eventstring", #"synergy_slider_6");
 	precache("eventstring", #"synergy_slider_7");
+	precache("eventstring", #"synergy_slider_8");
+	precache("eventstring", #"synergy_slider_9");
 
 	precache("eventstring", #"synergy_title");
 	precache("eventstring", #"synergy_description");
@@ -40,6 +44,8 @@ init() { //9284135d
 	precache("eventstring", #"synergy_option_5");
 	precache("eventstring", #"synergy_option_6");
 	precache("eventstring", #"synergy_option_7");
+	precache("eventstring", #"synergy_option_8");
+	precache("eventstring", #"synergy_option_9");
 
 	precache("eventstring", #"synergy_slider_text_1");
 	precache("eventstring", #"synergy_slider_text_2");
@@ -48,6 +54,8 @@ init() { //9284135d
 	precache("eventstring", #"synergy_slider_text_5");
 	precache("eventstring", #"synergy_slider_text_6");
 	precache("eventstring", #"synergy_slider_text_7");
+	precache("eventstring", #"synergy_slider_text_8");
+	precache("eventstring", #"synergy_slider_text_9");
 
 	precache("eventstring", #"synergy_submenu_icon_1");
 	precache("eventstring", #"synergy_submenu_icon_2");
@@ -56,6 +64,8 @@ init() { //9284135d
 	precache("eventstring", #"synergy_submenu_icon_5");
 	precache("eventstring", #"synergy_submenu_icon_6");
 	precache("eventstring", #"synergy_submenu_icon_7");
+	precache("eventstring", #"synergy_submenu_icon_8");
+	precache("eventstring", #"synergy_submenu_icon_9");
 
 	precache("eventstring", #"synergy_element_7");
 	precache("eventstring", #"synergy_element_8");
@@ -80,7 +90,7 @@ initial_variables() { //ec264b2e
 	self.gun_game_enabled = false;
 	self.hud_created = false;
 	self.loaded_offset = false;
-	self.option_limit = 7;
+	self.option_limit = 9;
 	self.current_menu = "Synergy";
 	self.structure = array();
 	self.previous = array();
@@ -137,6 +147,8 @@ initialize_menu() { //15544841
 				luinotifyevent(#"synergy_menu", 7, 100025, (self.x_offset + 6), (self.x_offset + 22), (self.y_offset + 158), (self.y_offset + 174), 0, 64); // Toggle 5
 				luinotifyevent(#"synergy_menu", 7, 100026, (self.x_offset + 6), (self.x_offset + 22), (self.y_offset + 188), (self.y_offset + 204), 0, 64); // Toggle 6
 				luinotifyevent(#"synergy_menu", 7, 100027, (self.x_offset + 6), (self.x_offset + 22), (self.y_offset + 218), (self.y_offset + 234), 0, 64); // Toggle 7
+				luinotifyevent(#"synergy_menu", 7, 100028, (self.x_offset + 6), (self.x_offset + 22), (self.y_offset + 248), (self.y_offset + 264), 0, 64); // Toggle 8
+				luinotifyevent(#"synergy_menu", 7, 100029, (self.x_offset + 6), (self.x_offset + 22), (self.y_offset + 278), (self.y_offset + 294), 0, 64); // Toggle 9
 
 				luinotifyevent(#"synergy_menu", 7, 100031, self.x_offset, (self.x_offset + 450), (self.y_offset + 30), (self.y_offset + 62), 0, 64); // Slider 1
 				luinotifyevent(#"synergy_menu", 7, 100032, self.x_offset, (self.x_offset + 450), (self.y_offset + 60), (self.y_offset + 92), 0, 64); // Slider 2
@@ -145,43 +157,51 @@ initialize_menu() { //15544841
 				luinotifyevent(#"synergy_menu", 7, 100035, self.x_offset, (self.x_offset + 450), (self.y_offset + 150), (self.y_offset + 182), 0, 64); // Slider 5
 				luinotifyevent(#"synergy_menu", 7, 100036, self.x_offset, (self.x_offset + 450), (self.y_offset + 180), (self.y_offset + 212), 0, 64); // Slider 6
 				luinotifyevent(#"synergy_menu", 7, 100037, self.x_offset, (self.x_offset + 450), (self.y_offset + 210), (self.y_offset + 242), 0, 64); // Slider 7
+				luinotifyevent(#"synergy_menu", 7, 100038, self.x_offset, (self.x_offset + 450), (self.y_offset + 240), (self.y_offset + 272), 0, 64); // Slider 8
+				luinotifyevent(#"synergy_menu", 7, 100039, self.x_offset, (self.x_offset + 450), (self.y_offset + 270), (self.y_offset + 302), 0, 64); // Slider 9
 
 				luinotifyevent(#"synergy_menu", 3, 100101, (self.x_offset + 189), (self.y_offset + 3)); // Title
 				luinotifyevent(#"synergy_menu", 3, 100102, (self.x_offset + 10), (self.y_offset + 242)); // Description
 
-				luinotifyevent(#"synergy_menu", 3, 100103, (self.x_offset + 10), (self.y_offset + 34)); // Option Text 1
-				luinotifyevent(#"synergy_menu", 3, 100104, (self.x_offset + 10), (self.y_offset + 64)); // Option Text 2
-				luinotifyevent(#"synergy_menu", 3, 100105, (self.x_offset + 10), (self.y_offset + 94)); // Option Text 3
-				luinotifyevent(#"synergy_menu", 3, 100106, (self.x_offset + 10), (self.y_offset + 124)); // Option Text 4
-				luinotifyevent(#"synergy_menu", 3, 100107, (self.x_offset + 10), (self.y_offset + 154)); // Option Text 5
-				luinotifyevent(#"synergy_menu", 3, 100108, (self.x_offset + 10), (self.y_offset + 184)); // Option Text 6
-				luinotifyevent(#"synergy_menu", 3, 100109, (self.x_offset + 10), (self.y_offset + 214)); // Option Text 7
+				luinotifyevent(#"synergy_menu", 3, 100110, (self.x_offset + 10), (self.y_offset + 34)); // Option Text 1
+				luinotifyevent(#"synergy_menu", 3, 100111, (self.x_offset + 10), (self.y_offset + 64)); // Option Text 2
+				luinotifyevent(#"synergy_menu", 3, 100112, (self.x_offset + 10), (self.y_offset + 94)); // Option Text 3
+				luinotifyevent(#"synergy_menu", 3, 100113, (self.x_offset + 10), (self.y_offset + 124)); // Option Text 4
+				luinotifyevent(#"synergy_menu", 3, 100114, (self.x_offset + 10), (self.y_offset + 154)); // Option Text 5
+				luinotifyevent(#"synergy_menu", 3, 100115, (self.x_offset + 10), (self.y_offset + 184)); // Option Text 6
+				luinotifyevent(#"synergy_menu", 3, 100116, (self.x_offset + 10), (self.y_offset + 214)); // Option Text 7
+				luinotifyevent(#"synergy_menu", 3, 100117, (self.x_offset + 10), (self.y_offset + 244)); // Option Text 8
+				luinotifyevent(#"synergy_menu", 3, 100118, (self.x_offset + 10), (self.y_offset + 274)); // Option Text 9
 
-				luinotifyevent(#"synergy_menu", 3, 100110, (self.x_offset + 265), (self.y_offset + 34)); // Slider Text 1
-				luinotifyevent(#"synergy_menu", 3, 100111, (self.x_offset + 265), (self.y_offset + 64)); // Slider Text 2
-				luinotifyevent(#"synergy_menu", 3, 100112, (self.x_offset + 265), (self.y_offset + 94)); // Slider Text 3
-				luinotifyevent(#"synergy_menu", 3, 100113, (self.x_offset + 265), (self.y_offset + 124)); // Slider Text 4
-				luinotifyevent(#"synergy_menu", 3, 100114, (self.x_offset + 265), (self.y_offset + 154)); // Slider Text 5
-				luinotifyevent(#"synergy_menu", 3, 100115, (self.x_offset + 265), (self.y_offset + 184)); // Slider Text 6
-				luinotifyevent(#"synergy_menu", 3, 100116, (self.x_offset + 265), (self.y_offset + 214)); // Slider Text 7
+				luinotifyevent(#"synergy_menu", 3, 100120, (self.x_offset + 265), (self.y_offset + 34)); // Slider Text 1
+				luinotifyevent(#"synergy_menu", 3, 100121, (self.x_offset + 265), (self.y_offset + 64)); // Slider Text 2
+				luinotifyevent(#"synergy_menu", 3, 100122, (self.x_offset + 265), (self.y_offset + 94)); // Slider Text 3
+				luinotifyevent(#"synergy_menu", 3, 100123, (self.x_offset + 265), (self.y_offset + 124)); // Slider Text 4
+				luinotifyevent(#"synergy_menu", 3, 100124, (self.x_offset + 265), (self.y_offset + 154)); // Slider Text 5
+				luinotifyevent(#"synergy_menu", 3, 100125, (self.x_offset + 265), (self.y_offset + 184)); // Slider Text 6
+				luinotifyevent(#"synergy_menu", 3, 100126, (self.x_offset + 265), (self.y_offset + 214)); // Slider Text 7
+				luinotifyevent(#"synergy_menu", 3, 100127, (self.x_offset + 265), (self.y_offset + 244)); // Slider Text 8
+				luinotifyevent(#"synergy_menu", 3, 100128, (self.x_offset + 265), (self.y_offset + 274)); // Slider Text 9
 
-				luinotifyevent(#"synergy_menu", 3, 100117, (self.x_offset + 425), (self.y_offset + 32)); // Submenu Icon Text 1
-				luinotifyevent(#"synergy_menu", 3, 100118, (self.x_offset + 425), (self.y_offset + 62)); // Submenu Icon Text 2
-				luinotifyevent(#"synergy_menu", 3, 100119, (self.x_offset + 425), (self.y_offset + 92)); // Submenu Icon Text 3
-				luinotifyevent(#"synergy_menu", 3, 100120, (self.x_offset + 425), (self.y_offset + 122)); // Submenu Icon Text 4
-				luinotifyevent(#"synergy_menu", 3, 100121, (self.x_offset + 425), (self.y_offset + 152)); // Submenu Icon Text 5
-				luinotifyevent(#"synergy_menu", 3, 100122, (self.x_offset + 425), (self.y_offset + 182)); // Submenu Icon Text 6
-				luinotifyevent(#"synergy_menu", 3, 100123, (self.x_offset + 425), (self.y_offset + 212)); // Submenu Icon Text 7
+				luinotifyevent(#"synergy_menu", 3, 100130, (self.x_offset + 425), (self.y_offset + 32)); // Submenu Icon Text 1
+				luinotifyevent(#"synergy_menu", 3, 100131, (self.x_offset + 425), (self.y_offset + 62)); // Submenu Icon Text 2
+				luinotifyevent(#"synergy_menu", 3, 100132, (self.x_offset + 425), (self.y_offset + 92)); // Submenu Icon Text 3
+				luinotifyevent(#"synergy_menu", 3, 100133, (self.x_offset + 425), (self.y_offset + 122)); // Submenu Icon Text 4
+				luinotifyevent(#"synergy_menu", 3, 100134, (self.x_offset + 425), (self.y_offset + 152)); // Submenu Icon Text 5
+				luinotifyevent(#"synergy_menu", 3, 100135, (self.x_offset + 425), (self.y_offset + 182)); // Submenu Icon Text 6
+				luinotifyevent(#"synergy_menu", 3, 100136, (self.x_offset + 425), (self.y_offset + 212)); // Submenu Icon Text 7
+				luinotifyevent(#"synergy_menu", 3, 100137, (self.x_offset + 425), (self.y_offset + 242)); // Submenu Icon Text 8
+				luinotifyevent(#"synergy_menu", 3, 100138, (self.x_offset + 425), (self.y_offset + 272)); // Submenu Icon Text 9
 
 				luinotifyevent(#"synergy_menu", 7, 100007, (self.x_offset + 296), (self.x_offset + 683), (self.y_offset - 358), (self.y_offset - 317), 0, 19); // Status Border
 				luinotifyevent(#"synergy_menu", 7, 100008, (self.x_offset + 298), (self.x_offset + 681), (self.y_offset - 356), (self.y_offset - 319), 0, 19); // Status Background
-				luinotifyevent(#"synergy_menu", 3, 100124, (self.x_offset + 400), (self.y_offset - 350)); // Status Text 1
-				luinotifyevent(#"synergy_menu", 3, 100125, (self.x_offset + 350), (self.y_offset - 325)); // Status Text 2
-				luinotifyevent(#"synergy_menu", 3, 100126, (self.x_offset + 350), (self.y_offset - 300)); // Status Text 3
-				luinotifyevent(#"synergy_menu", 3, 100127, (self.x_offset + 350), (self.y_offset - 275)); // Status Text 4
-				luinotifyevent(#"synergy_menu", 3, 100128, (self.x_offset + 350), (self.y_offset - 250)); // Status Text 5
-				luinotifyevent(#"synergy_menu", 3, 100129, (self.x_offset + 350), (self.y_offset - 225)); // Status Text 6
-				luinotifyevent(#"synergy_menu", 3, 100130, (self.x_offset + 350), (self.y_offset - 200)); // Status Text 7
+				luinotifyevent(#"synergy_menu", 3, 100140, (self.x_offset + 400), (self.y_offset - 350)); // Status Text 1
+				luinotifyevent(#"synergy_menu", 3, 100141, (self.x_offset + 350), (self.y_offset - 325)); // Status Text 2
+				luinotifyevent(#"synergy_menu", 3, 100142, (self.x_offset + 350), (self.y_offset - 300)); // Status Text 3
+				luinotifyevent(#"synergy_menu", 3, 100143, (self.x_offset + 350), (self.y_offset - 275)); // Status Text 4
+				luinotifyevent(#"synergy_menu", 3, 100144, (self.x_offset + 350), (self.y_offset - 250)); // Status Text 5
+				luinotifyevent(#"synergy_menu", 3, 100145, (self.x_offset + 350), (self.y_offset - 225)); // Status Text 6
+				luinotifyevent(#"synergy_menu", 3, 100146, (self.x_offset + 350), (self.y_offset - 200)); // Status Text 7
 
 				for(i = 3; i <= 9; i++) {
 					self.menu["synergy_text_" + string(i)] = spawnStruct();
@@ -364,7 +384,7 @@ close_controls_menu() { //1ca8a22d
 }
 
 set_menu_visibility(opacity) { //40a7558d
-	for(i = 1; i < self.option_limit; i++) {
+	for(i = 1; i < 7; i++) {
 		luinotifyevent(#"synergy_element_" + string(i), 2, 200002, opacity);
 	}
 
@@ -831,13 +851,10 @@ scroll_cursor(direction) { //1cf9a91c
 				}
 				if(self.previous_scrolling_offset != self.scrolling_offset) {
 					fake_scroll = true;
-					//iPrintln("Trigger 1 | " + self.scrolling_offset); // Scroll Map >> Zombie (Up) || Should Scroll List Up and Keep Cursor in Place (Lock Cursor) || Cursor Index 4+
-																															// Scrolls Index 5+
 					self.previous_trigger = 1;
 				}
 			} else {
 				self.scrolling_offset = (self.syn["cursor"].index - int(self.option_limit / 2));
-				//iPrintln("Trigger 2 | " + self.scrolling_offset); // Scroll Zombie >> Map (Down) || Should Scroll List Down and Keep Cursor in Place (Lock Cursor) || Cursor Index 3
 				self.previous_trigger = 2;
 			}
 		} else {
@@ -852,13 +869,8 @@ scroll_cursor(direction) { //1cf9a91c
 
 	if(!fake_scroll) {
 		self.syn["cursor"].y = int(self.y_offset + (((self.syn["cursor"].index + 1) - self.scrolling_offset) * 30));
-		//iPrintlnBold("Cursor Y Pos: " + string(self.syn["cursor"].y));
-		//iPrintlnBold("Maximum: " + string(maximum));
 		luinotifyevent(#"synergy_element_6", 3, 200006, self.syn["cursor"].y, 32);
 	}
-
-	//iPrintln("Scrolling Offset: " + self.scrolling_offset);
-	//iPrintln("Cursor Index: " + self.syn["cursor"].index);
 
 	if(isDefined(self.structure) && self.structure.size > 0 && isDefined(self.structure[self.syn["cursor"].index]) && isDefined(self.structure[self.syn["cursor"].index].description)) {
 		set_text("description", self.structure[self.syn["cursor"].index].description, 1);
@@ -935,12 +947,8 @@ set_options() { //a0d8ccb6
 			self.scrolling_offset = 0;
 		}
 
-		//iPrintln("Offset " + self.scrolling_offset);
-
 		for(i = 1; i <= maximum; i++) {
 			x = ((i - 1) + self.scrolling_offset);
-
-			//iPrintlnBold("Index: " + string(x));
 
 			set_text("option_" + string(i), self.structure[x].text, 2);
 
