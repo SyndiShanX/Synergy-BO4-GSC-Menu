@@ -9,21 +9,22 @@
 0x40A7558D, set_menu_visibility
 0xD5EA17F0, set_text
 0xE2DACB2B, set_shader_height
-0xF657ACE9, set_lui_element_x
-0x2C839940, set_lui_element_y
+0x28744BF9, set_lui_element_x
+0xCAAB9069, set_lui_element_y
 0x69453E2E, update_element_positions
 0xD5163D06, set_menu_color
-0xF26B389,  create_rainbow_color
+0xF26B389, create_rainbow_color
 0xF0D557B3, start_rainbow
 0xDF47A93E, return_toggle
 0xCCD7591C, set_variable
 0x4A82C16F, remove_from_array
 0x42A328B2, execute_function
 0x58D27B23, add_option
-0x4B7EA67,  add_toggle
+0x4B7EA67, add_toggle
 0xAD88D2FF, add_array
 0x628281E1, add_increment
-0x8101EA46, add_menu
+0x2BC4DE7B, get_title_width
+0x28CCC05D, set_title
 0x30112462, new_menu
 0xA3ED0F9E, empty_option
 0x1CF9A91C, scroll_cursor
@@ -34,7 +35,7 @@
 0x55638223, set_menu_colors
 0xA7E74C75, hide_ui
 0x6395585F, hide_weapon
-0x89F2DF9,  __init__system__
+0x89F2DF9, __init__system__
 0xE63CB8AF, menu_call
 0x366E5F8B, construct_string
 0x2E13FDC2, replace_character
@@ -63,9 +64,9 @@
 0x9CBA355D, take_perk
 0x6F6861D1, give_enhancement_perk
 0x7B9ACA54, take_enhancement_perk
-0xDC117A2,  update_enhancement_perks
+0xDC117A2 , update_enhancement_perks
 0xBE0766F2, vulture_aid_logic
-0xD96F5F0,  vulture_aid_down
+0x8FB1A2A5, vulture_aid_down
 0x5AC66375, give_perks
 0x85F85C7E, give_perkaholic
 0x88B48E0A, take_perkaholic
@@ -73,13 +74,19 @@
 0x620B4353, give_elixir
 0x6741FEC0, give_talisman
 0xC9575D65, set_point_increment
-0xC5E64D3,  set_points
+0xC5E64D3 , set_points
 0x12F6E7DF, add_points
 0x8C736C47, take_points
 0xCD449A35, forge_mode
-0xF9F0252,  forge_mode_loop
+0xF9F0252 , forge_mode_loop
 0x8B986195, set_speed
 0xED855E11, third_person
+0xA3B23E83, player_option
+0xC91549CE, get_name
+0x675B8C0 , clean_name
+0xD8A28E11, commit_suicide
+0xC4DA1A2B, print_name
+0xDE512D61, kick_player
 0x2ADB77B5, freeze_box
 0x42505BEF, open_doors
 0x57BA8289, open_narrative_room
@@ -93,6 +100,7 @@
 0x5BE7A94B, give_weapon
 0x72D8CEC0, give_mastercraft_weapon
 0xDE099FEE, get_weapon_attachments
+0x44ECC3E9, function get_attachment_name
 0xB04978D6, get_equipped_attachments
 0x224C09C9, equip_attachment
 0x52F76807, equip_camo
@@ -115,18 +123,4 @@
 0xF386CA4E, slow_zombies
 0x64827754, disable_spawns
 0x5F4E093D, set_zombie_speed
-0x772907D2, update_zombie_speed
-0xE1877C95, set_gravity
-0xA3B23E83, player_option
-0xC91549CE, get_name
-0x675B8C0,  clean_name
-0xD8A28E11, commit_suicide
-0xC4DA1A2B, print_name
-0x91F1D5E2, prod_settings
-0xDE512D61, kick_player
-0xEC07394F, give_killstreak
-0x611ACFBB, give_all_perks
-0x6DF72E2A, take_all_perks
-0x986114CE, give_talent
-0xB151488D, take_talent
-0xA3AC038F, take_all_talents
+0x772907D2, update_zombie_speed                                        

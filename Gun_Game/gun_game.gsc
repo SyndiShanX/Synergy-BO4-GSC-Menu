@@ -26,6 +26,8 @@ initial_variables() { //ec264b2e
 	self.in_menu = false;
 	self.gun_game_initialized = false;
 
+	self.equip_attachment_in_progress = false;
+
 	self.map_name = get_map_name();
 
 	self.controls_menu_open = false;
@@ -221,7 +223,7 @@ menu_option() { //bf384607
 	menu = self.current_menu;
 	switch(menu) {
 		case "Setup Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 				self synergy::add_array("Progression Method", "Progress is made using either Points or Kills", &set_progression_method, "progression_method", array("Points", "Kills"));
 
@@ -240,7 +242,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Gun Game Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_toggle("Third Person", undefined, &third_person, self.third_person);
 
@@ -342,17 +344,11 @@ start_game() { //ebb653eb
 	self.extra_text_2_offset = -1;
 	self.extra_text_3_offset = -1;
 	self.extra_text_4_offset = -1;
-	self.extra_text_5_offset = -1;
-	self.extra_text_6_offset = -1;
-	self.extra_text_7_offset = -1;
 
 	self.extra_text_1_previous_offset = 0;
 	self.extra_text_2_previous_offset = 0;
 	self.extra_text_3_previous_offset = 0;
 	self.extra_text_4_previous_offset = 0;
-	self.extra_text_5_previous_offset = 0;
-	self.extra_text_6_previous_offset = 0;
-	self.extra_text_7_previous_offset = 0;
 
 	wait 0.25;
 
@@ -368,7 +364,7 @@ start_game() { //ebb653eb
 	if(self.synergy_enabled) {
 		synergy::set_text("option_1", "Open: ^3[{+switchseat}]", 2);
 	} else {
-		synergy::set_text("option_1", "Open: ^3[{+speed_throw}] ^7and ^3[{+melee}] or ^3[{+switchseat}]", 2);
+		synergy::set_text("option_1", "Open: ^3[{+speed_throw}] ^7and ^3[{+melee}] ^7or ^3[{+switchseat}]", 2);
 	}
 	synergy::set_text("option_2", "Scroll: ^3[{+speed_throw}] ^7or ^3[{+attack}]", 2);
 	synergy::set_text("option_3", "Select: ^3[{+activate}] ^7Back: ^3[{+melee}]", 2);
@@ -702,7 +698,7 @@ guarantee_weapon() { //8e8cf6d1
 		if(isDefined(self.current_weapon) && !self hasWeapon(self.current_weapon) && !self.updating_weapon) {
 			self takeWeapon(self.current_weapon);
 			wait 0.1;
-			self zm_weapons::give_build_kit_weapon(self.current_weapon);
+			self.current_weapon = self zm_weapons::give_build_kit_weapon(self.current_weapon);
 			wait 0.25;
 			self switchToWeapon(self.current_weapon);
 			self setCamo(self.current_weapon, self.camo);
@@ -746,7 +742,7 @@ pack_weapons() { //dc2d810d
 		wait 0.1;
 	}
 
-	self zm_weapons::give_build_kit_weapon(weapon);
+	weapon = self zm_weapons::give_build_kit_weapon(weapon);
 
 	if(self.pack_tier >= 2 && zm_weapons::is_weapon_upgraded(weapon)) {
 		if(!isInArray(self.syn["weapons"]["blacklisted_weapons"], self.current_weapon_string)) {
@@ -788,18 +784,16 @@ update_weapon() { //1adba75e
 
 	if(self hasWeapon(new_weapon)) {
 		self switchToWeapon(new_weapon);
-	} else {
-		self zm_weapons::give_build_kit_weapon(new_weapon);
-		wait 0.1;
-		self switchToWeapon(new_weapon);
-		self giveMaxAmmo(new_weapon);
 	}
-	wait 0.1;
 
 	if(self.pack_weapons) {
 		pack_weapons();
 		self.camo = self.syn["camos"]["gun_game_packed"][randomIntRange(0, (self.syn["camos"]["gun_game_packed"].size - 1))];
 	} else {
+		new_weapon = self zm_weapons::give_build_kit_weapon(new_weapon);
+		wait 0.1;
+		self switchToWeapon(new_weapon);
+		self giveMaxAmmo(new_weapon);
 		self.camo = self.syn["camos"]["gun_game"][randomIntRange(0, (self.syn["camos"]["gun_game"].size - 1))];
 		self.current_weapon = new_weapon;
 	}

@@ -286,6 +286,12 @@ input_manager() { //fb500cd3
 					wait 0.2;
 				}
 			} else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
+				
+				if(self.gun_game_enabled && (self.current_menu == "Setup Options" || self.current_menu == "Gun Game Options")) {
+					self notify("menu_option_gun_game");
+				} else {
+					self notify("menu_option");
+				}
 
 				scroll_cursor(set_variable(self attackButtonPressed(), "down", "up"));
 
@@ -747,7 +753,7 @@ get_title_width(title) { //2bc4de7b
 	return title_width;
 }
 
-add_menu(title) { //8101ea46
+set_title(title) { //28ccc05d
 	set_text("title", title, 0);
 
 	title_width = get_title_width(title);
@@ -926,6 +932,12 @@ scroll_slider(direction) { //6e2f9762
 }
 
 set_options() { //a0d8ccb6
+	if(isDefined(self.equip_attachment_in_progress)) {
+		while(self.equip_attachment_in_progress) {
+			wait 0.05;
+		}
+	}
+
 	for(i = 1; i <= self.option_limit; i++) {
 		luinotifyevent(#"synergy_toggle_" + string(i), 2, 200002, 0);
 		luinotifyevent(#"synergy_slider_" + string(i), 2, 200002, 0);

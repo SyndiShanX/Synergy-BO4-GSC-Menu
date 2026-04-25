@@ -42,6 +42,8 @@ initial_variables() { //ec264b2e
 	self.point_increment = 100;
 	self.map_name = get_map_name();
 
+	self.equip_attachment_in_progress = false;
+
 	self.narrative_open = false;
 
 	if(level.script == "zm_zodt8" || level.script == "zm_towers" || level.script == "zm_mansion") {
@@ -50,6 +52,9 @@ initial_variables() { //ec264b2e
 		level.w_homunculus_leprechaun = getweapon(#"homunculus_leprechaun");
 	}
 
+	setDvar(#"zm_debug_ee", 1);
+	setDvar(#"zm_debug_trilane", 1);
+
 	// Weapons
 
 	self.syn["mastercraft"] = array();
@@ -57,29 +62,29 @@ initial_variables() { //ec264b2e
 	self.syn["weapons"]["category"][0] = ["assault_rifles", "sub_machine_guns", "tactical_rifles", "light_machine_guns", "sniper_rifles", "shotguns", "pistols", "launchers", "melee", "equipment", "extras"];
 	self.syn["weapons"]["category"][1] = ["Assault Rifles", "Sub Machine Guns", "Tactical Rifles", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Melee", "Equipment", "Extras"];
 
-	self.syn["weapons"]["assault_rifles"][0] =		 array("ar_accurate_t8", "ar_fastfire_t8", "ar_modular_t8", "ar_mg1909_t8", "ar_damage_t8", "ar_stealth_t8", "ar_galil_t8", "ar_standard_t8", "ar_an94_t8", "ar_doublebarrel_t8", "ar_peacekeeper_t8");
-	self.syn["weapons"]["sub_machine_guns"][0] =	 array("smg_drum_pistol_t8", "smg_standard_t8", "smg_fastfire_t8", "smg_handling_t8", "smg_accurate_t8", "smg_capacity_t8", "smg_mp40_t8", "smg_vmp_t8", "smg_fastburst_t8", "smg_folding_t8", "smg_minigun_t8");
-	self.syn["weapons"]["tactical_rifles"][0] =		 array("tr_longburst_t8", "tr_leveraction_t8", "tr_midburst_t8", "tr_powersemi_t8", "tr_flechette_t8", "tr_damageburst_t8");
+	self.syn["weapons"]["assault_rifles"][0] =     array("ar_accurate_t8", "ar_fastfire_t8", "ar_modular_t8", "ar_mg1909_t8", "ar_damage_t8", "ar_stealth_t8", "ar_galil_t8", "ar_standard_t8", "ar_an94_t8", "ar_doublebarrel_t8", "ar_peacekeeper_t8");
+	self.syn["weapons"]["sub_machine_guns"][0] =   array("smg_drum_pistol_t8", "smg_standard_t8", "smg_fastfire_t8", "smg_handling_t8", "smg_accurate_t8", "smg_capacity_t8", "smg_mp40_t8", "smg_vmp_t8", "smg_fastburst_t8", "smg_folding_t8", "smg_minigun_t8");
+	self.syn["weapons"]["tactical_rifles"][0] =    array("tr_longburst_t8", "tr_leveraction_t8", "tr_midburst_t8", "tr_powersemi_t8", "tr_flechette_t8", "tr_damageburst_t8");
 	self.syn["weapons"]["light_machine_guns"][0] = array("lmg_standard_t8", "lmg_spray_t8", "lmg_heavy_t8", "lmg_double_t8", "lmg_stealth_t8");
-	self.syn["weapons"]["sniper_rifles"][0] =			 array("sniper_powersemi_t8", "sniper_powerbolt_t8", "sniper_quickscope_t8", "sniper_fastrechamber_t8", "sniper_locus_t8", "sniper_mini14_t8", "sniper_damagesemi_t8");
-	self.syn["weapons"]["shotguns"][0] =					 array("shotgun_trenchgun_t8", "shotgun_semiauto_t8", "shotgun_pump_t8", "shotgun_precision_t8", "shotgun_fullauto_t8");
-	self.syn["weapons"]["pistols"][0] =						 array("pistol_topbreak_t8", "pistol_revolver_t8", "pistol_standard_t8", "pistol_burst_t8", "pistol_fullauto_t8");
-	self.syn["weapons"]["launchers"][0] =					 array("launcher_standard_t8", "special_crossbow_t8");
-	self.syn["weapons"]["melee"][0] =							 array("bowie_knife", "special_ballisticknife_t8_dw");
-	self.syn["weapons"]["equipment"][0] =					 array("eq_frag_grenade", "eq_acid_bomb", "claymore", "sticky_grenade", "eq_molotov", "eq_wraith_fire", "mini_turret", "proximity_grenade");
-	self.syn["weapons"]["extras"][0] =						 array("minigun");
+	self.syn["weapons"]["sniper_rifles"][0] =      array("sniper_powersemi_t8", "sniper_powerbolt_t8", "sniper_quickscope_t8", "sniper_fastrechamber_t8", "sniper_locus_t8", "sniper_mini14_t8", "sniper_damagesemi_t8");
+	self.syn["weapons"]["shotguns"][0] =           array("shotgun_trenchgun_t8", "shotgun_semiauto_t8", "shotgun_pump_t8", "shotgun_precision_t8", "shotgun_fullauto_t8");
+	self.syn["weapons"]["pistols"][0] =            array("pistol_topbreak_t8", "pistol_revolver_t8", "pistol_standard_t8", "pistol_burst_t8", "pistol_fullauto_t8");
+	self.syn["weapons"]["launchers"][0] =          array("launcher_standard_t8", "special_crossbow_t8");
+	self.syn["weapons"]["melee"][0] =              array("bowie_knife", "special_ballisticknife_t8_dw");
+	self.syn["weapons"]["equipment"][0] =          array("eq_frag_grenade", "eq_acid_bomb", "claymore", "sticky_grenade", "eq_molotov", "eq_wraith_fire", "mini_turret", "proximity_grenade");
+	self.syn["weapons"]["extras"][0] =             array("minigun");
 
-	self.syn["weapons"]["assault_rifles"][1] =		 array("ICR-7", "Maddox RFB", "KN-57", "Hitchcock M9", "Rampart 17", "VAPR-XKG", "Grav", "Swat RFT", "AN-94", "Doublecross", "Peacekeeper");
-	self.syn["weapons"]["sub_machine_guns"][1] =	 array("Escargot", "MX9", "Spitfire", "Saug 9mm", "GKS", "Cordite", "MP-40", "VMP", "Daemon 3XB", "Switchblade X9", "MicroMG 9mm");
-	self.syn["weapons"]["tactical_rifles"][1] =		 array("Swordfish", "Essex Model 07", "ABR 223", "Auger DMR", "S6 Stingray", "M16");
+	self.syn["weapons"]["assault_rifles"][1] =     array("ICR-7", "Maddox RFB", "KN-57", "Hitchcock M9", "Rampart 17", "VAPR-XKG", "Grav", "Swat RFT", "AN-94", "Doublecross", "Peacekeeper");
+	self.syn["weapons"]["sub_machine_guns"][1] =   array("Escargot", "MX9", "Spitfire", "Saug 9mm", "GKS", "Cordite", "MP-40", "VMP", "Daemon 3XB", "Switchblade X9", "MicroMG 9mm");
+	self.syn["weapons"]["tactical_rifles"][1] =    array("Swordfish", "Essex Model 07", "ABR 223", "Auger DMR", "S6 Stingray", "M16");
 	self.syn["weapons"]["light_machine_guns"][1] = array("Titan", "Hades", "VKM 750", "Zweihänder", "Tigershark");
-	self.syn["weapons"]["sniper_rifles"][1] =			 array("SDM", "Paladin HB50", "Koshka", "Outlaw", "Locus", "Vendetta", "Havelina AA50");
-	self.syn["weapons"]["shotguns"][1] =					 array("M1897 Trebuchet", "SG12", "MOG 12", "Argus", "Rampage");
-	self.syn["weapons"]["pistols"][1] =						 array("Welling", "Mozu", "Strife", "RK 7 Garrison", "KAP 45");
-	self.syn["weapons"]["launchers"][1] =					 array("Hellion Salvo", "Reaver C86");
-	self.syn["weapons"]["melee"][1] =							 array("Bowie Knife", "Ballistic Knife");
-	self.syn["weapons"]["equipment"][1] =					 array("Frag Grenade", "Acid Bomb", "Claymore", "Semtex", "Molotov", "Wraith Fire", "Mini Turret", "Shock Charge");
-	self.syn["weapons"]["extras"][1] =						 array("Death Machine");
+	self.syn["weapons"]["sniper_rifles"][1] =      array("SDM", "Paladin HB50", "Koshka", "Outlaw", "Locus", "Vendetta", "Havelina AA50");
+	self.syn["weapons"]["shotguns"][1] =           array("M1897 Trebuchet", "SG12", "MOG 12", "Argus", "Rampage");
+	self.syn["weapons"]["pistols"][1] =            array("Welling", "Mozu", "Strife", "RK 7 Garrison", "KAP 45");
+	self.syn["weapons"]["launchers"][1] =          array("Hellion Salvo", "Reaver C86");
+	self.syn["weapons"]["melee"][1] =              array("Bowie Knife", "Ballistic Knife");
+	self.syn["weapons"]["equipment"][1] =          array("Frag Grenade", "Acid Bomb", "Claymore", "Semtex", "Molotov", "Wraith Fire", "Mini Turret", "Shock Charge");
+	self.syn["weapons"]["extras"][1] =             array("Death Machine");
 
 	self.syn["weapons"]["hashes"][0] = array("2580570083c8795a", "44214c17f34996ea", "5fd15d3e3a7a9b0c", "28d36f686569f6db", "1039f66708e1d597", "4ef408b2b3e35377", "3c2d17d2f2c857e1", "70f8f3d92031f6f7", "0f662b8266f6be66", "6009b31eb328208b", "6cb6925ebe3bc0d6", "3d5b6ca92bd02c5c", "5bf4dd6dcf1d24f3", "6436ccb615a2b9c6", "7a398a475f8af4c7", "5f1d38574585b35e", "2f42bb0a766b63b4", "66e6c9c83987136b", "28b38fa134e54223", "62032b32d0d142be", "5d7835133aa2daa1", "2f1f9926e48404f7", "5b3e3bae603f9641", "4328baa07bf1d03b", "0b73b6226aaa80f5", "6dc98fe2dc7c7650", "7b2cb0cda291ae11", "1dd5e58c9eb28af6", "66adeb4d1a0422d2", "5d9abb421c753ff2", "497d3824e705398c", "54c9bab69f2a2d2a", "57f46c2caf1de7fc", "0b75a649c0e85983", "369cff6935966a74", "485d0d5e33d6802b", "6840b7b398f4bb83", "67b5b30f9aa8786c", "59618269d014e1fe", "33d6e545e88450c5", "196b2477923b2f7f", "6f8ae16433fba11c", "5243385728e38aa9", "5f9eb7548cc02363", "7a7bda9ab5e9bf35", "0a9dd31e84aaab4e", "35a57559d3bdc159", "3003d1fc53331a5b", "42f6b4f6dd8585ac", "1f48082b20588e4e", "3b0e53f588197120", "18a2b56939a972ee", "6ab1184700ce0aa6", "7be1faad20a192c8", "181d603caefe4cdb", "957f735864c76c09", "99a4271a5452dc0b", "bbb22e33fa2975ad", "34b7eb9fde56bd35", "4e23def16bca8076", "79110fd100108ab9", "703eb1b835b3361f", "640d88fb13e0421e", "0c78156ba6aeda14", "71a5a304a66b5bc9", "4ccbdb4876f0a027", "10f614b278daaebc", "ab3a2f2eeada34a8", "fa6f01faf5bdba69", "7847b8511647815a", "5a4291956faa97ef", "2605a6745df58840", "3a1959bb039f2be3", "62d7f56331878d18", "5b8d1ff4b772bd85", "095dd69e40d99560", "0539f784146391d2", "5004e2171c2be97d", "7d7f0dbb00201240", "243cd42eb1bd6e10", "4ae11871b1233211", "5203eb1bc7ccee98", "b6392019ff8dc689", "c2a45d43be3dba42", "f8e66b21aa05c753", "19c157f2230454ad", "023882a5729dceca", "25a13b6f6232a985", "617dcc39334959ce", "25f355b5d35b8488", "138efe2bb30be63c", "138f012bb30beb55", "138f002bb30be9a2", "4868d59af21181c9", "a7e4878539bc7f72", "134c05846f7c5c98", "67c8d6a04ecce713", "67c8dba04eccef92", "67c8dea04eccf4ab", "67c8e2a04eccfb77", "09b4f9ecbedf98fb", "09b4f7ecbedf9595", "09b4f6ecbedf93e2", "09b4f5ecbedf922f", "4b7e4696d38d13e3", "1ecb90ddb44096f4", "7b1ab4354f6a9ef4", "cd50a2c4ff4e615d", "8fa49b6dc614ec3e", "7a42b57be462143f", "f264d6f24a950a5b", "a91e1c117ebbf5e6", "579652e2459b8c74", "60f0c0ede97e5741", "7e6386f7403487f5", "13a204ba6887b18f", "6684ea1c92c6b6e4", "4fa72f3aca76724f", "3bce061cf2bc9f98", "50f35c4cfb775a9c", "187a6cbc1c93a177", "18829f56b3fbdac1", "74dd69dd8a46d4aa", "6627899099b8a69d", "1d3a5309fa2c9b80", "4dfeb08c20a14b8b", "2b648e8ce3814bbb", "0e1311542f5782b5", "55330e258be3e3cc", "478e71d96c16eb50", "2c8e9cd5fbd53e70", "3ce59657b420dbb2", "40788017f1c860f0", "56584ced84931c9f", "7c76823f9f06439c", "0e052dd0c54e4a6f", "3477cc89337a5ea5", "0fcb8798a7354324", "435dd4ea9f2fd1bf", "514128f7d058cde0", "757d19cbfbeb94b7", "354b896513d0581d", "552dc81e8f3ba5bc", "35aeae4085f96334", "6184fe412da2bb57", "3041cc761d495272", "42ec1ef8c9536af0", "4bf5a2219b1a65d2", "7f8028bb8adc966c", "44f95b73da64d7ee", "081c373345c076c1", "24c644460c2b5642", "78ae302374d576cf", "1fc7843987e89a83", "1efb82c43276a4e3", "6aadfdc58af04635", "2721c688766673fb", "55ab674fdfba3485", "173040967fe4f754", "16044c4b951b7bdd", "16f590f4c5bbc17c", "749afb2862fc3d54", "65f0a900303f4c55", "62c799cc48d4d897", "6c8b8cf03f3be5de", "485b656efb0fd0f8", "713d1e36bd254b65", "459f15018585edda", "716f4e16d6efbd74", "2f4a72ac7be5902e", "6a0c4101e88a4707", "0c2a620242d1636a", "0cd53ea4d4ee864c", "2df0835a53060b95", "7dc8f3611c942007", "7f6a3674177103f1", "7a3940c928f342e7", "3882e337d28ec4df", "0e992907ddf45c9e", "337a0bfc51449d31", "34415d7a97a7d783", "3b5823adc79b4e56", "2909dcf2d0d6eed1", "5f45cf57e1bee38b", "7c29084c96931c48", "5e450b80e312b0d1", "43b2880f3238b8d2", "38662c868c5d5cee", "491ff8e9d1af03a8", "b9826c972a454fb9", "0cb1cdb5b47f0226", "1b5092cccdb3d65b", "4c157b1aeefae09e", "68bfa6918dc2eb81", "5f8f734c5dd02242", "508ba13614577e04", "403bfa4250f7a743", "7d9d24e1aef966fc", "6fed6a04129cb670", "71707ceac8b47c2c", "932b1b9ca78dc1fb", "2cc459d985c09333", "454db5bc2d8b3088");
 	self.syn["weapons"]["hashes"][1] = array("ar_accurate_t8", "ar_fastfire_t8", "ar_modular_t8", "ar_mg1909_t8", "ar_damage_t8", "ar_stealth_t8", "ar_galil_t8", "ar_standard_t8", "ar_an94_t8", "ar_doublebarrel_t8", "ar_peacekeeper_t8", "smg_drum_pistol_t8", "smg_standard_t8", "smg_fastfire_t8", "smg_handling_t8", "smg_accurate_t8", "smg_capacity_t8", "smg_mp40_t8", "smg_vmp_t8", "smg_fastburst_t8", "smg_folding_t8", "smg_minigun_t8", "tr_longburst_t8", "tr_leveraction_t8", "tr_midburst_t8", "tr_powersemi_t8", "tr_flechette_t8", "tr_damageburst_t8", "lmg_standard_t8", "lmg_spray_t8", "lmg_heavy_t8", "lmg_double_t8", "lmg_stealth_t8", "sniper_powersemi_t8", "sniper_powerbolt_t8", "sniper_quickscope_t8", "sniper_fastrechamber_t8", "sniper_locus_t8", "sniper_mini14_t8", "sniper_damagesemi_t8", "shotgun_trenchgun_t8", "shotgun_semiauto_t8", "shotgun_pump_t8", "shotgun_precision_t8", "shotgun_fullauto_t8", "pistol_topbreak_t8", "pistol_revolver_t8", "pistol_standard_t8", "pistol_burst_t8", "pistol_fullauto_t8", "launcher_standard_t8", "special_crossbow_t8", "special_ballisticknife_t8_dw", "minigun", "bowie_knife", "bowie_knife_story_1", "stake_knife", "galvaknuckles_t8", "eq_frag_grenade", "eq_acid_bomb", "claymore", "sticky_grenade", "eq_molotov", "eq_wraith_fire", "mini_turret", "proximity_grenade", "homunculus", "homunculus_leprechaun", "cymbal_monkey", "ray_gun", "ray_gun_mk2", "ww_freezegun_t8", "zhield_dw", "zhield_frost_dw", "ww_tricannon_t8", "ww_tricannon_earth_t8", "ww_tricannon_fire_t8", "ww_tricannon_water_t8", "ww_tricannon_air_t8", "zhield_zword_dw", "ww_crossbow_t8", "tomahawk_t8", "tomahawk_t8_upgraded", "zhield_spectral_dw", "zhield_spectral_dw_upgraded", "ww_blundergat_t8", "ww_blundergat_fire_t8", "ww_blundergat_acid_t8", "ww_blundergat_fire_t8_unfinished", "ww_crossbow_impaler_t8", "ww_random_ray_gun1", "ww_random_ray_gun2", "ww_random_ray_gun3", "equip_sprout", "thunderstorm", "zhield_zpear_dw", "ww_hand_o", "ww_hand_h", "ww_hand_g", "ww_hand_c", "ray_gun_mk2v", "ray_gun_mk2x", "ray_gun_mk2y", "ray_gun_mk2z", "snowball", "snowball_upgraded", "snowball_yellow", "snowball_yellow_upgraded", "music_box", "eq_nesting_doll_grenade", "eq_nesting_doll_grenade_niko", "eq_nesting_doll_grenade_rich", "eq_nesting_doll_grenade_takeo", "thundergun", "tundragun", "ww_tesla_gun_t8", "ww_tesla_sniper_t8", "hero_chakram_lv3", "hero_hammer_lv3", "hero_scepter_lv3", "hero_sword_pistol_lv3", "hero_flamethrower_t8_lv3", "hero_minigun_t8_lv3", "hero_katana_t8_lv3", "hero_gravityspikes_t8_lv3", "ar_accurate_t8_upgraded", "ar_fastfire_t8_upgraded", "ar_modular_t8_upgraded", "ar_mg1909_t8_upgraded", "ar_damage_t8_upgraded", "ar_stealth_t8_upgraded", "ar_galil_t8_upgraded", "ar_standard_t8_upgraded", "ar_an94_t8_upgraded", "ar_doublebarrel_t8_upgraded", "ar_peacekeeper_t8_upgraded", "smg_drum_pistol_t8_upgraded", "smg_standard_t8_upgraded", "smg_fastfire_t8_upgraded", "smg_handling_t8_upgraded", "smg_accurate_t8_upgraded", "smg_capacity_t8_upgraded", "smg_mp40_t8_upgraded", "smg_vmp_t8_upgraded", "smg_fastburst_t8_upgraded", "smg_folding_t8_upgraded", "smg_minigun_t8_upgraded", "tr_longburst_t8_upgraded", "tr_leveraction_t8_upgraded", "tr_midburst_t8_upgraded", "tr_powersemi_t8_upgraded", "tr_flechette_t8_upgraded", "tr_damageburst_t8_upgraded", "lmg_standard_t8_upgraded", "lmg_spray_t8_upgraded", "lmg_heavy_t8_upgraded", "lmg_double_t8_upgraded", "lmg_stealth_t8_upgraded", "sniper_powersemi_t8_upgraded", "sniper_powerbolt_t8_upgraded", "sniper_quickscope_t8_upgraded", "sniper_fastrechamber_t8_upgraded", "sniper_locus_t8_upgraded", "sniper_mini14_t8_upgraded", "sniper_damagesemi_t8_upgraded", "shotgun_trenchgun_t8_upgraded", "shotgun_semiauto_t8_upgraded", "shotgun_pump_t8_upgraded", "shotgun_precision_t8_upgraded", "shotgun_fullauto_t8_upgraded", "pistol_topbreak_t8_upgraded", "pistol_revolver_t8_upgraded", "pistol_standard_t8_upgraded", "pistol_burst_t8_upgraded", "pistol_fullauto_t8_upgraded", "launcher_standard_t8_upgraded", "special_crossbow_t8_upgraded", "special_ballisticknife_t8_dw_upgraded", "ww_tricannon_t8_upgraded", "ww_tricannon_earth_t8_upgraded", "ww_tricannon_fire_t8_upgraded", "ww_tricannon_water_t8_upgraded", "ww_tricannon_air_t8_upgraded", "ray_gun_upgraded", "ray_gun_mk2_upgraded", "ww_freezegun_t8_upgraded", "thundergun_upgraded", "tundragun_upgraded", "ww_tesla_gun_t8_upgraded", "ww_tesla_sniper_upgraded_t8", "ww_blundergat_t8_upgraded", "ww_blundergat_fire_t8_upgraded", "ww_blundergat_acid_t8_upgraded", "zhield_zword_dw_upgraded", "ww_crossbow_t8_upgraded", "ww_hand_o_upgraded", "ww_hand_h_upgraded", "ww_hand_g_upgraded", "ww_hand_c_upgraded", "ray_gun_mk2v_upgraded", "ray_gun_mk2x_dw", "ray_gun_mk2y_upgraded", "ray_gun_mk2z_upgraded");
@@ -90,6 +95,8 @@ initial_variables() { //ec264b2e
 
 	self.syn["attachments"][0] = array("acog", "damage", "damage2", "dualoptic", "dw", "elo", "extbarrel", "extbarrel2", "extclip", "extclip2", "fastreload", "fastreload2", "fmj", "fmj2", "grip", "grip2", "holo", "is", "ir", "mixclip", "mms", "pistolscope", "quickdraw", "quickdraw2", "reflex", "rf", "speedreloader", "stalker", "stalker2", "steadyaim", "steadyaim2", "suppressed", "swayreduc", "uber");
 	self.syn["attachments"][1] = array("Acog", "High Caliber", "High Caliber II", "Dual Zoom", "Dual Wield", "Elo", "Long Barrel", "Long Barrel II", "Extended Mags", "Extended Mags II", "Fast Mags", "Fast Mags II", "FMJ", "FMJ II", "Grip", "Grip II", "Holographic", "Iron Sights", "Thermal", "Hybrid Mags", "Threat Detector", "Compact Scope", "Quickdraw", "Quickdraw II", "Reflex", "Rapid Fire", "Speed Loader", "Stock", "Stock II", "Laser Sight", "Laser Sight II", "Suppressor", "Stabilizer", "Operator Mod");
+	self.syn["blacklisted_attachments"] = array("none", "null", "clantag", "custom1", "custom2", "killcounter");
+	self.syn["optics"] = array("reflex", "elo", "mms", "holo", "acog", "dualoptic", "ir", "is");
 
 	// AATs
 
@@ -324,7 +331,7 @@ menu_option() { //bf384607
 	menu = self.current_menu;
 	switch(menu) {
 		case "Synergy":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("Basic Options", undefined, &synergy::new_menu, "Basic Options");
 			self synergy::add_option("Fun Options", undefined, &synergy::new_menu, "Fun Options");
@@ -336,7 +343,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Basic Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_toggle("God Mode", "Makes you Invincible", &god_mode, self.god_mode);
 			self synergy::add_toggle("Frag No Clip", "Fly through the Map using your ^3Equipment^7 Keybind", &frag_no_clip, self.frag_no_clip);
@@ -358,7 +365,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Fun Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_increment("Set Speed", undefined, &set_speed, "set_speed", 1, 1, 15, 1);
 			self synergy::add_increment("Set Gravity", undefined, &set_gravity, "set_gravity", 800, 100, 800, 100);
@@ -367,7 +374,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Weapon Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("Give Weapons", undefined, &synergy::new_menu, "Give Weapons");
 			self synergy::add_option("Give Mastercrafts", undefined, &synergy::new_menu, "Give Mastercrafts");
@@ -386,7 +393,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Zombie Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_toggle("No Target", "Zombies won't Target You", &no_target, self.no_target);
 
@@ -405,7 +412,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Map Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_toggle("Freeze Box", "Locks the Mystery Box, so it can't move", &freeze_box, self.freeze_box);
 			self synergy::add_option("Open Doors", undefined, &open_doors);
@@ -420,7 +427,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Powerup Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_toggle("Shoot Powerups", undefined, &shoot_powerups, self.shoot_powerups);
 
@@ -436,7 +443,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Menu Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_increment("Move Menu X", "Move the Menu around Horizontally", &synergy::modify_menu_position, "move_menu_x", 0, -1200, 1200, 50, "x");
 			self synergy::add_increment("Move Menu Y", "Move the Menu around Vertically", &synergy::modify_menu_position, "move_menu_y", 0, -250, 250, 25, "y");
@@ -452,7 +459,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Give Perks":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			for(i = 0; i < self.syn["perks"][0].size; i++) {
 				self synergy::add_option(self.syn["perks"][1][i], undefined, &give_perk, self.syn["perks"][0][i]);
@@ -460,7 +467,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Take Perks":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			for(i = 0; i < self.syn["perks"][0].size; i++) {
 				self synergy::add_option(self.syn["perks"][1][i], undefined, &take_perk, self.syn["perks"][0][i]);
@@ -468,7 +475,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Give Elixirs":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			for(i = 0; i < self.syn["elixirs"][0].size; i++) {
 				self synergy::add_option(self.syn["elixirs"][1][i], undefined, &give_elixir, self.syn["elixirs"][0][i], self.syn["elixirs"][2][i]);
@@ -476,7 +483,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Give Talismans":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			for(i = 0; i < self.syn["talismans"][0].size; i++) {
 				self synergy::add_option(self.syn["talismans"][1][i], self.syn["talismans"][2][i], &give_talisman, self.syn["talismans"][0][i]);
@@ -484,7 +491,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Point Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_increment("Set Increment", undefined, &set_point_increment, "set_increment", 100, 100, 10000, 100);
 
@@ -494,30 +501,30 @@ menu_option() { //bf384607
 
 			break;
 		case "Equip Attachment":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
-			self.syn["attachment_toggles"] = array();
+			self.equip_attachment_in_progress = true;
+
+			self.syn["attachment_toggles"] = [];
+
+			while(self getCurrentWeapon() == getWeapon(#"none")) {
+				wait 0.05;
+			}
 
 			weapon_attachments = get_weapon_attachments();
 
 			if(isDefined(weapon_attachments) && isArray(weapon_attachments) && weapon_attachments.size > 0) {
 				for(i = 0; i < weapon_attachments.size; i++) {
 					self.syn["attachment_toggles"][i] = weaponHasAttachment(self getCurrentWeapon(), weapon_attachments[i]);
-					if(isInArray(self.syn["attachments"][0], weapon_attachments[i])) {
-						for(x = 0; x < self.syn["attachments"][0].size; x++) {
-							if(self.syn["attachments"][0][x] == weapon_attachments[i]) {
-								self synergy::add_toggle(self.syn["attachments"][1][x], weapon_attachments[i], &equip_attachment, self.syn["attachment_toggles"][i], weapon_attachments[i], i);
-							}
-						}
-					} else {
-						self synergy::add_toggle(weapon_attachments[i], weapon_attachments[i], &equip_attachment, self.syn["attachment_toggles"][i], weapon_attachments[i], i);
-					}
+					self synergy::add_toggle(get_attachment_name(weapon_attachments[i]), undefined, &equip_attachment, self.syn["attachment_toggles"][i], weapon_attachments[i], i);
 				}
 			}
 
+			self.equip_attachment_in_progress = false;
+
 			break;
 		case "Equip Camo":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("Default Camos", undefined, &synergy::new_menu, "Default Camos");
 			self synergy::add_option("Pack-a-Punch Camos", undefined, &synergy::new_menu, "Pack-a-Punch Camos");
@@ -525,7 +532,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Default Camos":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("None", "0", &equip_camo, 0);
 
@@ -535,7 +542,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Pack-a-Punch Camos":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("None", "0", &equip_camo, 0);
 
@@ -545,7 +552,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Black Market Camos":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("None", "0", &equip_camo, 0);
 
@@ -555,7 +562,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Give AAT":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("None", undefined, &take_aat);
 
@@ -565,7 +572,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Give Mastercrafts":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_array("ICR-7 Variant", undefined, &give_mastercraft_weapon, "icr_mastercrafts", array("Blinding Glory", "Summon", "Gearhead"), undefined, "ar_accurate_t8");
 			self synergy::add_array("Maddox RFB Variant", undefined, &give_mastercraft_weapon, "maddox_mastercrafts", array("Carbon Cobra", "$treet"), undefined, "ar_fastfire_t8");
@@ -609,7 +616,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Give Weapons":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			for(i = 0; i < self.syn["weapons"]["category"][1].size; i++) {
 				self synergy::add_option(self.syn["weapons"]["category"][1][i], undefined, &synergy::new_menu, self.syn["weapons"]["category"][1][i]);
@@ -617,13 +624,13 @@ menu_option() { //bf384607
 
 			break;
 		case "Assault Rifles":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("assault_rifles");
 
 			break;
 		case "Sub Machine Guns":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("sub_machine_guns");
 
@@ -633,43 +640,43 @@ menu_option() { //bf384607
 
 			break;
 		case "Tactical Rifles":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("tactical_rifles");
 
 			break;
 		case "Light Machine Guns":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("light_machine_guns");
 
 			break;
 		case "Sniper Rifles":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("sniper_rifles");
 
 			break;
 		case "Shotguns":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("shotguns");
 
 			break;
 		case "Pistols":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("pistols");
 
 			break;
 		case "Launchers":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("launchers");
 
 			break;
 		case "Melee":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("melee");
 
@@ -691,7 +698,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Equipment":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("equipment");
 
@@ -730,7 +737,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Extras":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("extras");
 
@@ -1329,7 +1336,7 @@ give_mastercraft_weapon(null, mastercraft_index, weapon, offset) { //72d8cec0
 	}
 
 	current_weapon = self getCurrentWeapon();
-	if(weapon == current_weapon.rootWeapon.name) {
+	if(getWeapon(weapon).rootWeapon.name == current_weapon.rootWeapon.name) {
 		weapon = current_weapon;
 	} else {
 		weapon = getWeapon(weapon);
@@ -1337,18 +1344,22 @@ give_mastercraft_weapon(null, mastercraft_index, weapon, offset) { //72d8cec0
 
 	if(!isDefined(mastercraft_index)) {
 		synergy::scroll_slider();
-		mastercraft_index = (self.slider[(self.current_menu + "_" + (self.syn["cursor"].index))] + 1);
+		mastercraft_index = int(self.slider[(self.current_menu + "_" + self.structure[self.syn["cursor"].index].label + "_" + (self.syn["cursor"].index))] + 1);
 	}
 
 	if(isDefined(offset) && isInt(offset)) {
-		mastercraft_index += offset;
+		mastercraft_index = int(mastercraft_index) + offset;
 	}
 
 	self.syn["mastercraft"][weapon.rootWeapon.name] = mastercraft_index;
 
 	weapon_options = self calcWeaponOptions(0, 0, mastercraft_index);
 
-	self takeWeapon(self getCurrentWeapon());
+	max_weapon_num = zm_utility::get_player_weapon_limit(self);
+
+	if(self getWeaponsListPrimaries().size >= max_weapon_num) {
+		self takeWeapon(self getCurrentWeapon());
+	}
 
 	self giveWeapon(weapon, weapon_options);
 
@@ -1363,28 +1374,28 @@ give_mastercraft_weapon(null, mastercraft_index, weapon, offset) { //72d8cec0
 get_weapon_attachments() { //de099fee
 	weapon = self getCurrentWeapon();
 
-	retry_counter = 0;
-	while(weapon == getWeapon(#"none")) {
-		if(retry_counter < 100) {
-			wait 0.1;
-			weapon = self getCurrentWeapon();
-			retry_counter++;
-		} else {
-			return;
-		}
+	if(weapon == getWeapon(#"none")) {
+		return;
 	}
 
 	supported_attachments = weapon.supportedAttachments;
 
-	blacklisted_attachments = ["none", "null", "clantag", "custom1", "custom2", "killcounter"];
-
-	foreach(attachment in blacklisted_attachments) {
-		if(isInArray(supported_attachments, attachment)) {
-			supported_attachments = synergy::remove_from_array(supported_attachments, attachment);
+	foreach(blacklisted_attachment in self.syn["blacklisted_attachments"]) {
+		if(isInArray(supported_attachments, blacklisted_attachment)) {
+			supported_attachments = synergy::remove_from_array(supported_attachments, blacklisted_attachment);
 		}
 	}
 
 	return supported_attachments;
+}
+
+function get_attachment_name(attachment) { //44ecc3e9
+	for(i = 0; i < self.syn["attachments"][0].size; i++) {
+		if(attachment == self.syn["attachments"][0][i]) {
+			return self.syn["attachments"][1][i];
+		}
+	}
+	return attachment;
 }
 
 get_equipped_attachments(weapon) { //b04978d6
@@ -1400,6 +1411,7 @@ get_equipped_attachments(weapon) { //b04978d6
 
 equip_attachment(attachment, i) { //224c09c9
 	weapon = self getCurrentWeapon();
+
 	stock = self getWeaponAmmoStock(weapon);
 	clip = self getWeaponAmmoClip(weapon);
 	attachments = get_equipped_attachments(weapon);
@@ -1408,9 +1420,8 @@ equip_attachment(attachment, i) { //224c09c9
 		if(isInArray(attachments, attachment)) {
 			attachments = synergy::remove_from_array(attachments, attachment);
 		} else {
-			optics = ["reflex", "elo", "mms", "holo", "acog", "dualoptic", "ir", "is"];
-			if(isInArray(optics, attachment)) {
-				foreach(optic in optics) {
+			if(isInArray(self.syn["optics"], attachment)) {
+				foreach(optic in self.syn["optics"]) {
 					if(isInArray(attachments, optic)) {
 						attachments = synergy::remove_from_array(attachments, optic);
 					}
@@ -1422,17 +1433,12 @@ equip_attachment(attachment, i) { //224c09c9
 		weapon = getWeapon(weapon.rootWeapon.name, attachments);
 	}
 
-	camo_index = getCamoIndex(self getWeaponOptions(weapon));
+	camo_index = getCamoIndex(self getBuildKitWeaponOptions(weapon));
 	if(!isDefined(camo_index) || !isInt(camo_index)) {
 		camo_index = 0;
 	}
 
 	mastercraft_index = 0;
-
-	if(!isDefined(self.syn[weapon.rootWeapon.name])) {
-		self.syn[weapon.rootWeapon.name] = array();
-	}
-
 	if(isDefined(self.syn["mastercraft"][weapon.rootWeapon.name])) {
 		mastercraft_index = self.syn["mastercraft"][weapon.rootWeapon.name];
 	}
@@ -1447,32 +1453,6 @@ equip_attachment(attachment, i) { //224c09c9
 	self setWeaponAmmoStock(weapon, stock);
 	self setWeaponAmmoClip(weapon, clip);
 	self setSpawnWeapon(weapon, true);
-
-	wait 0.1;
-
-	weapon = self getCurrentWeapon();
-
-	retry_counter = 0;
-	while(weapon == getWeapon(#"none")) {
-		if(retry_counter < 5) {
-			wait 0.1;
-			weapon = self getCurrentWeapon();
-			retry_counter++;
-		} else {
-			self giveWeapon(self.previous_weapon);
-
-			self setWeaponAmmoStock(weapon, stock);
-			self setWeaponAmmoClip(weapon, clip);
-			self setSpawnWeapon(weapon, true);
-
-			wait 0.75;
-			weapon = self getCurrentWeapon();
-			break;
-		}
-	}
-
-	self.syn["attachment_toggles"][i] = weaponHasAttachment(weapon, attachment);
-	wait 1;
 }
 
 equip_camo(camo_index) { //52f76807
@@ -1528,7 +1508,6 @@ spawn_normal_zombie() { //5237db24
 
 spawn_zombie(spawner) { //253cbb6e
 	zombie = zombie_utility::spawn_zombie(spawner, spawner.targetName);
-	zombie forceTeleport(self.origin + anglesToForward(self.angles) * 300);
 }
 
 kill_all_zombies() { //57f97468

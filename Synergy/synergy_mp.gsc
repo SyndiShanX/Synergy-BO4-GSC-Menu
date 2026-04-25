@@ -20,6 +20,8 @@ init() { //9284135d
 }
 
 initial_variables() { //ec264b2e
+	self.equip_attachment_in_progress = false;
+
 	// Weapons
 
 	self.syn["mastercraft"] = array();
@@ -62,6 +64,8 @@ initial_variables() { //ec264b2e
 
 	self.syn["attachments"][0] = array("acog", "damage", "damage2", "dualoptic", "dw", "elo", "extbarrel", "extbarrel2", "extclip", "extclip2", "fastreload", "fastreload2", "fmj", "fmj2", "grip", "grip2", "holo", "is", "ir", "mixclip", "mms", "pistolscope", "quickdraw", "quickdraw2", "reflex", "rf", "speedreloader", "stalker", "stalker2", "steadyaim", "steadyaim2", "suppressed", "swayreduc", "uber");
 	self.syn["attachments"][1] = array("Acog", "High Caliber", "High Caliber II", "Dual Zoom", "Dual Wield", "Elo", "Long Barrel", "Long Barrel II", "Extended Mags", "Extended Mags II", "Fast Mags", "Fast Mags II", "FMJ", "FMJ II", "Grip", "Grip II", "Holographic", "Iron Sights", "Thermal", "Hybrid Mags", "Threat Detector", "Compact Scope", "Quickdraw", "Quickdraw II", "Reflex", "Rapid Fire", "Speed Loader", "Stock", "Stock II", "Laser Sight", "Laser Sight II", "Suppressor", "Stabilizer", "Operator Mod");
+	self.syn["blacklisted_attachments"] = array("none", "null", "clantag", "custom1", "custom2", "killcounter");
+	self.syn["optics"] = array("reflex", "elo", "mms", "holo", "acog", "dualoptic", "ir", "is");
 
 	// Killstreaks
 
@@ -139,7 +143,7 @@ menu_option() { //bf384607
 	menu = self.current_menu;
 	switch(menu) {
 		case "Synergy":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("Basic Options", undefined, &synergy::new_menu, "Basic Options");
 			self synergy::add_option("Fun Options", undefined, &synergy::new_menu, "Fun Options");
@@ -150,7 +154,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Basic Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_toggle("God Mode", "Makes you Invincible", &god_mode, self.god_mode);
 			self synergy::add_toggle("Frag No Clip", "Fly through the Map using your ^3Equipment^7 Keybind", &frag_no_clip, self.frag_no_clip);
@@ -159,7 +163,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Fun Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_increment("Set Speed", undefined, &set_speed, "set_speed", 1, 1, 15, 1);
 			self synergy::add_increment("Set Gravity", undefined, &set_gravity, "set_gravity", 800, 100, 800, 100);
@@ -168,7 +172,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Weapon Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("Give Weapons", undefined, &synergy::new_menu, "Give Weapons");
 			self synergy::add_option("Give Mastercrafts", undefined, &synergy::new_menu, "Give Mastercrafts");
@@ -185,7 +189,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Give Killstreaks":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			for(i = 0; i < self.syn["killstreaks"][0].size; i++) {
 				self synergy::add_option(self.syn["killstreaks"][1][i], undefined, &give_killstreak, self.syn["killstreaks"][0][i]);
@@ -193,7 +197,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Menu Options":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_increment("Move Menu X", "Move the Menu around Horizontally", &synergy::modify_menu_position, "move_menu_x", 0, -1200, 1200, 50, "x");
 			self synergy::add_increment("Move Menu Y", "Move the Menu around Vertically", &synergy::modify_menu_position, "move_menu_y", 0, -250, 250, 25, "y");
@@ -209,7 +213,7 @@ menu_option() { //bf384607
 
 			break;
 		case "All Players":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			foreach(player in level.players){
 				self synergy::add_option(player.name, undefined, &synergy::new_menu, "Player Option");
@@ -217,7 +221,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Player Option":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			target = undefined;
 			foreach(player in level.players) {
@@ -240,30 +244,30 @@ menu_option() { //bf384607
 
 			break;
 		case "Equip Attachment":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
-			self.syn["attachment_toggles"] = array();
+			self.equip_attachment_in_progress = true;
+
+			self.syn["attachment_toggles"] = [];
+
+			while(self getCurrentWeapon() == getWeapon(#"none")) {
+				wait 0.05;
+			}
 
 			weapon_attachments = get_weapon_attachments();
 
 			if(isDefined(weapon_attachments) && isArray(weapon_attachments) && weapon_attachments.size > 0) {
 				for(i = 0; i < weapon_attachments.size; i++) {
 					self.syn["attachment_toggles"][i] = weaponHasAttachment(self getCurrentWeapon(), weapon_attachments[i]);
-					if(isInArray(self.syn["attachments"][0], weapon_attachments[i])) {
-						for(x = 0; x < self.syn["attachments"][0].size; x++) {
-							if(self.syn["attachments"][0][x] == weapon_attachments[i]) {
-								self synergy::add_toggle(self.syn["attachments"][1][x], weapon_attachments[i], &equip_attachment, self.syn["attachment_toggles"][i], weapon_attachments[i], i);
-							}
-						}
-					} else {
-						self synergy::add_toggle(weapon_attachments[i], weapon_attachments[i], &equip_attachment, self.syn["attachment_toggles"][i], weapon_attachments[i], i);
-					}
+					self synergy::add_toggle(get_attachment_name(weapon_attachments[i]), undefined, &equip_attachment, self.syn["attachment_toggles"][i], weapon_attachments[i], i);
 				}
 			}
 
+			self.equip_attachment_in_progress = false;
+
 			break;
 		case "Equip Camo":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("Default Camos", undefined, &synergy::new_menu, "Default Camos");
 			self synergy::add_option("Pack-a-Punch Camos", undefined, &synergy::new_menu, "Pack-a-Punch Camos");
@@ -271,7 +275,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Default Camos":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("None", "0", &equip_camo, 0);
 
@@ -281,7 +285,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Pack-a-Punch Camos":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("None", "0", &equip_camo, 0);
 
@@ -291,7 +295,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Black Market Camos":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_option("None", "0", &equip_camo, 0);
 
@@ -301,7 +305,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Give Mastercrafts":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			self synergy::add_array("ICR-7 Variant", undefined, &give_mastercraft_weapon, "icr_mastercrafts", array("Blinding Glory", "Summon", "Gearhead"), undefined, "ar_accurate_t8");
 			self synergy::add_array("Maddox RFB Variant", undefined, &give_mastercraft_weapon, "maddox_mastercrafts", array("Carbon Cobra", "$treet"), undefined, "ar_fastfire_t8");
@@ -345,7 +349,7 @@ menu_option() { //bf384607
 
 			break;
 		case "Give Weapons":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			for(i = 0; i < self.syn["weapons"]["category"][1].size; i++) {
 				self synergy::add_option(self.syn["weapons"]["category"][1][i], undefined, &synergy::new_menu, self.syn["weapons"]["category"][1][i]);
@@ -353,79 +357,79 @@ menu_option() { //bf384607
 
 			break;
 		case "Assault Rifles":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("assault_rifles");
 
 			break;
 		case "Sub Machine Guns":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("sub_machine_guns");
 
 			break;
 		case "Tactical Rifles":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("tactical_rifles");
 
 			break;
 		case "Light Machine Guns":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("light_machine_guns");
 
 			break;
 		case "Sniper Rifles":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("sniper_rifles");
 
 			break;
 		case "Shotguns":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("shotguns");
 
 			break;
 		case "Pistols":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("pistols");
 
 			break;
 		case "Launchers":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("launchers");
 
 			break;
 		case "Melee":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("melee");
 
 			break;
 		case "Equipment":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("equipment");
 
 			break;
 		case "Extras":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("extras");
 
 			break;
 		case "Specialist":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("specialist");
 
 			break;
 		case "Specialist Equipment":
-			self synergy::add_menu(menu);
+			self synergy::set_title(menu);
 
 			load_weapons("specialist_equipment");
 
@@ -594,16 +598,16 @@ player_option(menu, player) { //a3b23e83
 
 	switch (menu) {
 		case "Player Option":
-			self synergy::add_menu(clean_name(player get_name()));
+			self synergy::set_title(clean_name(player get_name()));
 			break;
 		case "Error":
-			self synergy::add_menu();
+			self synergy::set_title();
 			self synergy::add_option("Oops, Something Went Wrong!", "Condition: Undefined");
 			break;
 		default:
 			error = true;
 			if(error) {
-				self synergy::add_menu("Critical Error");
+				self synergy::set_title("Critical Error");
 				self synergy::add_option("Oops, Something Went Wrong!", "Condition: Menu Index");
 			}
 			break;
@@ -680,7 +684,9 @@ give_weapon(weapon) { //5be7a94b
 	weapon = getWeapon(weapon);
 
 	if(!self hasWeapon(weapon)) {
-		self takeWeapon(self getCurrentWeapon());
+		if(self getWeaponsListPrimaries().size >= 2) {
+			self takeWeapon(self getCurrentWeapon());
+		}
 
 		self giveWeapon(weapon);
 		self switchToWeaponImmediate(weapon);
@@ -694,7 +700,7 @@ give_weapon(weapon) { //5be7a94b
 
 give_mastercraft_weapon(null, mastercraft_index, weapon, offset) { //72d8cec0
 	current_weapon = self getCurrentWeapon();
-	if(weapon == current_weapon.rootWeapon.name) {
+	if(getWeapon(weapon).rootWeapon.name == current_weapon.rootWeapon.name) {
 		weapon = current_weapon;
 	} else {
 		weapon = getWeapon(weapon);
@@ -702,21 +708,22 @@ give_mastercraft_weapon(null, mastercraft_index, weapon, offset) { //72d8cec0
 
 	if(!isDefined(mastercraft_index)) {
 		synergy::scroll_slider();
-		mastercraft_index = (self.slider[(self.current_menu + "_" + (self.syn["cursor"].index))] + 1);
+		mastercraft_index = int(self.slider[(self.current_menu + "_" + self.structure[self.syn["cursor"].index].label + "_" + (self.syn["cursor"].index))] + 1);
 	}
 
 	if(isDefined(offset) && isInt(offset)) {
-		mastercraft_index += offset;
+		mastercraft_index = int(mastercraft_index) + offset;
 	}
 
 	self.syn["mastercraft"][weapon.rootWeapon.name] = mastercraft_index;
 
 	weapon_options = self calcWeaponOptions(0, 0, mastercraft_index);
 
-	self takeWeapon(self getCurrentWeapon());
+	if(self getWeaponsListPrimaries().size >= 2) {
+		self takeWeapon(self getCurrentWeapon());
+	}
 
 	self giveWeapon(weapon, weapon_options);
-	self switchToWeaponImmediate(weapon);
 
 	wait 0.25;
 	self giveStartAmmo(weapon);
@@ -725,28 +732,28 @@ give_mastercraft_weapon(null, mastercraft_index, weapon, offset) { //72d8cec0
 get_weapon_attachments() { //de099fee
 	weapon = self getCurrentWeapon();
 
-	retry_counter = 0;
-	while(weapon == getWeapon(#"none")) {
-		if(retry_counter < 100) {
-			wait 0.1;
-			weapon = self getCurrentWeapon();
-			retry_counter++;
-		} else {
-			return;
-		}
+	if(weapon == getWeapon(#"none")) {
+		return;
 	}
 
 	supported_attachments = weapon.supportedAttachments;
 
-	blacklisted_attachments = ["none", "null", "clantag", "custom1", "custom2", "killcounter"];
-
-	foreach(attachment in blacklisted_attachments) {
-		if(isInArray(supported_attachments, attachment)) {
-			supported_attachments = synergy::remove_from_array(supported_attachments, attachment);
+	foreach(blacklisted_attachment in self.syn["blacklisted_attachments"]) {
+		if(isInArray(supported_attachments, blacklisted_attachment)) {
+			supported_attachments = synergy::remove_from_array(supported_attachments, blacklisted_attachment);
 		}
 	}
 
 	return supported_attachments;
+}
+
+function get_attachment_name(attachment) { //44ecc3e9
+	for(i = 0; i < self.syn["attachments"][0].size; i++) {
+		if(attachment == self.syn["attachments"][0][i]) {
+			return self.syn["attachments"][1][i];
+		}
+	}
+	return attachment;
 }
 
 get_equipped_attachments(weapon) { //b04978d6
@@ -762,6 +769,7 @@ get_equipped_attachments(weapon) { //b04978d6
 
 equip_attachment(attachment, i) { //224c09c9
 	weapon = self getCurrentWeapon();
+
 	stock = self getWeaponAmmoStock(weapon);
 	clip = self getWeaponAmmoClip(weapon);
 	attachments = get_equipped_attachments(weapon);
@@ -770,9 +778,8 @@ equip_attachment(attachment, i) { //224c09c9
 		if(isInArray(attachments, attachment)) {
 			attachments = synergy::remove_from_array(attachments, attachment);
 		} else {
-			optics = ["reflex", "elo", "mms", "holo", "acog", "dualoptic", "ir", "is"];
-			if(isInArray(optics, attachment)) {
-				foreach(optic in optics) {
+			if(isInArray(self.syn["optics"], attachment)) {
+				foreach(optic in self.syn["optics"]) {
 					if(isInArray(attachments, optic)) {
 						attachments = synergy::remove_from_array(attachments, optic);
 					}
@@ -784,17 +791,12 @@ equip_attachment(attachment, i) { //224c09c9
 		weapon = getWeapon(weapon.rootWeapon.name, attachments);
 	}
 
-	camo_index = getCamoIndex(self getWeaponOptions(weapon));
+	camo_index = getCamoIndex(self getBuildKitWeaponOptions(weapon));
 	if(!isDefined(camo_index) || !isInt(camo_index)) {
 		camo_index = 0;
 	}
 
 	mastercraft_index = 0;
-
-	if(!isDefined(self.syn[weapon.rootWeapon.name])) {
-		self.syn[weapon.rootWeapon.name] = array();
-	}
-
 	if(isDefined(self.syn["mastercraft"][weapon.rootWeapon.name])) {
 		mastercraft_index = self.syn["mastercraft"][weapon.rootWeapon.name];
 	}
@@ -809,31 +811,6 @@ equip_attachment(attachment, i) { //224c09c9
 	self setWeaponAmmoStock(weapon, stock);
 	self setWeaponAmmoClip(weapon, clip);
 	self setSpawnWeapon(weapon, true);
-
-	wait 0.1;
-
-	weapon = self getCurrentWeapon();
-
-	retry_counter = 0;
-	while(weapon == getWeapon(#"none")) {
-		if(retry_counter < 5) {
-			wait 0.1;
-			weapon = self getCurrentWeapon();
-			retry_counter++;
-		} else {
-			self giveWeapon(self.previous_weapon);
-
-			self setWeaponAmmoStock(weapon, stock);
-			self setWeaponAmmoClip(weapon, clip);
-			self setSpawnWeapon(weapon, true);
-
-			wait 0.75;
-			weapon = self getCurrentWeapon();
-			break;
-		}
-	}
-
-	self.syn["attachment_toggles"][i] = weaponHasAttachment(weapon, attachment);
 }
 
 equip_camo(camo_index) { //52f76807
