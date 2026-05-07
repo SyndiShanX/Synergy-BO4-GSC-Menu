@@ -15,6 +15,7 @@
 #include scripts\zm_common\zm_laststand;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_magicbox;
+#include scripts\zm_common\zm_items;
 #include scripts\zm_common\zm_pack_a_punch_util;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_player;
@@ -52,8 +53,6 @@ initial_variables() { //ec264b2e
 		level.w_homunculus_leprechaun = getweapon(#"homunculus_leprechaun");
 	}
 
-	setDvar(#"zm_debug_ee", 1);
-	setDvar(#"zm_debug_trilane", 1);
 
 	// Weapons
 
@@ -424,6 +423,8 @@ menu_option() { //bf384607
 			if(!level flag::get("power_on")) {
 				self synergy::add_option("Turn Power On", undefined, &power_on);
 			}
+			
+			self synergy::add_option("Pick up all Parts", undefined, &pick_up_parts);
 
 			break;
 		case "Powerup Options":
@@ -1229,6 +1230,24 @@ power_on() { //a2ad3104
 	}
 }
 
+pick_up_parts() { //46d60064
+	if(isDefined(level.parts_collected)) {
+	  return;
+	}
+	
+	all_parts = getitemarray();
+	
+	foreach(item in all_parts) {
+		part = item.item;
+		if(isDefined(part) && isDefined(part.craftItem) && part.craftItem) {
+			self zm_items::player_pick_up(self, part);
+			item delete();
+		}
+	}
+
+	level.parts_collected = true;
+}
+
 // Powerup Options
 
 spawn_powerup(powerup) { //a6188a5c
@@ -1443,7 +1462,6 @@ equip_attachment(attachment, i) { //224c09c9
 		mastercraft_index = self.syn["mastercraft"][weapon.rootWeapon.name];
 	}
 
-	self.previous_weapon = self getCurrentWeapon();
 	self takeWeapon(self getCurrentWeapon());
 
 	weapon_options = self calcWeaponOptions(camo_index, 0, mastercraft_index);
