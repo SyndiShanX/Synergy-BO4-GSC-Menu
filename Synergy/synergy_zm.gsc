@@ -1551,6 +1551,10 @@ one_shot_zombies() { //ad42a823
 		iPrintlnBold("One Shot Zombies [^2ON^7]");
 		self.one_shot_zombies = true;
 		zombies = get_zombies();
+		while(!isDefined(zombies) || zombies.size < 1) {
+			zombies = get_zombies();
+			wait 0.1;
+		}
 		level.prev_health = zombies[0].health;
 		while(isDefined(self.one_shot_zombies)) {
 			foreach(zombie in get_zombies()) {
@@ -1559,7 +1563,7 @@ one_shot_zombies() { //ad42a823
 					zombie.health = zombie.maxHealth;
 				}
 			}
-			wait 0.01;
+			wait 0.1;
 		}
 	} else {
 		iPrintlnBold("One Shot Zombies [^1OFF^7]");
