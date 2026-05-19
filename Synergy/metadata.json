@@ -14,6 +14,14 @@
                 "scripts/zm_common/load.gsc"
             ]
         },
+				{
+            "type": "scriptparsetree",
+            "name": "scripts/synergy_zm.csc",
+            "path": "synergy_zm.cscc",
+            "hooks": [
+                "scripts/zm_common/load.csc"
+            ]
+        },
         {
             "type": "scriptparsetree",
             "name": "scripts/synergy_mp.gsc",

@@ -2,4 +2,5 @@
 *.bat
 *.zip
 *.gscc
+*.cscc
 *.luac

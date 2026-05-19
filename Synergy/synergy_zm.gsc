@@ -48,7 +48,6 @@ initial_variables() { //ec264b2e
 	self.narrative_open = false;
 
 	if(level.script == "zm_zodt8" || level.script == "zm_towers" || level.script == "zm_mansion") {
-		setDvar(#"zm_holiday_event", 1);
 		zm_loadout::register_lethal_grenade_for_level(#"homunculus_leprechaun");
 		level.w_homunculus_leprechaun = getweapon(#"homunculus_leprechaun");
 	}
@@ -416,7 +415,7 @@ menu_option() { //bf384607
 			self synergy::add_toggle("Freeze Box", "Locks the Mystery Box, so it can't move", &freeze_box, self.freeze_box);
 			self synergy::add_option("Open Doors", undefined, &open_doors);
 
-			if(self.map_name == "voyage_of_despair" || self.map_name == "ix" || self.map_name == "blood_of_the_dead" || self.map_name == "classified" || self.map_name == "ancient_evil" || self.map_name == "alpha_omega") {
+			if(self.map_name == "voyage_of_despair" || self.map_name == "ix" || self.map_name == "blood_of_the_dead" || self.map_name == "classified" || self.map_name == "dead_of_the_night" || self.map_name == "ancient_evil" || self.map_name == "alpha_omega") {
 				self synergy::add_option("Open Narrative Room", undefined, &open_narrative_room);
 			}
 
@@ -1217,6 +1216,8 @@ open_narrative_room_thread() { // Atian Menu - 89cd6cce
 		baphomets_entry_clip moveTo(baphomets_entry_clip.origin + vectorScale((0, 0, 16), 10), 1.6);
 		baphomets_entry = getEnt("baphomets_entry", "targetname");
 		baphomets_entry rotateYaw(125, 1.6);
+	} else if(self.map_name == "dead_of_the_night") {
+		level util::clientnotify("show_narrative_dotn");
 	}
 	self.narrative_open = true;
 }
