@@ -39,6 +39,20 @@ init() { //9284135d
 	callback::on_spawned(&player_connect);
 }
 
+player_connect() { //1f26b6eb
+	if(self isHost()) {
+		self.access = "Host";
+	} else {
+		self.access = "None";
+	}
+
+	self initial_variables();
+	
+	if(self isHost()) {
+		self thread initialize_menu();
+	}
+}
+
 initial_variables() { //ec264b2e
 	self.point_increment = 100;
 	self.map_name = get_map_name();
@@ -47,10 +61,10 @@ initial_variables() { //ec264b2e
 
 	self.narrative_open = false;
 
-	if(level.script == "zm_zodt8" || level.script == "zm_towers" || level.script == "zm_mansion") {
-		zm_loadout::register_lethal_grenade_for_level(#"homunculus_leprechaun");
-		level.w_homunculus_leprechaun = getweapon(#"homunculus_leprechaun");
-	}
+	//if(level.script == "zm_zodt8" || level.script == "zm_towers" || level.script == "zm_mansion") {
+	//	zm_loadout::register_lethal_grenade_for_level(#"homunculus_leprechaun");
+	//	level.w_homunculus_leprechaun = getweapon(#"homunculus_leprechaun");
+	//}
 
 
 	// Weapons
@@ -127,7 +141,7 @@ initial_variables() { //ec264b2e
 	// Elixirs
 
 	self.syn["elixirs"][0] = array(#"zm_bgb_aftertaste", #"zm_bgb_alchemical_antithesis", #"zm_bgb_always_done_swiftly", #"zm_bgb_anti_entrapment", #"zm_bgb_anywhere_but_here", #"zm_bgb_arsenal_accelerator", #"zm_bgb_blood_debt", #"zm_bgb_bullet_boost", #"zm_bgb_burned_out", #"zm_bgb_cache_back", #"zm_bgb_conflagration_liquidation", #"zm_bgb_ctrl_z", #"zm_bgb_dead_of_nuclear_winter", #"zm_bgb_dividend_yield", #"zm_bgb_equip_mint", #"zm_bgb_extra_credit", #"zm_bgb_free_fire", #"zm_bgb_head_drama", #"zm_bgb_head_scan", #"zm_bgb_immolation_liquidation", #"zm_bgb_in_plain_sight", #"zm_bgb_join_the_party", #"zm_bgb_kill_joy", #"zm_bgb_licensed_contractor", #"zm_bgb_near_death_experience", #"zm_bgb_newtonian_negation", #"zm_bgb_now_you_see_me", #"zm_bgb_nowhere_but_there", #"zm_bgb_perk_up", #"zm_bgb_perkaholic", #"zm_bgb_phantom_reload", #"zm_bgb_phoenix_up", #"zm_bgb_point_drops", #"zm_bgb_pop_shocks", #"zm_bgb_power_keg", #"zm_bgb_power_vacuum", #"zm_bgb_quacknarok", #"zm_bgb_refresh_mint", #"zm_bgb_reign_drops", #"zm_bgb_secret_shopper", #"zm_bgb_shields_up", #"zm_bgb_shopping_free", #"zm_bgb_stock_option", #"zm_bgb_suit_up", #"zm_bgb_sword_flay", #"zm_bgb_talkin_bout_regeneration", #"zm_bgb_temporal_gift", #"zm_bgb_undead_man_walking", #"zm_bgb_wall_power", #"zm_bgb_wall_to_wall_clearance", #"zm_bgb_whos_keeping_score");
-	self.syn["elixirs"][1] = array("Aftertaste", "Alchemical Antithesis", "Always Done Swiftly", "Anti Entrapment", "Anywhere But Here", "Arsenal Accelerator", "Blood Debt", "Bullet Boost", "Burned Out", "Cache Back", "Conflagration Liquidation", "Ctrl-Z", "Dead Of Nuclear Winter", "Dividend Yield", "Equip Mint", "Extra Credit", "Free Fire", "Head Drama", "Head Scan", "Immolation Liquidation", "In Plain Sight", "Join The Party", "Kill Joy", "Licensed Contractor", "Near Death Experience", "Newtonian Negation", "Now You See Me", "Nowhere But There", "Perk Up", "Perkaholic", "Phantom Reload", "Phoenix Up", "Point Drops", "Pop Shocks", "Power Keg", "Power Vacuum", "Quacknarok", "Refresh Mint", "Reign Drops", "Secret Shopper", "Shields Up", "Shopping Free", "Stock Option", "Suit Up", "Sword Flay", "Talkin Bout Regeneration", "Temporal Gift", "Undead Man Walking", "Wall Power", "Wall To Wall Clearance", "Whos Keeping Score");
+	self.syn["elixirs"][1] = array("Aftertaste", "Alchemical Antithesis", "Always Done Swiftly", "Anti Entrapment", "Anywhere But Here", "Arsenal Accelerator", "Blood Debt", "Bullet Boost", "Burned Out", "Cache Back", "Conflagration Liquidation", "Ctrl-Z", "Dead Of Nuclear Winter", "Dividend Yield", "Equip Mint", "Extra Credit", "Free Fire", "Head Drama", "Head Scan", "Immolation Liquidation", "In Plain Sight", "Join The Party", "Kill Joy", "Licensed Contractor", "Near Death Experience", "Newtonian Negation", "Now You See Me", "Nowhere But There", "Perk Up", "Perkaholic", "Phantom Reload", "Phoenix Up", "Point Drops", "Pop Shocks", "Power Keg", "Power Vacuum", "Quacknarok", "Refresh Mint", "Reign Drops", "Secret Shopper", "Shields Up", "Shopping Free", "Stock Option", "Suit Up", "Sword Flay", "Talkin' Bout Regeneration", "Temporal Gift", "Undead Man Walking", "Wall Power", "Wall To Wall Clearance", "Who's Keeping Score");
 	self.syn["elixirs"][2] = array("timed", "instant", "timed", "timed", "instant", "timed", "timed", "instant", "timed", "instant", "instant", "timed", "instant", "timed", "instant", "instant", "timed", "timed", "timed", "instant", "instant", "instant", "instant", "instant", "timed", "timed", "timed", "instant", "instant", "instant", "timed", "instant", "instant", "timed", "instant", "timed", "timed", "instant", "instant", "timed", "instant", "timed", "timed", "instant", "timed", "timed", "timed", "timed", "timed", "timed", "instant");
 
 	// Talismans
@@ -151,9 +165,10 @@ initialize_menu() { //15544841
 	self endon("disconnect");
 
 	while(!self.initialized) {
-		if(self.host) {
+		if(self isHost()) {
 			self.initialized = true;
 
+			level flag::wait_till("all_players_spawned");
 			level flag::wait_till("initial_blackscreen_passed");
 
 			if(!self.menu_initialized) {
@@ -168,11 +183,25 @@ initialize_menu() { //15544841
 	}
 }
 
-player_connect() { //1f26b6eb
-	self.host = self isHost();
+initialize_verified_menu() { //8e2077d4
+	level endon("game_ended");
+	self endon("disconnect");
 
-	self initial_variables();
-	self thread initialize_menu();
+	while(!self.initialized) {
+		if(self.access != "None") {
+			self.initialized = true;
+
+			while(!self.menu_initialized) {
+				self notify("init_menu");
+				wait 0.05;
+			}
+
+			self.synergy_enabled = true;
+
+			self thread menu_call();
+		}
+		wait 0.05;
+	}
 }
 
 menu_call() { //e63cb8af
@@ -422,7 +451,7 @@ menu_option() { //bf384607
 			if(!level flag::get("power_on")) {
 				self synergy::add_option("Turn Power On", undefined, &power_on);
 			}
-			
+
 			self synergy::add_option("Pick up all Parts", undefined, &pick_up_parts);
 
 			break;
@@ -455,7 +484,6 @@ menu_option() { //bf384607
 			self synergy::add_increment("Blue", "Set the Blue Value for the Menu Outline Color", &synergy::set_menu_colors, "set_blue", 255, 1, 255, 1, "Blue");
 
 			self synergy::add_toggle("Hide UI", undefined, &synergy::hide_ui, self.hide_ui);
-			self synergy::add_toggle("Hide Weapon", undefined, &synergy::hide_weapon, self.hide_weapon);
 
 			break;
 		case "Give Perks":
@@ -837,11 +865,11 @@ menu_option() { //bf384607
 god_mode() { //df7ef5e9
 	self.god_mode = !synergy::return_toggle(self.god_mode);
 	if(self.god_mode) {
-		iPrintlnBold("God Mode [^2ON^7]");
+		self iPrintlnBold("God Mode [^2ON^7]");
 		self enableInvulnerability();
 		god_mode_loop();
 	} else {
-		iPrintlnBold("God Mode [^1OFF^7]");
+		self iPrintlnBold("God Mode [^1OFF^7]");
 		self notify("stop_god_mode");
 		self disableInvulnerability();
 	}
@@ -864,7 +892,7 @@ frag_no_clip() { //b991b337
 
 	if(!isDefined(self.frag_no_clip)) {
 		self.frag_no_clip = true;
-		iPrintlnBold("Frag No Clip [^2ON^7], Press your ^3Equipment^7 Keybind to Enter and ^3Melee^7 to Exit");
+		self iPrintlnBold("Frag No Clip [^2ON^7], Press your ^3Equipment^7 Keybind to Enter and ^3Melee^7 to Exit");
 		while (isDefined(self.frag_no_clip)) {
 			if(self fragButtonPressed()) {
 				if(!isDefined(self.frag_no_clip_loop)) {
@@ -875,7 +903,7 @@ frag_no_clip() { //b991b337
 		}
 	} else {
 		self.frag_no_clip = undefined;
-		iPrintlnBold("Frag No Clip [^1OFF^7]");
+		self iPrintlnBold("Frag No Clip [^1OFF^7]");
 	}
 }
 
@@ -924,10 +952,10 @@ frag_no_clip_loop() { //ec65b153
 infinite_ammo() { //8a006f06
 	self.infinite_ammo = !synergy::return_toggle(self.infinite_ammo);
 	if(self.infinite_ammo) {
-		iPrintlnBold("Infinite Ammo [^2ON^7]");
+		self iPrintlnBold("Infinite Ammo [^2ON^7]");
 		self thread infinite_ammo_loop();
 	} else {
-		iPrintlnBold("Infinite Ammo [^1OFF^7]");
+		self iPrintlnBold("Infinite Ammo [^1OFF^7]");
 		self notify("stop_infinite_ammo");
 	}
 }
@@ -962,10 +990,10 @@ infinite_ammo_loop() { //f4d0adea
 infinite_shield() { //f636dc3f
 	self.infinite_shield = !synergy::return_toggle(self.infinite_shield);
 	if(self.infinite_shield) {
-		iPrintlnBold("Infinite Shield [^2ON^7]");
+		self iPrintlnBold("Infinite Shield [^2ON^7]");
 		self thread infinite_shield_loop();
 	} else {
-		iPrintlnBold("Infinite Shield [^1OFF^7]");
+		self iPrintlnBold("Infinite Shield [^1OFF^7]");
 		self notify("stop_infinite_shield");
 	}
 }
@@ -1148,12 +1176,86 @@ set_gravity(value) {
 third_person() { //ed855e11
 	self.third_person = !synergy::return_toggle(self.third_person);
 	if(self.third_person) {
-		iPrintlnBold("Third Person [^2ON^7]");
+		self iPrintlnBold("Third Person [^2ON^7]");
 		self setClientThirdPerson(1);
 	} else {
-		iPrintlnBold("Third Person [^1OFF^7]");
+		self iPrintlnBold("Third Person [^1OFF^7]");
 		self setClientThirdPerson(0);
 	}
+}
+
+// Player Options
+
+player_option(menu, player) { //a3b23e83
+	if(!isDefined(menu) || !isDefined(player) || !isPlayer(player)) {
+		menu = "Error";
+	}
+
+	switch (menu) {
+		case "Player Option":
+			self synergy::set_title(clean_name(player get_name()));
+			break;
+		case "Error":
+			self synergy::set_title();
+			self synergy::add_option("Oops, Something Went Wrong!", "Condition: Undefined");
+			break;
+		default:
+			error = true;
+			if(error) {
+				self synergy::set_title("Critical Error");
+				self synergy::add_option("Oops, Something Went Wrong!", "Condition: Menu Index");
+			}
+			break;
+	}
+}
+
+get_name() { //c91549ce
+	name = self.name;
+	if(name[0] != "[") {
+		return name;
+	}
+
+	for(a = (name.size - 1); a >= 0; a--) {
+		if(name[a] == "]") {
+			break;
+		}
+	}
+
+	return getSubStr(name, (a + 1));
+}
+
+clean_name(name) { //675b8c0
+	if(!isDefined(name) || name == "") {
+		return;
+	}
+
+	illegal = ["^A", "^B", "^F", "^H", "^I", "^0", "^1", "^2", "^3", "^4", "^5", "^6", "^7", "^8", "^9", "^:"];
+	new_string = "";
+	for(a = 0; a < name.size; a++) {
+		if(a < (name.size - 1)) {
+			if(array::contains(illegal, (name[a] + name[(a + 1)]))) {
+				a += 2;
+				if(a >= name.size) {
+					break;
+				}
+			}
+		}
+
+		if(isDefined(name[a]) && a < name.size) {
+			new_string += name[a];
+		}
+	}
+
+	return new_string;
+}
+
+print_name(target) { //c4da1a2b
+	self iPrintlnBold(target.name);
+}
+
+verify_player(target) { //b5373ddb
+	target.access = "Verified";
+	target thread initialize_verified_menu();
 }
 
 // Map Options
@@ -1161,11 +1263,11 @@ third_person() { //ed855e11
 freeze_box() { //2adb77b5
 	self.freeze_box = !synergy::return_toggle(self.freeze_box);
 	if(self.freeze_box) {
-		iPrintlnBold("Freeze Box [^2ON^7]");
+		self iPrintlnBold("Freeze Box [^2ON^7]");
 		wait 5;
 		level.chest_min_move_usage = 999;
 	} else {
-		iPrintlnBold("Freeze Box [^1OFF^7]");
+		self iPrintlnBold("Freeze Box [^1OFF^7]");
 		wait 5;
 		level.chest_min_move_usage = 4;
 	}
@@ -1235,9 +1337,9 @@ pick_up_parts() { //46d60064
 	if(isDefined(level.parts_collected)) {
 	  return;
 	}
-	
+
 	all_parts = getitemarray();
-	
+
 	foreach(item in all_parts) {
 		part = item.item;
 		if(isDefined(part) && isDefined(part.craftItem) && part.craftItem) {
@@ -1258,10 +1360,10 @@ spawn_powerup(powerup) { //a6188a5c
 shoot_powerups() { //fe39a316
 	self.shoot_powerups = !synergy::return_toggle(self.shoot_powerups);
 	if(self.shoot_powerups) {
-		iPrintlnBold("Shoot Powerups [^2ON^7]");
+		self iPrintlnBold("Shoot Powerups [^2ON^7]");
 		self thread shoot_powerups_loop();
 	} else {
-		iPrintlnBold("Shoot Powerups [^1OFF^7]");
+		self iPrintlnBold("Shoot Powerups [^1OFF^7]");
 		self notify("stop_shoot_powerups");
 	}
 }
@@ -1507,10 +1609,10 @@ get_zombies() { //81b284e5
 no_target() { //1a890726
 	self.no_target = !synergy::return_toggle(self.no_target);
 	if(self.no_target) {
-		iPrintlnBold("No Target [^2ON^7]");
+		self iPrintlnBold("No Target [^2ON^7]");
 		self val::set(#"escort_robot", "ignoreme");
 	} else {
-		iPrintlnBold("No Target [^1OFF^7]");
+		self iPrintlnBold("No Target [^1OFF^7]");
 		self val::reset(#"escort_robot", "ignoreme");
 	}
 }
@@ -1549,7 +1651,7 @@ teleport_zombies() { //819e635b
 
 one_shot_zombies() { //ad42a823
 	if(!isDefined(self.one_shot_zombies)) {
-		iPrintlnBold("One Shot Zombies [^2ON^7]");
+		self iPrintlnBold("One Shot Zombies [^2ON^7]");
 		self.one_shot_zombies = true;
 		zombies = get_zombies();
 		while(!isDefined(zombies) || zombies.size < 1) {
@@ -1567,7 +1669,7 @@ one_shot_zombies() { //ad42a823
 			wait 0.1;
 		}
 	} else {
-		iPrintlnBold("One Shot Zombies [^1OFF^7]");
+		self iPrintlnBold("One Shot Zombies [^1OFF^7]");
 		self.one_shot_zombies = undefined;
 		foreach(zombie in get_zombies()) {
 			if(isDefined(zombie)) {
@@ -1626,7 +1728,7 @@ unfreeze_zombie(zombie) { //d644a7f7
 
 slow_zombies() { //f386ca4e
 	if(!isDefined(self.slow_zombies)) {
-		iPrintlnBold("Slow Zombies [^2ON^7]");
+		self iPrintlnBold("Slow Zombies [^2ON^7]");
 		self.slow_zombies = true;
 		while(isDefined(self.slow_zombies)) {
 			foreach(zombie in get_zombies()) {
@@ -1639,7 +1741,7 @@ slow_zombies() { //f386ca4e
 			wait 0.1;
 		}
 	} else {
-		iPrintlnBold("Slow Zombies [^1OFF^7]");
+		self iPrintlnBold("Slow Zombies [^1OFF^7]");
 		self.slow_zombies = undefined;
 		foreach(zombie in get_zombies()) {
 			if(isDefined(zombie)) {
@@ -1654,10 +1756,10 @@ slow_zombies() { //f386ca4e
 disable_spawns() { //64827754
 	self.disable_spawns = !synergy::return_toggle(self.disable_spawns);
 	if(self.disable_spawns) {
-		iPrintlnBold("Disable Spawns [^2ON^7]");
+		self iPrintlnBold("Disable Spawns [^2ON^7]");
 		level flag::clear("spawn_zombies");
 	} else {
-		iPrintlnBold("Disable Spawns [^1OFF^7]");
+		self iPrintlnBold("Disable Spawns [^1OFF^7]");
 		level flag::set("spawn_zombies");
 	}
 }

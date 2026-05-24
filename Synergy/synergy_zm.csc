@@ -8,8 +8,9 @@ autoexec __init__sytem__() { //607fee8
 
 init() { //9284135d
 	level waittill("show_narrative_dotn");
-	player = getlocalplayers()[0];
-	localclientnum = player getlocalclientnumber();
-	
-  function_a5777754(localclientnum, "narrative_room");
+
+	function_a5777754(0, "narrative_room");
+  function_a5777754(1, "narrative_room");
+  function_a5777754(2, "narrative_room");
+  function_a5777754(3, "narrative_room");
 }

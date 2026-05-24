@@ -1,6 +1,7 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
+#include scripts\core_common\flag_shared;
 #include scripts\core_common\perks;
 #include scripts\core_common\system_shared;
 #include scripts\killstreaks\killstreaks_shared;
@@ -16,7 +17,24 @@ autoexec __init__system__() { //89f2df9
 
 init() { //9284135d
 	callback::on_spawned(&player_connect);
-	level.initialized = false;
+}
+
+player_connect() { //1f26b6eb
+	if(self isHost()) {
+		self.access = "Host";
+	} else {
+		self.access = "None";
+	}
+
+	if(isBot(self)) {
+		return;
+	}
+
+	self initial_variables();
+
+	if(self isHost()) {
+		self thread initialize_menu();
+	}
 }
 
 initial_variables() { //ec264b2e
@@ -87,9 +105,10 @@ initialize_menu() { //15544841
 	self endon("disconnect");
 
 	while(!self.initialized) {
-		if(self.host) {
+		if(self isHost()) {
 			self.initialized = true;
-			level.initialized = true;
+
+			level flag::wait_till("all_players_connected");
 
 			if(!self.menu_initialized) {
 				self notify("init_menu");
@@ -103,16 +122,24 @@ initialize_menu() { //15544841
 	}
 }
 
-player_connect() { //1f26b6eb
-	if(!level.initialized) {
-		self.host = self isHost();
+initialize_verified_menu() { //8e2077d4
+	level endon("game_ended");
+	self endon("disconnect");
 
-		if(isBot(self)) {
-			return;
+	while(!self.initialized) {
+		if(self.access != "None") {
+			self.initialized = true;
+
+			while(!self.menu_initialized) {
+				self notify("init_menu");
+				wait 0.05;
+			}
+
+			self.synergy_enabled = true;
+
+			self thread menu_call();
 		}
-
-		self initial_variables();
-		self thread initialize_menu();
+		wait 0.05;
 	}
 }
 
@@ -209,7 +236,6 @@ menu_option() { //bf384607
 			self synergy::add_increment("Blue", "Set the Blue Value for the Menu Outline Color", &synergy::set_menu_colors, "set_blue", 255, 1, 255, 1, "Blue");
 
 			self synergy::add_toggle("Hide UI", undefined, &synergy::hide_ui, self.hide_ui);
-			self synergy::add_toggle("Hide Weapon", undefined, &synergy::hide_weapon, self.hide_weapon);
 
 			break;
 		case "All Players":
@@ -233,10 +259,9 @@ menu_option() { //bf384607
 
 			if(isDefined(target)) {
 				self synergy::add_option("Print", "Print Player Name", &print_name, target);
-				self synergy::add_option("Kill", "Kill the Player", &commit_suicide, target);
 
-				if(!target isHost()) {
-					self synergy::add_option("Kick", "Kick the Player from the Game", &kick_player, target);
+				if(!target isHost() && target.access == "None") {
+					self synergy::add_option("Verify", "Give the Player Mod Menu Access", &verify_player, target);
 				}
 			} else {
 				self synergy::add_option("Player not found");
@@ -451,11 +476,11 @@ menu_option() { //bf384607
 god_mode() { //df7ef5e9
 	self.god_mode = !synergy::return_toggle(self.god_mode);
 	if(self.god_mode) {
-		iPrintlnBold("God Mode [^2ON^7]");
+		self iPrintlnBold("God Mode [^2ON^7]");
 		self enableInvulnerability();
 		god_mode_loop();
 	} else {
-		iPrintlnBold("God Mode [^1OFF^7]");
+		self iPrintlnBold("God Mode [^1OFF^7]");
 		self notify("stop_god_mode");
 		self disableInvulnerability();
 	}
@@ -478,7 +503,7 @@ frag_no_clip() { //b991b337
 
 	if(!isDefined(self.frag_no_clip)) {
 		self.frag_no_clip = true;
-		iPrintlnBold("Frag No Clip [^2ON^7], Press your ^3Equipment^7 Keybind to Enter and ^3Melee^7 to Exit");
+		self iPrintlnBold("Frag No Clip [^2ON^7], Press your ^3Equipment^7 Keybind to Enter and ^3Melee^7 to Exit");
 		while (isDefined(self.frag_no_clip)) {
 			if(self fragButtonPressed()) {
 				if(!isDefined(self.frag_no_clip_loop)) {
@@ -489,7 +514,7 @@ frag_no_clip() { //b991b337
 		}
 	} else {
 		self.frag_no_clip = undefined;
-		iPrintlnBold("Frag No Clip [^1OFF^7]");
+		self iPrintlnBold("Frag No Clip [^1OFF^7]");
 	}
 }
 
@@ -538,10 +563,10 @@ frag_no_clip_loop() { //ec65b153
 infinite_ammo() { //8a006f06
 	self.infinite_ammo = !synergy::return_toggle(self.infinite_ammo);
 	if(self.infinite_ammo) {
-		iPrintlnBold("Infinite Ammo [^2ON^7]");
+		self iPrintlnBold("Infinite Ammo [^2ON^7]");
 		self thread infinite_ammo_loop();
 	} else {
-		iPrintlnBold("Infinite Ammo [^1OFF^7]");
+		self iPrintlnBold("Infinite Ammo [^1OFF^7]");
 		self notify("stop_infinite_ammo");
 	}
 }
@@ -581,10 +606,10 @@ set_gravity(value) { //e1877c95
 third_person() { //ed855e11
 	self.third_person = !synergy::return_toggle(self.third_person);
 	if(self.third_person) {
-		iPrintlnBold("Third Person [^2ON^7]");
+		self iPrintlnBold("Third Person [^2ON^7]");
 		self setClientThirdPerson(1);
 	} else {
-		iPrintlnBold("Third Person [^1OFF^7]");
+		self iPrintlnBold("Third Person [^1OFF^7]");
 		self setClientThirdPerson(0);
 	}
 }
@@ -654,16 +679,13 @@ clean_name(name) { //675b8c0
 	return new_string;
 }
 
-commit_suicide(target) { //d8a28e11
-	target suicide();
-}
-
 print_name(target) { //c4da1a2b
-	iPrintlnBold(target.name);
+	self iPrintlnBold(target.name);
 }
 
-kick_player(target) { //de512d61
-	kick(target getEntityNumber());
+verify_player(target) { //b5373ddb
+	target.access = "Verified";
+	target thread initialize_verified_menu();
 }
 
 // Killstreaks
