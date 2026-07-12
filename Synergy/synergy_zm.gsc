@@ -367,6 +367,7 @@ menu_option() { //bf384607
 			self synergy::add_option("Map Options", undefined, &synergy::new_menu, "Map Options");
 			self synergy::add_option("Powerup Options", undefined, &synergy::new_menu, "Powerup Options");
 			self synergy::add_option("Menu Options", undefined, &synergy::new_menu, "Menu Options");
+			self synergy::add_option("All Players", undefined, &synergy::new_menu, "All Players");
 
 			break;
 		case "Basic Options":
@@ -484,6 +485,36 @@ menu_option() { //bf384607
 			self synergy::add_increment("Blue", "Set the Blue Value for the Menu Outline Color", &synergy::set_menu_colors, "set_blue", 255, 1, 255, 1, "Blue");
 
 			self synergy::add_toggle("Hide UI", undefined, &synergy::hide_ui, self.hide_ui);
+
+			break;
+		case "All Players":
+			self synergy::set_title(menu);
+
+			foreach(player in level.players) {
+				self synergy::add_option(player.name, undefined, &synergy::new_menu, "Player Option");
+			}
+
+			break;
+		case "Player Option":
+			self synergy::set_title(menu);
+
+			target = undefined;
+			foreach(player in level.players) {
+				if(player.name == self.previous_option) {
+					target = player;
+					break;
+				}
+			}
+
+			if(isDefined(target)) {
+				self synergy::add_option("Print", "Print Player Name", &print_name, target);
+
+				if(!target isHost() && target.access == "None") {
+					self synergy::add_option("Verify", "Give the Player Mod Menu Access", &verify_player, target);
+				}
+			} else {
+				self synergy::add_option("Player not found");
+			}
 
 			break;
 		case "Give Perks":
@@ -1298,13 +1329,29 @@ open_narrative_room() { // Atian Menu - 57ba8289
 
 open_narrative_room_thread() { // Atian Menu - 89cd6cce
 	level notify(#"fake_waittill");
-	if(self.map_name == "ix") {
+	if(self.map_name == "voyage_of_despair") {
+		level flag::set(#"open_lore_room");
+		baphomets_entry_clip = getEnt("baphomets_entry_clip", "targetname");
+    baphomets_entry_clip moveTo(baphomets_entry_clip.origin + (0, 0, 160), 1.6);
+		baphomets_entry = getEnt("baphomets_entry", "targetname");
+		baphomets_entry rotateYaw(125, 1.6);
+	} else if(self.map_name == "ix") {
 		exploder::exploder("exp_lgt_body_pit_secret_room");
 		level clientfield::set("" + #"hash_2383fd01b106ced8", 1);
 		lore_room_doors = getEntArray("lore_room", "targetname");
 		foreach(door in lore_room_doors) {
-			door moveTo(door.origin + vectorScale((0, 0, -16), 10), 2.2);
+			door moveTo(door.origin + (0, 0, -160), 2.2);
 		}
+	} else if(self.map_name == "blood_of_the_dead") {
+    level flag::set(#"activate_infirmury");
+    level clientfield::set("" + #"narrative_room", 1);
+    door = getEnt("cr_door", "targetname");
+    door rotateYaw(90, 1.6);
+    var_3400a741 = getEntArray("cr_door_bar", "targetname");
+    var_3400a741[0] moveTo(var_3400a741[0].origin + (0, 0, -80), 0.001);
+    var_3400a741[1] moveTo(var_3400a741[1].origin + (0, 0, -80), 0.001);
+	} else if(self.map_name == "dead_of_the_night") {
+		level util::clientnotify("show_narrative_dotn");
 	} else if(self.map_name == "alpha_omega") {
 		door = getEnt("bread_door", "targetname");
 		door rotateTo(door.angles + (vectorScale((0, -1, 0), 170)), 1);
@@ -1312,15 +1359,7 @@ open_narrative_room_thread() { // Atian Menu - 89cd6cce
 		door disconnectPaths();
 		blocker = spawn("trigger_box", (-800, -1070, -132), 0, 408, 164, 132);
 		blocker disconnectPaths();
-	} else if(self.map_name == "voyage_of_despair") {
-		level flag::set(#"open_lore_room");
-		baphomets_entry_clip = getEnt("baphomets_entry_clip", "targetname");
-		baphomets_entry_clip moveTo(baphomets_entry_clip.origin + vectorScale((0, 0, 16), 10), 1.6);
-		baphomets_entry = getEnt("baphomets_entry", "targetname");
-		baphomets_entry rotateYaw(125, 1.6);
-	} else if(self.map_name == "dead_of_the_night") {
-		level util::clientnotify("show_narrative_dotn");
-	}
+  }
 	self.narrative_open = true;
 }
 
