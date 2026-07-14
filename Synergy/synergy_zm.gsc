@@ -22,6 +22,7 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_round_logic;
 #include scripts\zm_common\zm_score;
+#include scripts\zm_common\zm_transformation;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_utility_zstandard;
 #include scripts\zm_common\zm_weapons;
@@ -47,7 +48,7 @@ player_connect() { //1f26b6eb
 	}
 
 	self initial_variables();
-	
+
 	if(self isHost()) {
 		self thread initialize_menu();
 	}
@@ -419,6 +420,8 @@ menu_option() { //bf384607
 			self synergy::add_option("Take Current Weapon", undefined, &take_weapon);
 			self synergy::add_option("Drop Current Weapon", undefined, &drop_weapon);
 
+			self synergy::add_option("Max Specialist Point Requirement", "Makes earning the Specialist take 17,500 points", &max_specialist_points);
+
 			break;
 		case "Zombie Options":
 			self synergy::set_title(menu);
@@ -435,6 +438,10 @@ menu_option() { //bf384607
 			self synergy::add_toggle("Freeze Zombies", undefined, &freeze_zombies, self.freeze_zombies);
 			self synergy::add_toggle("Slow Zombies", undefined, &slow_zombies, self.slow_zombies);
 			self synergy::add_toggle("Disable Spawns", undefined, &disable_spawns, self.disable_spawns);
+
+			if(self.map_name == "voyage_of_despair" || self.map_name == "ix" || self.map_name == "dead_of_the_night" || self.map_name == "ancient_evil") {
+				self synergy::add_toggle("Disable Transformations", "Disables Catalysts and Blightfathers", &disable_transformations, self.disable_transformations);
+			}
 
 			self synergy::add_array("Set Zombie Speed", undefined, &set_zombie_speed, "zombie_speed", array("Restore", "Walk", "Run", "Sprint", "Super Sprint"));
 
@@ -1344,7 +1351,6 @@ open_narrative_room_thread() { // Atian Menu - 89cd6cce
 		}
 	} else if(self.map_name == "blood_of_the_dead") {
     level flag::set(#"activate_infirmury");
-    level clientfield::set("" + #"narrative_room", 1);
     door = getEnt("cr_door", "targetname");
     door rotateYaw(90, 1.6);
     var_3400a741 = getEntArray("cr_door_bar", "targetname");
@@ -1360,6 +1366,7 @@ open_narrative_room_thread() { // Atian Menu - 89cd6cce
 		blocker = spawn("trigger_box", (-800, -1070, -132), 0, 408, 164, 132);
 		blocker disconnectPaths();
   }
+	level clientfield::set("" + #"narrative_room", 1);
 	self.narrative_open = true;
 }
 
@@ -1639,6 +1646,11 @@ drop_weapon() { //84172a80
 	self dropItem(self getCurrentWeapon());
 }
 
+max_specialist_points() { //1ae20b96
+	self.var_d11656b = 100;
+	self.var_9f176816 = 17500;
+}
+
 // Zombie Options
 
 get_zombies() { //81b284e5
@@ -1660,6 +1672,7 @@ set_round(value) { //e8352140
 	value--;
 	self thread zm_utility::zombie_goto_round(value);
 }
+
 
 spawn_normal_zombie() { //5237db24
 	spawner = array::random(level.zombie_spawners);
@@ -1800,6 +1813,23 @@ disable_spawns() { //64827754
 	} else {
 		self iPrintlnBold("Disable Spawns [^1OFF^7]");
 		level flag::set("spawn_zombies");
+	}
+}
+
+disable_transformations() { //5db4f2f5
+	self.disable_transformations = !synergy::return_toggle(self.disable_transformations);
+	if(self.disable_transformations) {
+		self iPrintlnBold("Disable Transformations [^2ON^7]");
+		while(isDefined(self.disable_transformations)) {
+			if(!isDefined(level.var_88de5053) || level.var_88de5053 != 0) {
+				level.var_88de5053 = 0;
+			}
+			wait 1;
+		}
+	} else {
+		self iPrintlnBold("Disable Transformations [^1OFF^7]");
+		self.disable_transformations = undefined;
+		level.var_88de5053 = 3;
 	}
 }
 

@@ -48,6 +48,9 @@
 0xAE215282, set_box_only_box_weapons
 0xBF384607, menu_option
 0x84E3B26C, test_function
+0xB74F400B, entity_finder
+0x7BCC9D13, entity_finder_loop
+0x739D5750, get_string_width
 0xBB60D1FC, get_weapon_id
 0xD796B12A, get_weapon_loop
 0x9516E89E, get_all_weapons
@@ -62,9 +65,10 @@
 0x7EFBF7EC, infinite_shield_loop
 0x47D6A43E, give_perk
 0x9CBA355D, take_perk
+0xDCE46D4F, set_perk_limit
 0x6F6861D1, give_enhancement_perk
 0x7B9ACA54, take_enhancement_perk
-0xDC117A2 , update_enhancement_perks
+0xDC117A2, update_enhancement_perks
 0xBE0766F2, vulture_aid_logic
 0x8FB1A2A5, vulture_aid_down
 0x5AC66375, give_perks
@@ -109,9 +113,12 @@
 0xA1BE53C6, take_aat
 0x5E8F396D, take_weapon
 0x84172A80, drop_weapon
+0x1AE20B96, max_specialist_points
 0x81B284E5, get_zombies
 0x1A890726, no_target
 0xE8352140, set_round
+0x475864B9, infinite_round
+0x3EF4F6B7, infinite_round_loop
 0x5237DB24, spawn_normal_zombie
 0x253CBB6E, spawn_zombie
 0x57F97468, kill_all_zombies
@@ -123,5 +130,6 @@
 0xD644A7F7, unfreeze_zombie
 0xF386CA4E, slow_zombies
 0x64827754, disable_spawns
+0x5DB4F2F5, disable_transformations
 0x5F4E093D, set_zombie_speed
 0x772907D2, update_zombie_speed                                        
