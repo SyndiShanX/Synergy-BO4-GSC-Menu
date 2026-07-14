@@ -420,7 +420,7 @@ menu_option() { //bf384607
 			self synergy::add_option("Take Current Weapon", undefined, &take_weapon);
 			self synergy::add_option("Drop Current Weapon", undefined, &drop_weapon);
 
-			self synergy::add_option("Max Specialist Point Requirement", "Makes earning the Specialist take 17,500 points", &max_specialist_points);
+			self synergy::add_toggle("Max Specialist Points Requirement", "Makes earning the Specialist take 17,500 points", &max_specialist_points, self.max_specialist_points);
 
 			break;
 		case "Zombie Options":
@@ -1647,8 +1647,16 @@ drop_weapon() { //84172a80
 }
 
 max_specialist_points() { //1ae20b96
-	self.var_d11656b = 100;
-	self.var_9f176816 = 17500;
+	self.max_specialist_points = !synergy::return_toggle(self.max_specialist_points);
+	if(self.max_specialist_points) {
+		self iPrintlnBold("Max Specialist Points Requirement [^2ON^7]");
+		self.var_d11656b = 100;
+		self.var_9f176816 = 17500;
+	} else {
+		self iPrintlnBold("Max Specialist Points Requirement [^1RESET^7]");
+		self.var_d11656b = 0;
+		self.var_9f176816 = 3000;
+	}
 }
 
 // Zombie Options
