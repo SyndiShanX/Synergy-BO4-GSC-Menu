@@ -813,7 +813,7 @@ equip_attachment(attachment, i) { //224c09c9
 		weapon = getWeapon(weapon.rootWeapon.name, attachments);
 	}
 
-	camo_index = getCamoIndex(self getBuildKitWeaponOptions(weapon));
+	camo_index = get_camo_index(self getCurrentWeapon());
 	if(!isDefined(camo_index) || !isInt(camo_index)) {
 		camo_index = 0;
 	}
