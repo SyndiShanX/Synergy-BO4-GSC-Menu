@@ -840,6 +840,16 @@ equip_camo(camo_index) { //52f76807
 	self setCamo(weapon, camo_index);
 }
 
+get_camo_index(weapon) { //bb7c0ede
+	if(isDefined(weapon) && weapon != level.weaponNone) {
+		weapon_options = self getWeaponOptions(weapon);
+		camo_index = getCamoIndex(weapon_options);
+		return camo_index;
+	} else {
+		return undefined;
+	}
+}
+
 take_weapon() { //5e8f396d
 	self takeWeapon(self getCurrentWeapon());
 	self switchToWeapon(self getWeaponsListPrimaries()[0]);
