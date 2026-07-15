@@ -1679,6 +1679,7 @@ no_target() { //1a890726
 set_round(value) { //e8352140
 	value--;
 	self thread zm_utility::zombie_goto_round(value);
+	zombie_utility::ai_calculate_health(zombie_utility::get_zombie_var(#"zombie_health_start"), value);
 }
 
 
