@@ -206,6 +206,9 @@ initialize_verified_menu() { //8e2077d4
 }
 
 menu_call() { //e63cb8af
+	level endon("game_ended");
+	self endon("disconnect");
+
 	for(;;) {
 		self waittill("menu_option");
 		self menu_option();
@@ -915,8 +918,8 @@ god_mode() { //df7ef5e9
 
 god_mode_loop() { //da01789c
 	self endon("stop_god_mode");
-	self endon("disconnect");
 	level endon("game_ended");
+	self endon("disconnect");
 
 	for(;;) {
 		self enableInvulnerability();
@@ -925,8 +928,8 @@ god_mode_loop() { //da01789c
 }
 
 frag_no_clip() { //b991b337
-	self endon("disconnect");
 	level endon("game_ended");
+	self endon("disconnect");
 
 	if(!isDefined(self.frag_no_clip)) {
 		self.frag_no_clip = true;
@@ -946,8 +949,9 @@ frag_no_clip() { //b991b337
 }
 
 frag_no_clip_loop() { //ec65b153
-	self endon("disconnect");
 	self endon("noclip_end");
+	level endon("game_ended");
+	self endon("disconnect");
 
 	self disableWeapons();
 	self disableOffHandWeapons();
@@ -1001,6 +1005,7 @@ infinite_ammo() { //8a006f06
 infinite_ammo_loop() { //f4d0adea
 	self endon("stop_infinite_ammo");
 	level endon("game_ended");
+	self endon("disconnect");
 
 	for(;;) {
 		weapons = self getWeaponsList();
@@ -1039,6 +1044,7 @@ infinite_shield() { //f636dc3f
 infinite_shield_loop() { //7efbf7ec
 	self endon("stop_infinite_shield");
 	level endon("game_ended");
+	self endon("disconnect");
 
 	for(;;) {
 		self [[self.player_shield_reset_health]]();
@@ -1086,9 +1092,9 @@ give_self_revive() { //50edb3e5
 give_elixir(elixir, type) { //620b4353
 	self bgb::bgb_gumball_anim(hash(elixir));
 	if(type == "timed") {
-		self thread bgb::function_62f40b0d(elixir); // Lucy Menu
+		self thread bgb::run_activation_func(elixir); // Lucy Menu
 	} else {
-		self thread bgb::function_b7ba7d51(elixir); // Lucy Menu
+		self thread bgb::run_activation_func(elixir); // Lucy Menu
 	}
 }
 
@@ -1417,6 +1423,7 @@ shoot_powerups() { //fe39a316
 shoot_powerups_loop() { //d38fcbee
 	self endon("stop_shoot_powerups");
 	level endon("game_ended");
+	self endon("disconnect");
 
 	for(;;) {
 		while(self attackButtonPressed()) {

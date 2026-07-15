@@ -16,7 +16,9 @@ autoexec __init__system__() { //89f2df9
 }
 
 init() { //9284135d
-	callback::on_spawned(&player_connect);
+	if(!sessionModeIsWarzoneGame()) {
+		callback::on_spawned(&player_connect);
+	}
 }
 
 player_connect() { //1f26b6eb
@@ -30,9 +32,7 @@ player_connect() { //1f26b6eb
 		return;
 	}
 
-	self initial_variables();
-
-	if(self isHost()) {
+	if(self isHost() && (!isDefined(self.initialized) || !self.initialized)) {
 		self thread initialize_menu();
 	}
 }
@@ -106,6 +106,7 @@ initialize_menu() { //15544841
 
 	while(!self.initialized) {
 		if(self isHost()) {
+			self initial_variables();
 			self.initialized = true;
 
 			level flag::wait_till("all_players_connected");
@@ -128,6 +129,7 @@ initialize_verified_menu() { //8e2077d4
 
 	while(!self.initialized) {
 		if(self.access != "None") {
+			self initial_variables();
 			self.initialized = true;
 
 			while(!self.menu_initialized) {
@@ -144,6 +146,9 @@ initialize_verified_menu() { //8e2077d4
 }
 
 menu_call() { //e63cb8af
+	level endon("game_ended");
+	self endon("disconnect");
+
 	for(;;) {
 		self waittill("menu_option");
 		self menu_option();
@@ -488,8 +493,8 @@ god_mode() { //df7ef5e9
 
 god_mode_loop() { //da01789c
 	self endon("stop_god_mode");
-	self endon("disconnect");
 	level endon("game_ended");
+	self endon("disconnect");
 
 	for(;;) {
 		self enableInvulnerability();
@@ -498,8 +503,8 @@ god_mode_loop() { //da01789c
 }
 
 frag_no_clip() { //b991b337
-	self endon("disconnect");
 	level endon("game_ended");
+	self endon("disconnect");
 
 	if(!isDefined(self.frag_no_clip)) {
 		self.frag_no_clip = true;
@@ -519,8 +524,9 @@ frag_no_clip() { //b991b337
 }
 
 frag_no_clip_loop() { //ec65b153
-	self endon("disconnect");
 	self endon("noclip_end");
+	level endon("game_ended");
+	self endon("disconnect");
 
 	self disableWeapons();
 	self disableOffHandWeapons();
@@ -574,6 +580,7 @@ infinite_ammo() { //8a006f06
 infinite_ammo_loop() { //f4d0adea
 	self endon("stop_infinite_ammo");
 	level endon("game_ended");
+	self endon("disconnect");
 
 	for(;;) {
 		weapons = self getWeaponsList();

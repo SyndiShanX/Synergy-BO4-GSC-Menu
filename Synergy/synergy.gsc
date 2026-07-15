@@ -20,8 +20,10 @@ player_connect() { //1f26b6eb
 		self.access = "None";
 	}
 
-	self initial_variables();
-	self thread initialize_menu();
+	if(!isDefined(self.hud_created) || !self.hud_created) {
+		self initial_variables();
+		self thread initialize_menu();
+	}
 }
 
 initial_variables() { //ec264b2e
@@ -441,11 +443,11 @@ set_menu_color(color) { //d5163d06
 }
 
 create_rainbow_color() { //f26b389
+	level endon("game_ended");
+
 	x = 0; y = 0;
 	r = 0; g = 0; b = 0;
 	level.rainbow_color = (0, 0, 0);
-
-	level endon("game_ended");
 
 	while(true) {
 		if(y >= 0 && y < 258) {
